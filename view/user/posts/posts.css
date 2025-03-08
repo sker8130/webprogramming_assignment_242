@@ -1,0 +1,148 @@
+body {
+  background-color: #fff8ee;
+  margin: 0;
+  font-family: Roboto;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+  padding-left: 0px;
+}
+
+.content {
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+}
+
+.banner {
+  background-image: url("images/image_items_bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 2 / 0.3;
+  color: white;
+  background-color: red;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.banner .blog-title {
+  position: absolute;
+  bottom: 10px;
+}
+
+.blog-title {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.search-input {
+  background-color: #cc3333;
+  width: 210px;
+  height: 50px;
+
+  padding: 8px 4px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 7px;
+}
+
+.search-button {
+  width: 50px;
+  height: 50px;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  background-color: #cc3333;
+  cursor: pointer;
+}
+
+.search-input input {
+  width: 95%;
+  border-radius: 9px;
+  border: none;
+  background-color: #fff8ee;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar form {
+  display: flex;
+  gap: 10px;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 20px 30px;
+  gap: 60px;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination p {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.pagination p.active {
+  background-color: #cc3333;
+  color: white;
+}
+
+.pagination p:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  box-shadow: 0 0 10px grey;
+  border-radius: 20px;
+}
+
+.view-more-button {
+  height: 50px;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  background-color: #cc3333;
+  width: 170px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* mobile: width < 740px */
+@media only screen and (max-width: 739px) {
+  .posts {
+    display: grid;
+    grid-template-columns: auto;
+  }
+}
+
+/* tablet: width >= 740px and width < 1024px */
+@media only screen and (min-width: 739px) and (max-width: 1023px) {
+  .posts {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+}
