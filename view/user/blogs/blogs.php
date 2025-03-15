@@ -7,9 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="posts.css" />
+    <link rel="stylesheet" href="/webprogramming_assignment_242/view/user/blogs/blogs.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,11 +37,11 @@
                 </form>
             </div>
 
-            <div class="posts" id="posts"></div>
+            <div class="blogs" id="blogs"></div>
             <script>
-            let posts = "";
+            let blogs = "";
             for (let i = 0; i < 6; i++) {
-                posts += `<div class="card">
+                blogs += `<div class="card">
                     <img src="images/food.png" alt=""
                         style="width: 100%; border-top-left-radius: 20px; border-top-right-radius: 20px">
                     <h2 style="text-align: center; margin: 10px 20px">Mỳ tươi trường thọ làm bằng tay</h2>
@@ -50,13 +49,13 @@
                         elit. Qui, Lorem Lorem ipsum dolor sit amet consectetur adipisicing.
                         ipsum dolor, sit amet consectetur adipisicing elit. Aliquam, natus?
                         maiores? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, illo!</p>
-                    <button class="view-more-button">
+                    <a href="/webprogramming_assignment_242/index.php?page=blogdetail&id=${i}"><button class="view-more-button">
                         Xem chi tiết
-                    </button>
+                    </button></a>
                 </div>`
             }
 
-            document.getElementById("posts").innerHTML = posts;
+            document.getElementById("blogs").innerHTML = blogs;
             </script>
 
             <div class="pagination">

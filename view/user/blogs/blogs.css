@@ -80,7 +80,7 @@ body {
   gap: 10px;
 }
 
-.posts {
+.blogs {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 20px 30px;
@@ -133,7 +133,7 @@ body {
 
 /* mobile: width < 740px */
 @media only screen and (max-width: 739px) {
-  .posts {
+  .blogs {
     display: grid;
     grid-template-columns: auto;
   }
@@ -141,7 +141,7 @@ body {
 
 /* tablet: width >= 740px and width < 1024px */
 @media only screen and (min-width: 739px) and (max-width: 1023px) {
-  .posts {
+  .blogs {
     display: grid;
     grid-template-columns: auto auto;
   }

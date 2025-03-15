@@ -1,0 +1,52 @@
+body {
+  background-color: #fff8ee;
+  /* background-color: yellow; */
+
+  margin: 0;
+  font-family: Roboto;
+}
+
+.container {
+  display: flex;
+  flex-flow: column;
+}
+
+.content {
+  padding: 70px;
+  display: flex;
+  flex-flow: column;
+  gap: 40px;
+}
+
+.top {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.main-content {
+  flex: 2;
+}
+
+.title {
+  font-size: 46px;
+  font-weight: bold;
+}
+
+.other-blogs {
+  flex: 0.8;
+}
+
+.blog-info {
+  display: flex;
+  gap: 27px;
+  color: grey;
+  font-size: 13px;
+}
+
+.share {
+  color: grey;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
