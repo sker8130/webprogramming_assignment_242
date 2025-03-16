@@ -37,6 +37,24 @@ body {
   flex: 0.8;
 }
 
+.other-blogs-list {
+  box-shadow: 0 0 3px grey;
+  border-radius: 15px;
+  margin-top: 17px;
+  padding: 20px 10px;
+  display: flex;
+  flex-flow: column;
+  gap: 17px;
+}
+
+.other-blog-element {
+  display: flex;
+  gap: 15px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 17px;
+  /* margin-top: 17px; */
+}
+
 .blog-info {
   display: flex;
   gap: 27px;

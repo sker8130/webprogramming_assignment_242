@@ -9,6 +9,7 @@
 
 <body>
     <?php
+    $base_url = '/webprogramming_assignment_242/view/user/';
     if (!isset($_GET["page"])) {
         include "./view/user/home/home.php";
     } else {

@@ -5,17 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="blogdetail.css">
+    <link rel="stylesheet" href="<?php echo $base_url; ?>blogdetail/blogdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -24,7 +20,7 @@
 
         <div class="content">
             <div class="top">
-                <div class="main-content" style="background: white">
+                <div class="main-content">
                     <div class="title" style=>tit</div>
                     <div class="blog-info">
                         <div style="display: flex; gap: 5px; ">
@@ -47,9 +43,52 @@
 
                     </div>
                 </div>
-                <div class="other-blogs" style="background: yellow">others Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Corporis quaerat delectus inventore commodi odio asperiores! Illo alias fugiat qui
-                    molestiae!</div>
+                <div class="other-blogs">
+                    <div style="text-align: center; font-size: 21px; font-weight:500; color: #cc3333">Các bài viết khác
+                    </div>
+                    <div class="other-blogs-list">
+                        <div class="other-blog-element">
+                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                                style="width: 45%; border-radius: 10px">
+
+                            <div style="display: flex; flex-flow: column; gap: 4px">
+                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
+                                    elit elit elit. Totam, est. elit elit</div>
+                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
+                            </div>
+                        </div>
+                        <div class="other-blog-element">
+                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                                style="width: 45%; border-radius: 10px">
+
+                            <div style="display: flex; flex-flow: column; gap: 4px">
+                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
+                                    elit elit elit. Totam, est. elit elit</div>
+                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
+                            </div>
+                        </div>
+                        <div class="other-blog-element">
+                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                                style="width: 45%; border-radius: 10px">
+
+                            <div style="display: flex; flex-flow: column; gap: 4px">
+                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
+                                    elit elit elit. Totam, est. elit elit</div>
+                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
+                            </div>
+                        </div>
+                        <div class="other-blog-element">
+                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                                style="width: 45%; border-radius: 10px">
+
+                            <div style="display: flex; flex-flow: column; gap: 4px">
+                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
+                                    elit elit elit. Totam, est. elit elit</div>
+                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="comment-section">comment</div>
         </div>
