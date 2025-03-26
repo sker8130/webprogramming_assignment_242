@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+$rqUri = $_SERVER["REQUEST_URI"];
 
-<body>
-    <?php
-    $base_url = '/webprogramming_assignment_242/view/user/';
-    if (!isset($_GET["page"])) {
-        include "./view/user/home/home.php";
-    } else {
-        $file_url = "./view/user/" . $_GET["page"] . "/" . $_GET["page"] . ".php";
-        if (is_file($file_url))
-            include $file_url;
-        //index.php?page=blogs  -> blogs.php
-        //index.php?page=introduction   -> introduction.php
-        //...
+$routes = [
+    "/webprogramming_assignment_242/blogs" => [BlogController::class, "index"],
+    "/webprogramming_assignment_242/blogdetail" => [BlogController::class, "detail"],
 
-        else include "./view/user/home/home.php";
-    } ?>
-</body>
+];
 
-</html>
+foreach ($routes as $uri => $arrayCtrl) {
+    $class = $arrayCtrl[0];
+    $method = $arrayCtrl[1];
+
+    $file = "app/controllers/$class.php";
+    if (str_starts_with($rqUri, $uri)) {
+        require_once $file;
+        $obj = new $class;
+        $obj->$method();
+        break;
+    }
+}

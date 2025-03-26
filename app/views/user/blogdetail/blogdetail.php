@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>blogdetail/blogdetail.css">
+    <link rel="stylesheet" href="app/views/user/blogdetail/blogdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="other-blogs-list">
                         <div class="other-blog-element">
-                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                            <img src="assets/other-posts-thumbnail.png" alt="idk"
                                 style="width: 45%; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div class="other-blog-element">
-                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                            <img src="assets/other-posts-thumbnail.png" alt="idk"
                                 style="width: 45%; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="other-blog-element">
-                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                            <img src="assets/other-posts-thumbnail.png" alt="idk"
                                 style="width: 45%; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="other-blog-element">
-                            <img src="<?php echo $base_url; ?>blogdetail/images/food.png" alt="idk"
+                            <img src="assets/other-posts-thumbnail.png" alt="idk"
                                 style="width: 45%; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">

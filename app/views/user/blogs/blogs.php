@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="<?php echo $base_url; ?>blogs/blogs.css" />
+    <link rel="stylesheet" href="app/views/user/blogs/blogs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,23 +39,23 @@
 
             <div class="blogs" id="blogs"></div>
             <script>
-            let blogs = "";
-            for (let i = 0; i < 6; i++) {
-                blogs += `<div class="card">
-                    <img src="<?php echo $base_url; ?>blogs/images/food.png" alt=""
+                let blogs = "";
+                for (let i = 0; i < 6; i++) {
+                    blogs += `<div class="card">
+                    <img src="assets/card.png" alt=""
                         style="width: 100%; border-top-left-radius: 20px; border-top-right-radius: 20px">
                     <h2 style="text-align: center; margin: 10px 20px">Mỳ tươi trường thọ làm bằng tay</h2>
                     <p style="text-align:justify; margin: 0 15px">Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Qui, Lorem Lorem ipsum dolor sit amet consectetur adipisicing.
                         ipsum dolor, sit amet consectetur adipisicing elit. Aliquam, natus?
                         maiores? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, illo!</p>
-                    <a href="/webprogramming_assignment_242/index.php?page=blogdetail&id=${i}"><button class="view-more-button">
+                    <a href="/webprogramming_assignment_242/blogdetail?id=${i}"><button class="view-more-button">
                         Xem chi tiết
                     </button></a>
                 </div>`
-            }
+                }
 
-            document.getElementById("blogs").innerHTML = blogs;
+                document.getElementById("blogs").innerHTML = blogs;
             </script>
 
             <div class="pagination">
