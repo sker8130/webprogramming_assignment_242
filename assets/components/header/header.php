@@ -1,21 +1,4 @@
 <!-- header component -->
-<<<<<<< HEAD
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>HEADER</h1>
-</body>
-
-</html>
-=======
 <?php
 //header
 ?>
@@ -23,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="assets/components/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -35,7 +18,7 @@
 <header>
     <div class="logo">
         <a href="#">
-            <img src="../images/logo-img-1.png" alt="logo image" />
+            <img src="assets/components/images/logo-img-1.png" alt="logo image" />
         </a>
     </div>
     <nav>
@@ -46,16 +29,15 @@
             <li><a href="../contact.php">PAGES</a></li>
             <li><a href="../contact.php">CONTACT</a></li>
         </ul>
-        <img src="../images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
+        <img src="assets/components/images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
     </nav>
     <div class="header-right">
         <div class="image">
-            <img src="../images/icon-delivery.png" alt="icon delivery" />
+            <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
         <a type="button" class="btn btn-primary btn-login">
             <span>Login</span>
         </a>
     </div>
-    <script src="../header-script.js"></script>
+    <script src="assets/header-script.js"></script>
 </header>
->>>>>>> 4e630e81b19bfc51b5330c2022031b8f4c1a6fe2

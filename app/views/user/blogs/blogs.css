@@ -4,13 +4,13 @@ body {
   font-family: Roboto;
 }
 
-.container {
+/* .container {
   display: flex;
   flex-flow: column;
-  padding-left: 0px;
-}
+  
+} */
 
-.content {
+.blogs-container {
   display: flex;
   flex-flow: column;
   gap: 20px;

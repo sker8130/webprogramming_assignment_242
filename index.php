@@ -18,9 +18,13 @@ foreach ($routes as $uri => $arrayCtrl) {
     if (str_starts_with($rqUri, $uri)) {
         require_once $file;
         $obj = new $class;
-        require_once "assets/components/header/header.php";
-        $obj->$method();
-        require_once "assets/components/footer/footer.php";
+        if ($method == "login" || $method == "register") {
+            $obj->$method();
+        } else {
+            require_once "assets/components/header/header.php";
+            $obj->$method();
+            require_once "assets/components/footer/footer.php";
+        }
         break;
     }
 }
