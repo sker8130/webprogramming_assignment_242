@@ -15,7 +15,7 @@ body {
   padding: 70px;
   display: flex;
   flex-flow: column;
-  gap: 40px;
+  gap: 70px;
 }
 
 .top {
@@ -67,4 +67,8 @@ body {
   display: flex;
   gap: 20px;
   justify-content: center;
+}
+
+.comment-section {
+  /* background-color: red; */
 }

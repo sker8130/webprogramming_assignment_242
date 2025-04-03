@@ -21,7 +21,7 @@
         <div class="content">
             <div class="top">
                 <div class="main-content">
-                    <div class="title" style=>tit</div>
+                    <div class="title">tit</div>
                     <div class="blog-info">
                         <div style="display: flex; gap: 5px; ">
                             <i class='far fa-user-circle'></i>
@@ -90,7 +90,11 @@
                     </div>
                 </div>
             </div>
-            <div class="comment-section">comment</div>
+            <div class="comment-section">
+                <div style="font-size: 30px">
+                    Để lại một bình luận
+                </div>
+            </div>
         </div>
 
         <div>footer</div>
