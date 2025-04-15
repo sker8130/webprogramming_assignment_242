@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,28 +19,48 @@
 <body>
     <div class="container">
         <div class="main-register">
-            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%">
+            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%"
+                onsubmit="return registerForm()" method="post">
                 <h2 style="margin-bottom: -2px">Register</h2>
 
-                <div style="margin-bottom: -2px; font-size: 14px">Name</div>
-                <input type="text" style="height: 27px;">
+                <!-- hiện message: -->
+                <div style="margin-bottom: -2px; font-size: 16px; color: yellow" id="message">
+                    <?php
+                    if (isset($errors["message"])) {
+                        echo $errors["message"];
+                    }
+                    ?>
+                </div>
 
                 <div style="margin-bottom: -2px; font-size: 14px">Username</div>
-                <input type="text" style="height: 27px;">
+                <input type="text" id="username" name="username">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Email</div>
-                <input type="email" style="height: 27px;">
+                <input type="email" id="email" name="email">
+
+                <div style="margin-bottom: -2px; font-size: 14px">Phone Number</div>
+                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="1234567890">
+
+                <div style="margin-bottom: -2px; font-size: 14px">Gender</div>
+                <select name="gender" id="gender" name="gender">
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+
+                <div style="margin-bottom: -2px; font-size: 14px">Date of Birth</div>
+                <input type="date" id="dob" name="dob">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Password</div>
-                <input type="password" style="height: 27px;">
+                <input type="password" id="password" name="password">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Confirm password</div>
-                <input type="password" style="height: 27px;">
+                <div style="margin-bottom: -2px; font-size: 14px">Confirm Password</div>
+                <input type="password" id="confirmedPassword" name="confirmedPassword">
 
                 <input type="submit" value="Register"
                     style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
-                <div>I already have an account. <span style="color: #2a435d; font-size: 16px; font-weight: 500">Log
-                        in</span>
+                <div>I already have an account. <span><a href="/webprogramming_assignment_242/login">
+                            Log in</a></span>
                 </div>
             </form>
         </div>
@@ -49,6 +71,45 @@
     </div>
 </body>
 
-
-
 </html>
+
+<script>
+function registerForm() {
+    // e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let email = document.getElementById("email").value;
+    let phoneNumber = document.getElementById("phoneNumber").value;
+    let gender = document.getElementById("gender").value;
+    let dob = document.getElementById("dob").value;
+    let password = document.getElementById("password").value;
+    let confirmedPassword = document.getElementById("confirmedPassword").value;
+
+    if (username.length == 0 || email.length == 0 || phoneNumber.length == 0 || gender.length == 0 || dob.length == 0 ||
+        password.length == 0 || confirmedPassword.length == 0) {
+        document.getElementById("message").innerText =
+            "** Please type full information! **";
+        return false;
+    } else {
+        if (username.length < 2 || username.length > 30) {
+            document.getElementById("message").innerText =
+                "** Username's length must be from 2 to 30 characters, please type again! **";
+            return false;
+        } else if (Number(dob.substring(0, 4)) > 2010) {
+            document.getElementById("message").innerText = "** Age must be over 15, please type again! **";
+            return false;
+        } else if (password.length < 2 || password.length > 30) {
+            document.getElementById("message").innerText =
+                "** Password's length must be from 2 to 30 characters, please type again! **";
+            return false;
+        } else if (password != confirmedPassword) {
+            document.getElementById("message").innerText =
+                "** Password and confirmed password must match, please type again! **";
+            return false;
+        } else {
+            document.getElementById("message").innerText = "";
+            return true;
+        }
+    }
+}
+</script>

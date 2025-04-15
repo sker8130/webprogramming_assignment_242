@@ -16,8 +16,6 @@
 
 <body>
     <div class="container">
-        <div>header</div>
-
         <div class="content">
             <div class="top">
                 <div class="main-content">
@@ -49,7 +47,7 @@
                     <div class="other-blogs-list">
                         <div class="other-blog-element">
                             <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 45%; border-radius: 10px">
+                                style="width: 70px; height: 70px; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
                                 <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
@@ -59,7 +57,7 @@
                         </div>
                         <div class="other-blog-element">
                             <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 45%; border-radius: 10px">
+                                style="width: 70px; height: 70px; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
                                 <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
@@ -69,7 +67,7 @@
                         </div>
                         <div class="other-blog-element">
                             <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 45%; border-radius: 10px">
+                                style="width: 70px; height: 70px; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
                                 <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
@@ -79,7 +77,7 @@
                         </div>
                         <div class="other-blog-element">
                             <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 45%; border-radius: 10px">
+                                style="width: 70px; height: 70px; border-radius: 10px">
 
                             <div style="display: flex; flex-flow: column; gap: 4px">
                                 <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
@@ -94,10 +92,16 @@
                 <div style="font-size: 30px">
                     Để lại một bình luận
                 </div>
+
+                <div class="comment-frame">
+                    <div class="comment-avatar"><img src="assets/card.png" alt=""></div>
+                    <div class="comment-input">
+                        <textarea placeholder="Thêm 1 bình luận"></textarea>
+                        <button class="send-button">Gửi</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div>footer</div>
     </div>
 </body>
 

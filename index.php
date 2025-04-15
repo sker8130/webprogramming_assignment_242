@@ -5,9 +5,9 @@ $rqUri = $_SERVER["REQUEST_URI"];
 $routes = [
     "/webprogramming_assignment_242/blogs" => [BlogController::class, "index"],
     "/webprogramming_assignment_242/blogdetail" => [BlogController::class, "detail"],
-    "/webprogramming_assignment_242/login" => [UserController::class, "login"],
-    "/webprogramming_assignment_242/register" => [UserController::class, "register"],
-
+    "/webprogramming_assignment_242/login" => [AuthController::class, "login"],
+    "/webprogramming_assignment_242/register" => [AuthController::class, "register"],
+    "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
 ];
 
 foreach ($routes as $uri => $arrayCtrl) {
