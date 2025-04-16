@@ -6,8 +6,6 @@ class BlogController
 {
     public function index()
     {
-        // new BlogModel(); //initial connection
-        // $result = BlogModel::list();
         require_once "app/views/user/blogs/blogs.php";
     }
 

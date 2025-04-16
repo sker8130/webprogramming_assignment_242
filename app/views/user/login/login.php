@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['success_message'])) {
+    echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
+    unset($_SESSION['success_message']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +25,23 @@
 <body>
     <div class="container">
         <div class="main-login">
-            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%">
+            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%" method="post">
                 <h2 style="margin-bottom: -2px">Login</h2>
-                <div style="margin-bottom: -2px; font-size: 14px">Username of email address *</div>
-                <input type="text" style="height: 27px;">
+
+                <div style="margin-bottom: -2px; font-size: 16px; color: yellow">
+                    <?php
+                    if (isset($errors["message"])) {
+                        echo $errors["message"];
+                    }
+                    ?>
+                </div>
+
+                <div style="margin-bottom: -2px; font-size: 14px">Username or email address *</div>
+                <input type="text" name="usernameEmail"
+                    value="<?php echo isset($oldInput["usernameEmail"]) ? htmlspecialchars($oldInput["usernameEmail"]) : ""; ?>">
                 <div style="margin-bottom: -2px; font-size: 14px">Password *</div>
-                <input type="password" style="height: 27px;">
+                <input type="password" name="password"
+                    value="<?php echo isset($oldInput["password"]) ? htmlspecialchars($oldInput["password"]) : ""; ?>">
                 <input type="submit" value="Log in"
                     style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
                 <label style="color: #2a435d; display: flex; align-items: center; gap: 4px">
@@ -30,8 +49,8 @@
                     <div>Remember me</div>
                 </label>
                 <div style="color: #4BFF3C">Lost your password</div>
-                <div>Don't have an account? <span
-                        style="color: #2a435d; font-size: 16px; font-weight: 500">Register</span>
+                <div>Don't have an account? <span style="color: #2a435d; font-size: 16px; font-weight: 500"><a
+                            href="/webprogramming_assignment_242/register">Register</a></span>
                 </div>
             </form>
         </div>

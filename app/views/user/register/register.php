@@ -33,29 +33,41 @@
                 </div>
 
                 <div style="margin-bottom: -2px; font-size: 14px">Username</div>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username"
+                    value="<?php echo isset($oldInput["username"]) ? htmlspecialchars($oldInput["username"]) : ""; ?>">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Email</div>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email"
+                    value="<?php echo isset($oldInput["email"]) ? htmlspecialchars($oldInput["email"]) : ""; ?>">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Phone Number</div>
-                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="1234567890">
+                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="1234567890"
+                    value="<?php echo isset($oldInput["phoneNumber"]) ? htmlspecialchars($oldInput["phoneNumber"]) : ""; ?>">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Gender</div>
-                <select name="gender" id="gender" name="gender">
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                    <option value="other">Other</option>
+                <select id="gender" name="gender">
+                    <option value="female"
+                        <?php echo (isset($oldInput["gender"]) && $oldInput["gender"] === "female") ? "selected" : ""; ?>>
+                        Female</option>
+                    <option value="male"
+                        <?php echo (isset($oldInput["gender"]) && $oldInput["gender"] === "male") ? "selected" : ""; ?>>
+                        Male</option>
+                    <option value="other"
+                        <?php echo (isset($oldInput["gender"]) && $oldInput["gender"] === "other") ? "selected" : ""; ?>>
+                        Other</option>
                 </select>
 
                 <div style="margin-bottom: -2px; font-size: 14px">Date of Birth</div>
-                <input type="date" id="dob" name="dob">
+                <input type="date" id="dob" name="dob"
+                    value="<?php echo isset($oldInput["dob"]) ? htmlspecialchars($oldInput["dob"]) : ""; ?>">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Password</div>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password"
+                    value="<?php echo isset($oldInput["password"]) ? htmlspecialchars($oldInput["password"]) : ""; ?>">
 
                 <div style="margin-bottom: -2px; font-size: 14px">Confirm Password</div>
-                <input type="password" id="confirmedPassword" name="confirmedPassword">
+                <input type="password" id="confirmedPassword" name="confirmedPassword"
+                    value="<?php echo isset($oldInput["confirmedPassword"]) ? htmlspecialchars($oldInput["confirmedPassword"]) : ""; ?>">
 
                 <input type="submit" value="Register"
                     style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
@@ -84,6 +96,7 @@ function registerForm() {
     let dob = document.getElementById("dob").value;
     let password = document.getElementById("password").value;
     let confirmedPassword = document.getElementById("confirmedPassword").value;
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
 
     if (username.length == 0 || email.length == 0 || phoneNumber.length == 0 || gender.length == 0 || dob.length == 0 ||
         password.length == 0 || confirmedPassword.length == 0) {
@@ -91,16 +104,16 @@ function registerForm() {
             "** Please type full information! **";
         return false;
     } else {
-        if (username.length < 2 || username.length > 30) {
+        if (username.length < 2 || username.length > 30 || !regex.test(username)) {
             document.getElementById("message").innerText =
-                "** Username's length must be from 2 to 30 characters, please type again! **";
+                "** Username's length must be from 2 to 30 characters and include numbers, please type again! ** ";
             return false;
         } else if (Number(dob.substring(0, 4)) > 2010) {
             document.getElementById("message").innerText = "** Age must be over 15, please type again! **";
             return false;
         } else if (password.length < 2 || password.length > 30) {
             document.getElementById("message").innerText =
-                "** Password's length must be from 2 to 30 characters, please type again! **";
+                "** Password's length must be from 2 to 30 characters, please type again! ** ";
             return false;
         } else if (password != confirmedPassword) {
             document.getElementById("message").innerText =

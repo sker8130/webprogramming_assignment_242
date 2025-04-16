@@ -52,3 +52,7 @@ a:active {
   font-size: 16px;
   font-weight: 500;
 }
+
+input[type='submit']:hover {
+  cursor: pointer;
+}

@@ -8,6 +8,9 @@ $routes = [
     "/webprogramming_assignment_242/login" => [AuthController::class, "login"],
     "/webprogramming_assignment_242/register" => [AuthController::class, "register"],
     "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
+    "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
+    "/webprogramming_assignment_242/cart" => [CartController::class, "index"],
+    "/webprogramming_assignment_242/" => [HomeController::class, "index"],
 ];
 
 foreach ($routes as $uri => $arrayCtrl) {
@@ -18,7 +21,7 @@ foreach ($routes as $uri => $arrayCtrl) {
     if (str_starts_with($rqUri, $uri)) {
         require_once $file;
         $obj = new $class;
-        if ($method == "login" || $method == "register") {
+        if ($method == "login" || $method == "register" || $class == "AdminController") {
             $obj->$method();
         } else {
             require_once "assets/components/header/header.php";

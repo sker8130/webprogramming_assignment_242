@@ -23,11 +23,11 @@
     </div>
     <nav>
         <ul class="nav-links">
-            <li><a href="../index.php">HOME</a></li>
-            <li><a href="../about.php">ABOUT</a></li>
-            <li><a href="../services.php">ITEMS</a></li>
-            <li><a href="../contact.php">PAGES</a></li>
-            <li><a href="../contact.php">CONTACT</a></li>
+            <li><a href="/webprogramming_assignment_242">HOME</a></li>
+            <li><a href="/webprogramming_assignment_242/about">ABOUT</a></li>
+            <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
+            <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
+            <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>
         </ul>
         <img src="assets/components/images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
     </nav>
@@ -35,7 +35,7 @@
         <div class="image">
             <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
-        <a type="button" class="btn btn-primary btn-login">
+        <a type="button" class="btn btn-primary btn-login" href="/webprogramming_assignment_242/login">
             <span>Login</span>
         </a>
     </div>
