@@ -19,7 +19,7 @@ if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
         $_SESSION["mySession"] = $userModel->getUsernameByToken($token);
     }
 }
-if (!isset($_SESSION["mySession"]) || $_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"):
+if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"))):
 ?>
 
 <div>Please login as a member first!</div>
