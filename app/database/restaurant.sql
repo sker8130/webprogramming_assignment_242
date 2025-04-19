@@ -21,7 +21,8 @@ SET time_zone = "+00:00";
 -- Cơ sở dữ liệu: `restaurant`
 --
 
-CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+DROP DATABASE IF EXISTS `restaurant`;
+CREATE DATABASE `restaurant` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `restaurant`;
 
 -- --------------------------------------------------------
@@ -45,7 +46,7 @@ CREATE TABLE `categories` (
 CREATE TABLE `comments` (
   `CommentID` int(11) NOT NULL,
   `ParentID` int(11) DEFAULT NULL,
-  `NewID` int(11) NOT NULL,
+  `BlogID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `Content` text NOT NULL,
   `CreatedAt` datetime DEFAULT current_timestamp()
@@ -69,14 +70,15 @@ CREATE TABLE `contacts` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `news`
+-- Cấu trúc bảng cho bảng `blogs`
 --
 
-CREATE TABLE `news` (
-  `NewsID` int(11) NOT NULL,
+CREATE TABLE `blogs` (
+  `BlogID` int(11) NOT NULL,
   `Title` varchar(255) NOT NULL,
-  `Content` text NOT NULL,
+  `Content` longtext NOT NULL,
   `Image` varchar(255) DEFAULT NULL,
+  `WriterName` varchar(255) DEFAULT NULL,
   `CreatedAt` datetime DEFAULT current_timestamp(),
   `UpdatedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -173,6 +175,20 @@ CREATE TABLE `users` (
   `DateofBirth` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `TokenID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `expiresAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -189,7 +205,7 @@ ALTER TABLE `categories`
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`CommentID`),
   ADD KEY `ParentID` (`ParentID`),
-  ADD KEY `NewID` (`NewID`),
+  ADD KEY `BlogID` (`BlogID`),
   ADD KEY `UserID` (`UserID`);
 
 --
@@ -199,10 +215,10 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`ContactID`);
 
 --
--- Chỉ mục cho bảng `news`
+-- Chỉ mục cho bảng `blogs`
 --
-ALTER TABLE `news`
-  ADD PRIMARY KEY (`NewsID`);
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`BlogID`);
 
 --
 -- Chỉ mục cho bảng `orders`
@@ -251,6 +267,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
+-- Chỉ mục cho bảng `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`TokenID`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -273,10 +295,10 @@ ALTER TABLE `contacts`
   MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `news`
+-- AUTO_INCREMENT cho bảng `blogs`
 --
-ALTER TABLE `news`
-  MODIFY `NewsID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `blogs`
+  MODIFY `BlogID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
@@ -315,6 +337,12 @@ ALTER TABLE `users`
   MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `TokenID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Các ràng buộc cho các bảng đã đổ
 --
 
@@ -323,7 +351,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`ParentID`) REFERENCES `comments` (`CommentID`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`NewID`) REFERENCES `news` (`NewsID`),
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`BlogID`) REFERENCES `blogs` (`BlogID`),
   ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
 
 --
@@ -352,6 +380,12 @@ ALTER TABLE `products`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`ProductID`) REFERENCES `products` (`ProductID`);
+
+--
+-- Các ràng buộc cho bảng `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

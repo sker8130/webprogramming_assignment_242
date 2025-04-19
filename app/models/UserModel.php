@@ -9,14 +9,30 @@ class UserModel
         $this->db = (new database())->connect();
     }
 
+    public function getUsernameByToken($token)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM tokens join users on UserID = UserID WHERE token = ?");
+        $stmt->bind_param("s", $token);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $row["Username"];
+    }
+
     public function checkEmailExists($email)
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
-        $stmt->store_result();
+        $result = $stmt->get_result();
+        $stmt->close();
 
-        return $stmt->num_rows > 0;
+        if ($row = $result->fetch_assoc()) {
+            return $row['UserID'];
+        } else {
+            return false;
+        }
     }
 
     public function checkUsernameExists($username)
@@ -24,9 +40,14 @@ class UserModel
         $stmt = $this->db->prepare("SELECT * FROM users WHERE Username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
-        $stmt->store_result();
+        $result = $stmt->get_result();
+        $stmt->close();
 
-        return $stmt->num_rows > 0;
+        if ($row = $result->fetch_assoc()) {
+            return $row['UserID'];
+        } else {
+            return false;
+        }
     }
 
     public function register($params)
@@ -40,10 +61,12 @@ class UserModel
         $dob = $params["dob"];
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->db->prepare("insert into users (Username, PasswordHash, Email, Phone, Gender, Role, DateofBirth) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("insert into users (Username, PasswordHash, Email, Phone, Gender, Role, DateofBirth) values (?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("sssssss", $username, $hashedPassword, $email, $phoneNumber, $gender, $role, $dob);
 
-        return $stmt->execute();
+        $exists = $stmt->execute();
+        $stmt->close();
+        return $exists;
     }
 
     public function login($params)

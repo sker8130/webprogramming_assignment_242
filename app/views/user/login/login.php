@@ -45,7 +45,7 @@ if (isset($_SESSION['success_message'])) {
                 <input type="submit" value="Log in"
                     style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
                 <label style="color: #2a435d; display: flex; align-items: center; gap: 4px">
-                    <input type="checkbox">
+                    <input type="checkbox" name="remember">
                     <div>Remember me</div>
                 </label>
                 <div style="color: #4BFF3C">Lost your password</div>

@@ -13,4 +13,13 @@ class BlogController
     {
         require_once "app/views/user/blogdetail/blogdetail.php";
     }
+
+    public function adminIndex()
+    {
+        require_once "app/views/admin/blogs/blogs.php";
+    }
+    public function add()
+    {
+        require_once "app/views/admin/blogs/add.php";
+    }
 }
