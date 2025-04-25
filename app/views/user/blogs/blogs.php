@@ -49,8 +49,10 @@
                 <button type="submit" class="search-button">Đi</button>
             </form>
         </div>
-        <div class="blogs" id="blogs"></div>
-        <script>
+        <div class="blogs" id="blogs">
+            <?php echo $htmlDisplayed; ?>
+        </div>
+        <!-- <script>
             let blogs = "";
             for (let i = 0; i < 6; i++) {
                 blogs += `<div class="card">
@@ -67,7 +69,7 @@
                     </div>`
             }
             document.getElementById("blogs").innerHTML = blogs;
-        </script>
+        </script> -->
         <div class="pagination">
             <p>&laquo;</p>
             <p class="active">1</p>

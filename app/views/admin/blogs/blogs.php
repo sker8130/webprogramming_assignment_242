@@ -17,6 +17,11 @@ if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
 if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
     header("Location: /webprogramming_assignment_242/");
 }
+
+if (isset($_SESSION["success_message"])) {
+    echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
+    unset($_SESSION['success_message']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,31 +73,35 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                     <a href="/webprogramming_assignment_242/admin/blogs/add" class="btn btn-primary my-3">Add a blog</a>
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-striped" id="table1">
+                            <table class="table table-striped table-bordered" id="table1">
                                 <thead>
                                     <tr>
-                                        <th>BlogID</th>
+                                        <!-- <th>BlogID</th>
+                                        <th>Created at</th>
                                         <th>Image</th>
+                                        <th>Writer's name</th>
                                         <th>Title</th>
-                                        <th>Content</th>
-                                        <th></th>
+                                        <th class="w-25">Content</th>
+                                        <th></th> -->
+                                        <?php echo $tableHeader; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Graiden</td>
-                                        <td>vehicula.aliquet@semconsequat.co.uk</td>
-                                        <td>076 4820 8838</td>
-                                        <td>Offenburg</td>
+                                    <!-- <tr>
+                                        <td>1</td>
+                                        <td>2020-12-23 00:00:00</td>
+                                        <td>vehicula</td>
+                                        <td>Cuong</td>
+                                        <td>idekkkk uoer</td>
+                                        <td>Offenburg Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                                            rem!...</td>
                                         <td>
-                                            <!-- <span class="badge bg-success">Active</span> -->
-                                            <a href="" class="btn btn-success">Update</a>
+                                            <a href="/webprogramming_assignment_242/admin/blogs/update"
+                                                class="btn btn-success">Update</a>
                                             <button class="btn btn-danger">Delete</button>
                                         </td>
-                                    </tr>
-
-
-
+                                    </tr> -->
+                                    <?php echo $tableBody; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -123,6 +132,14 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
+
+    <script>
+    function deleteConfirm(id) {
+        if (confirm(`Delete this blog with ID =  ${id}?`)) {
+            window.location.href = `/webprogramming_assignment_242/admin/blogs/delete?id=${id}`;
+        }
+    }
+    </script>
 </body>
 
 </html>

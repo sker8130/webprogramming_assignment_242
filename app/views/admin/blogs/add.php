@@ -46,10 +46,11 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
         ?>
         <div id="main">
             <?php
-            require_once "assets/components/admin/header.php"
+            require_once "assets/components/admin/header.php";
             ?>
 
-            <form class="page-heading" method="post">
+            <form action="" class="page-heading" method="post" onsubmit="return addConfirm()"
+                enctype="multipart/form-data">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -64,7 +65,9 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="image" class="form-label">Thumbnail image</label>
-                                        <input class="form-control" type="file" id="image" required>
+                                        <input class="form-control" type="file" id="image" name="image" accept="image/*"
+                                            required>
+                                        <img id="imageDisplayed" src="" alt="" width="200" class="mt-4">
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +81,23 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="title" class="form-label">Title</label>
-                                        <textarea class="form-control" id="title" rows="2" required></textarea>
+                                        <textarea class="form-control" id="title" name="title" rows="2"
+                                            required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <label for="preview" class="form-label">Preview</label>
+                                        <textarea class="form-control" id="preview" name="preview" rows="2" required
+                                            maxlength="280"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +111,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="writerName" class="form-label">Writer's name</label>
-                                        <textarea class="form-control" id="writerName" rows="1" required></textarea>
+                                        <textarea class="form-control" id="writerName" name="writerName" rows="1"
+                                            required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +126,24 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="content" class="form-label">Content</label>
-                                        <textarea class="form-control tinymce" id="content" rows="30"
-                                            required></textarea>
+                                        <textarea class="tinymce" id="content" name="content" rows="30"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="section">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-label">Make this blog public?</div>
+                                    <div class="form-check">
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="form-check-input" name="isPublic" value="yes">
+                                            <label for="checkbox">Yes</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,10 +151,10 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                     </div>
                 </section>
 
-                <input type="submit" class="btn btn-primary" role="button" value="Add this blog">
+
+                <input type="submit" name="add" class="btn btn-primary" role="button" value="Add this blog">
 
             </form>
-
             <footer>
                 <div class=" footer clearfix mb-0 text-muted">
                     <div class="float-start">
@@ -132,6 +168,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
             </footer>
         </div>
     </div>
+
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
@@ -139,6 +176,42 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <script src="assets/compiled/js/app.js"></script>
     <script src="assets/extensions/tinymce/tinymce.min.js"></script>
     <script src="assets/static/js/pages/tinymce.js"></script>
+
+    <!-- preview ảnh sau khi chọn xong -->
+    <script>
+    document.getElementById("image").addEventListener("change", function(event) {
+        const imageInput = event.target.files[0];
+        const imageDisplayed = document.getElementById("imageDisplayed");
+
+        if (imageInput) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imageDisplayed.src = e.target.result;
+            }
+            reader.readAsDataURL(imageInput);
+        }
+
+
+    })
+    </script>
+
+    <script>
+    function addConfirm() {
+        const content = tinymce.get("content").getContent({
+            format: "text"
+        }).trim();
+
+        if (content === "") {
+            alert("Content is required!");
+            tinymce.get("content").focus();
+            return false;
+        }
+
+        return confirm("Add this blog?");
+    }
+    </script>
+    </script>
+
 
 
 

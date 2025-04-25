@@ -76,9 +76,11 @@ CREATE TABLE `contacts` (
 CREATE TABLE `blogs` (
   `BlogID` int(11) NOT NULL,
   `Title` varchar(255) NOT NULL,
+  `Preview` varchar(280) NOT NULL,
   `Content` longtext NOT NULL,
   `Image` varchar(255) DEFAULT NULL,
   `WriterName` varchar(255) DEFAULT NULL,
+  `IsPublic` enum("yes", "no") NOT NULL,
   `CreatedAt` datetime DEFAULT current_timestamp(),
   `UpdatedAt` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
