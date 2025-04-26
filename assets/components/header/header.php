@@ -39,5 +39,5 @@
             <span>Login</span>
         </a>
     </div>
-    <script src="assets/header-script.js"></script>
+    <script src="assets/components/header-script.js"></script>
 </header>

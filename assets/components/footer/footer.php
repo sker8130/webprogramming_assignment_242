@@ -26,7 +26,7 @@
                     <div class="address">
                         <span class="icon-location"><img src="assets/components/images/icon-location.png"
                                 alt="icon location" /></span>
-                        <span>1986 Hilltop DriveBorger, TX 79007</span>
+                        <span>TASTY BITES ESTELLA</span>
                     </div>
                     <div class="store-info">
                         <div class="open-hour">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="phone-num">
                             <span><img src="assets/components/images/icon-phone.png" alt="icon phone" /></span>
-                            <span>+880 1630-225015</span>
+                            <span>+387 847 976</span>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="address">
                         <span class="icon-location"><img src="assets/components/images/icon-location.png"
                                 alt="icon location" /></span>
-                        <span>4877 Rose AvenueNew Orleans, LA 70112</span>
+                        <span>TASTY BITES SAIGON CENTRE</span>
                     </div>
                     <div class="store-info">
                         <div class="open-hour">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="phone-num">
                             <span><img src="assets/components/images/icon-phone.png" alt="icon phone" /></span>
-                            <span>+880 1630-225016</span>
+                            <span>+387 847 976</span>
                         </div>
                     </div>
                 </div>
