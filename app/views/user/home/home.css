@@ -153,7 +153,7 @@ section{
     
 }
 .our-content{
-    flex-grow: 1; /* Chữ chiếm phần còn lại của không gian */
+    flex-grow: 1;
     max-width: 70%;
     display: flex;
     flex-direction: column;
@@ -169,7 +169,7 @@ section{
     font-size: 16px;
     color: #555;
     line-height: 1.6;
-    word-wrap: break-word; /* Đảm bảo chữ có thể xuống dòng */
+    word-wrap: break-word;
 }
 .success{
     margin-top: 40px;
@@ -281,8 +281,8 @@ section{
     margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Khoảng cách giữa các item */
-    justify-content: space-between; /* Căn đều các item */
+    gap: 20px;
+    justify-content: space-between;
 }
 .review-item {
     flex: 1 1 300px;

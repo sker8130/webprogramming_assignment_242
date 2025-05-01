@@ -221,29 +221,70 @@ if (isset($_SESSION["success_message"])) {
 
     </div>
     <section class="section-review section-hidden">
-        <div class="container">
-            <div class="review-content">
-                <h2 class="title text-white">Review form our guests</h2>
-                <div class="review-box">
-                    <div class="review-item">
-                        <img src="<?php echo asset('app/views/user/home/img/image_guests_1.png'); ?>" alt="guest icon" class="icon-guest">
-                        <div class="sub-title">Robert M. Dixon</div>
-                        <p class="normal-text">Also very good and so was the service. I had the mushroom risotto with scallops which was awesome. My wife had a burger over greens...</p>
-                    </div>
-                    
-                    <div class="review-item">
-                        <img src="<?php echo asset('app/views/user/home/img/image_guests_2.png'); ?>" alt="guest icon" class="icon-guest">
-                        <div class="sub-title">Robert M. Dixon</div>
-                        <p class="normal-text">Also very good and so was the service. I had the mushroom risotto with scallops which was awesome. My wife had a burger over greens...</p>
-                    </div>
-                    
-                    <div class="review-item">
-                        <img src="<?php echo asset('app/views/user/home/img/image_guests_3.png'); ?>" alt="guest icon" class="icon-guest">
-                        <div class="sub-title">Robert M. Dixon</div>
-                        <p class="normal-text">Also very good and so was the service. I had the mushroom risotto with scallops which was awesome. My wife had a burger over greens...</p>
-                    </div>
+    <div class="container">
+        <div class="review-content">
+            <h2 class="title text-white">Đánh giá từ khách hàng</h2>
+            <div class="review-box">
+                <?php
+                    require_once "app/database/database.php";
+                    $db = new Database();
+                    $conn = $db->connect();
+                    $query = "SELECT * FROM (
+                            SELECT r.*, u.Username, u.Avatar, p.ProductName,
+                                   ROW_NUMBER() OVER (PARTITION BY r.UserID ORDER BY r.CreatedAt DESC) as rn
+                            FROM reviews r
+                            JOIN users u ON r.UserID = u.UserID
+                            JOIN products p ON r.ProductID = p.ProductID
+                          ) AS ranked_reviews
+                          WHERE rn = 1
+                          ORDER BY CreatedAt DESC
+                          LIMIT 3";
+
+                    $result = $conn->query($query);
+
+                    if ($result && $result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // lấy Avatar
+                            $defaultAvatar = asset('app/views/user/home/img/default_avatar.png');
+                            $avatar = !empty($row['Avatar']) ? $row['Avatar'] : $defaultAvatar;
+
+                            $ratingStars = str_repeat('★', $row['Rating']) . str_repeat('☆', 5 - $row['Rating']);
+                            ?>
+                            <div class="review-item">
+                                <div class="avatar">
+                                    <img src="<?php echo $avatar; ?>"
+                                        alt="Avatar của <?php echo htmlspecialchars($row['Username']); ?>" class="user-avatar"
+                                        onerror="this.src='<?php echo $defaultAvatar; ?>'">
+                                </div>
+                                <div class="review-header">
+                                    <div class="sub-title"><?php echo htmlspecialchars($row['Username']); ?></div>
+                                    <div class="rating"><?php echo $ratingStars; ?></div>
+                                </div>
+                                <p class="normal-text"><?php echo htmlspecialchars($row['Comment']); ?></p>
+                                <small class="product-name">Đã thử: <?php echo htmlspecialchars($row['ProductName']); ?></small>
+                                <small class="review-date"><?php echo date('d/m/Y', strtotime($row['CreatedAt'])); ?></small>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        // không có review
+                        for ($i = 1; $i <= 3; $i++) {
+                            ?>
+                            <div class="review-item">
+                                <div class="avatar-container">
+                                    <img src="<?php echo asset('app/views/user/home/img/default_avatar.png'); ?>"
+                                        alt="Khách hàng mẫu" class="user-avatar">
+                                </div>
+                                <div class="sub-title">Khách hàng mẫu</div>
+                                <p class="normal-text">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!</p>
+                            </div>
+                            <?php
+                        }
+                    }
+
+                    $conn->close();
+                    ?>
                 </div>
-                
             </div>
         </div>
     </section>
