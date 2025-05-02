@@ -156,9 +156,12 @@ if (isset($_SESSION['scrollToComment'])) {
                         <div class='comment-content'>{$comment["Content"]}</div>";
                     if (!$notLoginCond) {
                         echo "<div class='comment-action'>
-                            <div onclick='viewRespondsToggle({$comment["CommentID"]})' style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i> <span>{$subCommentsTotal}</span></div>
-                                                     <i class='far fa-trash-alt deleteComment' style='cursor: pointer' onclick='confirmDelete({$comment["CommentID"]})'></i>
-                            </div>
+                            <div onclick='viewRespondsToggle({$comment["CommentID"]})' style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i> <span>{$subCommentsTotal}</span></div>";
+
+                        if ($comment["UserID"] == $userID) {
+                            echo "<i class='far fa-trash-alt deleteComment' style='cursor: pointer' onclick='confirmDelete({$comment["CommentID"]})'></i>";
+                        }
+                        echo "</div>
                                                      ";
                     }
 
@@ -188,7 +191,7 @@ if (isset($_SESSION['scrollToComment'])) {
                     <!--<span style='font-weight: bold; color: #cc3333'>@amy23</span>-->
                     {$subComment["Content"]}
                 </div>";
-                        if (!$notLoginCond) {
+                        if (!$notLoginCond && $subComment["UserID"] == $userID) {
                             echo "<div class='comment-action'>
                     <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
                         onclick='confirmDelete({$subComment["CommentID"]}, {$comment["CommentID"]})'></i>
