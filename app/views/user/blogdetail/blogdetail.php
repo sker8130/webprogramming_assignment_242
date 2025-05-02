@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+if (isset($_SESSION['scrollToComment'])) {
+    $scrollCommentID = $_SESSION['scrollToComment'];
+    $parentID = $_SESSION["openResponds"];
+    echo "<script>
+        window.addEventListener('load', function() {
+            var target = document.getElementById('comment-{$scrollCommentID}');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            viewRespondsToggle({$parentID});
+         });
+    </script>";
+    unset($_SESSION['scrollToComment']);
+    unset($_SESSION['openResponds']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,19 +38,21 @@
         <div class="content">
             <div class="top">
                 <div class="main-content">
-                    <div class="title">tit</div>
+                    <div class="title"><?php echo $row["Title"]; ?></div>
                     <div class="blog-info">
                         <div style="display: flex; gap: 5px; ">
                             <i class='far fa-user-circle'></i>
-                            <div>Hải Dương</div>
+                            <div><?php echo $row["WriterName"] ?></div>
                         </div>
                         <div style="display: flex; gap: 5px; ">
                             <i class='far fa-calendar-plus'></i>
-                            <div>2/2/2025</div>
+                            <div><?php echo substr($row["CreatedAt"], 0, 10) ?></div>
                         </div>
                     </div>
                     <hr style="color: grey">
-                    <div class="blog-content">blog content</div>
+                    <div class="blog-content">
+                        <?php echo $row["Content"]; ?>
+                    </div>
                     <div class="share">
                         <i class='fab fa-facebook'></i>
                         <i class='fab fa-instagram'></i>
@@ -45,64 +66,187 @@
                     <div style="text-align: center; font-size: 21px; font-weight:500; color: #cc3333">Các bài viết khác
                     </div>
                     <div class="other-blogs-list">
-                        <div class="other-blog-element">
-                            <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 70px; height: 70px; border-radius: 10px">
+                        <?php
+                        $count = 0;
+                        while ($otherBlog = $otherBlogs->fetch_assoc()) {
+                            if ($otherBlog["BlogID"] != $row["BlogID"] && $otherBlog["IsPublic"] === "yes") {
+                                echo "<div class='other-blog-element'>
+                                    <img src='{$otherBlog["Image"]}' alt='idk'
+                                        style='width: 70px; height: 70px; border-radius: 10px'>
+                                    <div style='display: flex; flex-flow: column; gap: 4px'>
+                                        <div style='font-weight:500; font-size: 14px'>{$otherBlog["Title"]}</div>
+                                        <div style='color: grey; font-size: 10px'>{$otherBlog["WriterName"]} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
+                                    </div>
+                                </div>";
+                                $count++;
+                                if ($count >= 4) break;
+                            }
+                        }
 
-                            <div style="display: flex; flex-flow: column; gap: 4px">
-                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
-                                    elit elit elit. Totam, est. elit elit</div>
-                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
-                            </div>
-                        </div>
-                        <div class="other-blog-element">
-                            <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 70px; height: 70px; border-radius: 10px">
+                        ?>
 
-                            <div style="display: flex; flex-flow: column; gap: 4px">
-                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
-                                    elit elit elit. Totam, est. elit elit</div>
-                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
-                            </div>
-                        </div>
-                        <div class="other-blog-element">
-                            <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 70px; height: 70px; border-radius: 10px">
-
-                            <div style="display: flex; flex-flow: column; gap: 4px">
-                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
-                                    elit elit elit. Totam, est. elit elit</div>
-                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
-                            </div>
-                        </div>
-                        <div class="other-blog-element">
-                            <img src="assets/other-posts-thumbnail.png" alt="idk"
-                                style="width: 70px; height: 70px; border-radius: 10px">
-
-                            <div style="display: flex; flex-flow: column; gap: 4px">
-                                <div style="font-weight:500; font-size: 14px">Lorem ipsum dolor sit amet elit elit
-                                    elit elit elit. Totam, est. elit elit</div>
-                                <div style="color: grey; font-size: 10px">Hải Dương | 2/2/22025</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <?php
+            //nếu session hết hạn nhưng cookie còn -> đặt lại session
+            //nếu k có session or có mà session là admin -> header tới login
+            require_once "app/models/UserModel.php";
+            require_once "app/models/TokenModel.php";
+
+            $userModel = new UserModel();
+            $tokenModel = new TokenModel();
+            if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
+                $token = $_COOKIE["usernameEmail"];
+                if ($tokenModel->checkTokenExists($token)) {
+                    $user = $userModel->getUserByToken($token);
+                    if ($user) {
+                        $_SESSION["mySession"] = $user["Username"];
+                    }
+                }
+            }
+
+            //kiểm tra chưa đăng nhập
+            $notLoginCond = !isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"));
+            if ($notLoginCond):
+            ?>
+
             <div class="comment-section">
                 <div style="font-size: 30px">
-                    Để lại một bình luận
+                    Please login first to leave a comment!
                 </div>
+            </div>
+            <?php else: ?>
+            <div class="comment-section" id="comment-section">
+                <div style="font-size: 30px">
+                    Leave a comment!
+                </div>
+                <?php endif; ?>
 
-                <div class="comment-frame">
-                    <div class="comment-avatar"><img src="assets/card.png" alt=""></div>
-                    <div class="comment-input">
-                        <textarea placeholder="Thêm 1 bình luận"></textarea>
-                        <button class="send-button">Gửi</button>
-                    </div>
+                <?php if (!$notLoginCond): ?>
+                <div class="comment-frame" style="align-items: center">
+                    <div class="comment-avatar"><img src="<?php
+                                                                echo $userModel->getUserById($userID)["Avatar"];
+                                                                ?>" alt=""></div>
+                    <form class="comment-input" method="post" onsubmit="return confirmSend()">
+                        <textarea name="comment" placeholder="Add a comment" required></textarea>
+                        <input type="submit" value="Send" class="send-button">
+                    </form>
                 </div>
+                <?php else: ?>
+                <?php endif; ?>
+
+                <?php
+                while ($comment = $comments->fetch_assoc()) {
+                    $date = substr($comment["CreatedAt"], 0, 10);
+                    $subComments = $this->commentModel->getAllByParentID($comment["CommentID"]);
+                    $subCommentsTotal = $subComments->num_rows;
+                    //hiển thị comment cha
+                    //khi ấn vào icon reply thì comments con và khung trả lời comment được hiện ra
+                    //ấn vào icon reply 1 lần nữa thì ẩn đi
+                    echo "<div class='comment-frame' style='margin-top: 50px' id='comment-{$comment["CommentID"]}'>
+                        <div class='displayed-comment-avatar'><img src='{$comment["Avatar"]}' alt=''></div>
+                        <div class='displayed-comment'>
+                            <div class='comment-info'>
+                                <div class='account-name'>{$comment["Username"]}</div>
+                                <div class='comment-date'> {$date}</div>
+                            </div>
+                        <div class='comment-content'>{$comment["Content"]}</div>";
+                    if (!$notLoginCond) {
+                        echo "<div class='comment-action'>
+                            <div onclick='viewRespondsToggle({$comment["CommentID"]})' style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i> <span>{$subCommentsTotal}</span></div>
+                                                     <i class='far fa-trash-alt deleteComment' style='cursor: pointer' onclick='confirmDelete({$comment["CommentID"]})'></i>
+                            </div>
+                                                     ";
+                    }
+
+
+
+                    echo "
+        </div>
+    </div>";
+
+                    if (!$notLoginCond) {
+                        echo "<div class='responds-for {$comment["CommentID"]}'>";
+                    } else {
+                        echo "<div ";
+                    }
+
+                    //hiển thị CÁC comments con
+                    while ($subComment = $subComments->fetch_assoc()) {
+                        $subCommentDate = substr($subComment["CreatedAt"], 0, 10);
+                        echo "<div class='comment-frame' style='margin-left: 60px' id='comment-{$subComment["CommentID"]}'>
+            <div class='displayed-comment-avatar'><img src='{$comment["Avatar"]}' alt=''></div>
+            <div class='displayed-comment'>
+                <div class='comment-info'>
+                    <div class='account-name'>{$subComment["Username"]}</div>
+                    <div class='comment-date'>{$subCommentDate}</div>
+                </div>
+                <div class='comment-content'>
+                    <!--<span style='font-weight: bold; color: #cc3333'>@amy23</span>-->
+                    {$subComment["Content"]}
+                </div>";
+                        if (!$notLoginCond) {
+                            echo "<div class='comment-action'>
+                    <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
+                        onclick='confirmDelete({$subComment["CommentID"]}, {$comment["CommentID"]})'></i>
+                </div>";
+                        }
+                        echo "</div>
+        </div>";
+                    }
+
+                    if (!$notLoginCond) {
+                        echo "<div class='comment-frame' style='align-items: center; margin-left: 60px'>
+                    <form class='comment-input' method='post' onsubmit='return confirmSend()'>
+                        <textarea name='comment' placeholder='Add a respond' style='border-color:rgb(212, 184, 184)'
+                            required></textarea>
+                        <input type='hidden' name='parentID' value='{$comment["CommentID"]}'>
+                        <input type='submit' value='Send' class='send-button'>
+                    </form>
+                </div>";
+                    }
+                    echo "</div>";
+                }
+                ?>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+function confirmSend() {
+    return confirm("Send this comment?");
+}
+
+function confirmDelete(commentID, parentID) {
+    if (confirm("Delete this comment?")) {
+        params = `&deletingCommentID=${commentID}`;
+        if (parentID != undefined) {
+            params += `&parentID=${parentID}`;
+        }
+        window.location.href += params;
+    }
+}
+</script>
+
+<script>
+function viewRespondsToggle(commentID) {
+    var elem = document.getElementsByClassName(`responds-for ${commentID}`)[0];
+    if (!elem) return;
+
+    if (elem.classList.contains("show")) {
+        // Đang mở, thì đóng lại
+        elem.style.maxHeight = "0";
+        elem.classList.remove("show");
+    } else {
+        // Đang đóng, thì mở ra
+        elem.style.maxHeight = elem.scrollHeight + "px";
+        elem.classList.add("show");
+    }
+}
+</script>

@@ -55,11 +55,16 @@ body {
   font-size: 13px;
 }
 
+.blog-content {
+  margin-top: 10px;
+}
+
 .share {
   color: grey;
   display: flex;
   gap: 20px;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .comment-section {
@@ -69,7 +74,7 @@ body {
 .comment-frame {
   display: flex;
   gap: 20px;
-  align-items: center;
+  /* align-items: center; */
   margin-top: 20px;
 }
 
@@ -100,15 +105,76 @@ body {
   padding: 2px;
 }
 
+.displayed-comment-avatar > img {
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+}
+
+.displayed-comment {
+  width: 100%;
+  border: 2px solid #cc3333;
+  border-radius: 10px;
+  /* resize: none; */
+  padding: 18px;
+  background: white;
+  min-height: 150px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.comment-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-name {
+  font-weight: bold;
+}
+
+.comment-date {
+  color: rgb(178, 174, 174);
+}
+
+.comment-action {
+  color: rgb(178, 174, 174);
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+}
+
 .send-button {
   margin-left: -80px;
+  /* margin-left: -150px; */
   background: #cc3333;
   /* height: 50%; */
   color: white;
   padding: 8px 20px;
   /* box-sizing: border-box; */
   border-radius: 30px;
+  border: none;
+  cursor: pointer;
 }
+
+.responds-for {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.viewRespondsButton:hover {
+  color: rgb(24, 43, 110);
+}
+
+.deleteComment:hover {
+  color: #cc3333;
+}
+
+/* .responds-for.show {
+  max-height: 100%;
+} */
 
 /* mobile: width < 740px */
 @media only screen and (max-width: 739px) {

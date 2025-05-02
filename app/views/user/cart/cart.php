@@ -15,8 +15,11 @@ $userModel = new UserModel();
 $tokenModel = new TokenModel();
 if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
     $token = $_COOKIE["usernameEmail"];
-    if (!$tokenModel->checkTokenExists($token)) {
-        $_SESSION["mySession"] = $userModel->getUsernameByToken($token);
+    if ($tokenModel->checkTokenExists($token)) {
+        $user = $userModel->getUserByToken($token);
+        if ($user) {
+            $_SESSION["mySession"] = $user["Username"];
+        }
     }
 }
 if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"))):

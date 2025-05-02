@@ -1,3 +1,17 @@
+<?php
+// $currentPath = $_SERVER['REQUEST_URI'];
+
+function isActive($path)
+{
+    // global $currentPath;
+    $currentPath = $_SERVER['REQUEST_URI'];
+
+    return strpos($currentPath, $path) !== false ? 'active' : '';
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,57 +70,73 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/blogs");
+                                            ?>">
                         <a href="/webprogramming_assignment_242/admin/blogs" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Blogs (quản lý bài đăng)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/comments" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/comments");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/comments"
+                            class="sidebar-link">
                             <i class="bi bi-pen-fill"></i>
                             <span>Comments (quản lý bình luận)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/webinfo" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/webinfo");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/webinfo"
+                            class="sidebar-link">
                             <i class="bi bi-stack"></i>
                             <span>Web Info (quản lý thông tin trên trang đã thiết kế)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/contact" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/contact");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/contact"
+                            class="sidebar-link">
                             <i class="bi bi-collection-fill"></i>
                             <span>Contact (quản lý liên hệ của khách)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/faq" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/faq");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/faq"
+                            class="sidebar-link">
                             <i class="bi bi-grid-1x2-fill"></i>
                             <span>FAQ (quản lý các câu hỏi đáp)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/items" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/items");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/items"
+                            class="sidebar-link">
                             <i class="bi bi-hexagon-fill"></i>
                             <span>Items (quản lý sản phẩm)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/cart" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/cart");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/cart"
+                            class="sidebar-link">
                             <i class="bi bi-file-earmark-medical-fill"></i>
                             <span>Cart (quản lý giỏ hàng)</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-item">
-                        <a href="/webprogramming_assignment_242/admin/orders" class="sidebar-link">
+                    <li class="sidebar-item <?php
+                                            echo isActive("/admin/orders");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/orders"
+                            class="sidebar-link">
                             <i class="bi bi-journal-check"></i>
                             <span>Orders (quản lý đơn hàng)</span>
                         </a>

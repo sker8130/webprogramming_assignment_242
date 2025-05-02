@@ -17,7 +17,7 @@ body {
 }
 
 .banner {
-  background-image: url("../../../../assets/image_items_bg.png");
+  background-image: url('../../../../assets/image_items_bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -89,9 +89,11 @@ body {
 
 .pagination {
   display: inline-block;
+  padding-left: 40px;
+  padding-bottom: 20px;
 }
 
-.pagination p {
+.pagination a {
   color: black;
   float: left;
   padding: 8px 16px;
@@ -100,12 +102,12 @@ body {
   border-radius: 7px;
 }
 
-.pagination p.active {
+.pagination a.active {
   background-color: #cc3333;
   color: white;
 }
 
-.pagination p:hover:not(.active) {
+.pagination a:hover:not(.active) {
   background-color: #ddd;
 }
 

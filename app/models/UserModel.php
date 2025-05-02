@@ -9,7 +9,7 @@ class UserModel
         $this->db = (new database())->connect();
     }
 
-    public function getUsernameByToken($token)
+    public function getUserByToken($token)
     {
         $stmt = $this->db->prepare("SELECT * FROM tokens join users on UserID = UserID WHERE token = ?");
         $stmt->bind_param("s", $token);
@@ -17,7 +17,18 @@ class UserModel
         $row = $stmt->get_result()->fetch_assoc();
         $stmt->close();
 
-        return $row["Username"];
+        return $row;
+    }
+
+    public function getUserById($id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE UserID = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $row;
     }
 
     public function checkEmailExists($email)
@@ -56,13 +67,14 @@ class UserModel
         $password = $params["password"];
         $email = $params["email"];
         $phoneNumber = $params["phoneNumber"];
+        $avatar = "assets/default-pfp.avif";
         $gender = $params["gender"];
         $role = "member";
         $dob = $params["dob"];
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->db->prepare("insert into users (Username, PasswordHash, Email, Phone, Gender, Role, DateofBirth) values (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $username, $hashedPassword, $email, $phoneNumber, $gender, $role, $dob);
+        $stmt = $this->db->prepare("insert into users (Username, PasswordHash, Email, Phone, Avatar, Gender, Role, DateofBirth) values (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $username, $hashedPassword, $email, $phoneNumber, $avatar, $gender, $role, $dob);
 
         $exists = $stmt->execute();
         $stmt->close();

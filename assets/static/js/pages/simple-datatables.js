@@ -4,6 +4,7 @@ let dataTable = new simpleDatatables.DataTable(
     sortable: false,
   }
 );
+
 // Move "per page dropdown" selector element out of label
 // to make it work with bootstrap 5. Add bs5 classes.
 function adaptPageDropdown() {
@@ -53,3 +54,24 @@ dataTable.on('datatable.sort', refreshPagination);
 
 // Re-patch pagination after the page was changed
 dataTable.on('datatable.page', adaptPagination);
+
+// document
+//   .getElementById('usernameForComments')
+//   .addEventListener('input', function () {
+//     const value = this.value.trim().toLowerCase();
+//     dataTable.columns(0).search(value);
+//   });
+
+// document
+//   .getElementById('blogIDForComments')
+//   .addEventListener('input', function () {
+//     const value = this.value.trim().toLowerCase();
+//     dataTable.columns(1).search(value);
+//   });
+
+// document
+//   .getElementById('contentForComments')
+//   .addEventListener('input', function () {
+//     const value = this.value.trim().toLowerCase();
+//     dataTable.columns(1).search(value);
+//   });

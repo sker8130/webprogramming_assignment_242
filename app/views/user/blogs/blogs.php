@@ -1,5 +1,10 @@
 <!-- trang danh sách bài đăng -->
 
+<?php
+$currentPage = $_GET['page'] ?? 1;
+$totalPages = $totalPages ?? 1;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,70 +23,42 @@
 
 
 <body>
-
-    <!-- <div>
-        <?php
-        //require_once "assets/components/header/header.php";
-        ?>
-        <div style="display: flex;
-  flex-flow: column;">
-            <div>hreig</div>
-            <div>hreig</div>
-        </div>
-    </div> -->
-
-    <?php
-    // require_once "assets/components/header/header.php";
-    ?>
     <div class="blogs-container">
         <div class="banner">
             <div class="blog-title">
-                <h3>BLOG ẨM THỰC</h3>
-                <p style="margin-top: -2px">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit,
-                    quae? Fugiat temporibus
-                    minima neque aspernatur? A!</p>
+                <h3>FOOD BLOGS</h3>
             </div>
         </div>
         <div class="search-bar">
-            <form>
-                <div class="search-input"><input type="text" placeholder="   Tìm kiếm bài đăng" name="search">
+            <form method="get">
+                <div class="search-input"><input type="text" placeholder="   Search for blogs" name="searchForBlogs"
+                        value="<?php echo isset($oldInput["searchForBlogs"]) ? htmlspecialchars($oldInput["searchForBlogs"]) : ""; ?>">
                 </div>
-                <button type="submit" class="search-button">Đi</button>
+                <button type="submit" class="search-button">Go</button>
             </form>
         </div>
         <div class="blogs" id="blogs">
             <?php echo $htmlDisplayed; ?>
         </div>
-        <!-- <script>
-            let blogs = "";
-            for (let i = 0; i < 6; i++) {
-                blogs += `<div class="card">
-                        <img src="assets/card.png" alt=""
-                            style="width: 100%; border-top-left-radius: 20px; border-top-right-radius: 20px">
-                        <h2 style="text-align: center; margin: 10px 20px">Mỳ tươi trường thọ làm bằng tay</h2>
-                        <p style="text-align:justify; margin: 0 15px">Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Qui, Lorem Lorem ipsum dolor sit amet consectetur adipisicing.
-                            ipsum dolor, sit amet consectetur adipisicing elit. Aliquam, natus?
-                            maiores? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, illo!</p>
-                        <a href="/webprogramming_assignment_242/blogdetail?id=${i}"><button class="view-more-button">
-                            Xem chi tiết
-                        </button></a>
-                    </div>`
-            }
-            document.getElementById("blogs").innerHTML = blogs;
-        </script> -->
         <div class="pagination">
-            <p>&laquo;</p>
-            <p class="active">1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>4</p>
-            <p>5</p>
-            <p>6</p>
-            <p>7</p>
-            <p>8</p>
-            <p>&raquo;</p>
+            <?php if ($currentPage > 1): ?>
+            <a
+                href="?page=<?php echo $currentPage - 1; ?>&searchForBlogs=<?php echo urlencode($oldInput["searchForBlogs"] ?? ''); ?>">&laquo;</a>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="?page=<?php echo $i; ?>&searchForBlogs=<?php echo urlencode($oldInput["searchForBlogs"] ?? ''); ?>"
+                class="<?php echo ($i == $currentPage) ? 'active' : ''; ?>">
+                <?php echo $i; ?>
+            </a>
+            <?php endfor; ?>
+
+            <?php if ($currentPage < $totalPages): ?>
+            <a
+                href="?page=<?php echo $currentPage + 1; ?>&searchForBlogs=<?php echo urlencode($oldInput["searchForBlogs"] ?? ''); ?>">&raquo;</a>
+            <?php endif; ?>
         </div>
+
     </div>
 </body>
 
