@@ -123,27 +123,6 @@ if (isset($_SESSION["success_message"])) {
                                     <?php
                                     echo $tableBody;
                                     ?>
-                                    <!-- <tr>
-                                        <td>1</td>
-                                        <td style='width: 150px'>23</td>
-                                        <td>yes</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td style='width: 150px'>50</td>
-                                        <td>no</td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td style='width: 150px'>89</td>
-                                        <td>yes</td>
-
-
-                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

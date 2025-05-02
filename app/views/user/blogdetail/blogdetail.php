@@ -142,78 +142,81 @@ if (isset($_SESSION['scrollToComment'])) {
                 while ($comment = $comments->fetch_assoc()) {
                     $date = substr($comment["CreatedAt"], 0, 10);
                     $subComments = $this->commentModel->getAllByParentID($comment["CommentID"]);
-                    $subCommentsTotal = $subComments->num_rows;
-                    //hiển thị comment cha
-                    //khi ấn vào icon reply thì comments con và khung trả lời comment được hiện ra
-                    //ấn vào icon reply 1 lần nữa thì ẩn đi
-                    echo "<div class='comment-frame' style='margin-top: 50px' id='comment-{$comment["CommentID"]}'>
-                        <div class='displayed-comment-avatar'><img src='{$comment["Avatar"]}' alt=''></div>
+                    $subCommentsTotal = $subComments->num_rows; ?>
+                <!-- hiển thị comment cha
+                    khi ấn vào icon reply thì comments con và khung trả lời comment được hiện ra
+                    ấn vào icon reply 1 lần nữa thì ẩn đi -->
+                <div class='comment-frame' style='margin-top: 50px' id='comment-<?php echo $comment["CommentID"] ?>'>
+                    <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
+                    <div class='displayed-comment'>
+                        <div class='comment-info'>
+                            <div class='account-name'><?php echo $comment["Username"] ?></div>
+                            <div class='comment-date'><?php echo $date ?></div>
+                        </div>
+                        <div class='comment-content'><?php echo $comment["Content"] ?></div>
+                        <?php if (!$notLoginCond) { ?>
+                        <div class='comment-action'>
+                            <div onclick='viewRespondsToggle(<?php echo $comment["CommentID"] ?>)'
+                                style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i>
+                                <span><?php echo $subCommentsTotal ?></span>
+                            </div>
+
+                            <?php if ($comment["UserID"] == $userID) { ?>
+                            <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
+                                onclick='confirmDelete(<?php echo $comment["CommentID"] ?>)'></i>
+                            <?php } ?>
+                        </div>
+
+                        <?php } ?>
+
+
+
+
+                    </div>
+                </div>
+
+                <?php if (!$notLoginCond) { ?>
+                <div class='responds-for <?php echo $comment["CommentID"] ?>'>
+                    <?php   } ?>
+
+                    <!-- hiển thị CÁC comments con -->
+                    <?php while ($subComment = $subComments->fetch_assoc()) {
+                            $subCommentDate = substr($subComment[" CreatedAt"], 0, 10); ?>
+                    <div class='comment-frame' style='margin-left: 60px'
+                        id='comment-<?php echo $subComment["CommentID"] ?>'>
+                        <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
                         <div class='displayed-comment'>
                             <div class='comment-info'>
-                                <div class='account-name'>{$comment["Username"]}</div>
-                                <div class='comment-date'> {$date}</div>
+                                <div class='account-name'><?php echo $subComment["Username"] ?></div>
+                                <div class='comment-date'><?php echo $subCommentDate ?></div>
                             </div>
-                        <div class='comment-content'>{$comment["Content"]}</div>";
-                    if (!$notLoginCond) {
-                        echo "<div class='comment-action'>
-                            <div onclick='viewRespondsToggle({$comment["CommentID"]})' style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i> <span>{$subCommentsTotal}</span></div>";
+                            <div class='comment-content'>
+                                <?php echo $subComment["Content"] ?>
+                            </div>
+                            <?php if (!$notLoginCond && $subComment["UserID"] == $userID) { ?>
+                            <div class='comment-action'>
+                                <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
+                                    onclick='confirmDelete(<?php echo $subComment["CommentID"] ?>, <?php echo $comment["CommentID"] ?>)'></i>
+                            </div>
+                            <?php } ?>
 
-                        if ($comment["UserID"] == $userID) {
-                            echo "<i class='far fa-trash-alt deleteComment' style='cursor: pointer' onclick='confirmDelete({$comment["CommentID"]})'></i>";
-                        }
-                        echo "</div>
-                                                     ";
-                    }
+                        </div>
+                    </div>
+                    <?php } ?>
 
-
-
-                    echo "
-        </div>
-    </div>";
-
-                    if (!$notLoginCond) {
-                        echo "<div class='responds-for {$comment["CommentID"]}'>";
-                    } else {
-                        echo "<div ";
-                    }
-
-                    //hiển thị CÁC comments con
-                    while ($subComment = $subComments->fetch_assoc()) {
-                        $subCommentDate = substr($subComment["CreatedAt"], 0, 10);
-                        echo "<div class='comment-frame' style='margin-left: 60px' id='comment-{$subComment["CommentID"]}'>
-            <div class='displayed-comment-avatar'><img src='{$comment["Avatar"]}' alt=''></div>
-            <div class='displayed-comment'>
-                <div class='comment-info'>
-                    <div class='account-name'>{$subComment["Username"]}</div>
-                    <div class='comment-date'>{$subCommentDate}</div>
+                    <?php if (!$notLoginCond) { ?>
+                    <div class='comment-frame' style='align-items: center; margin-left: 60px'>
+                        <form class='comment-input' method='post' onsubmit='return confirmSend()'>
+                            <textarea name='comment' placeholder='Add a respond' style='border-color:rgb(212, 184, 184)'
+                                required></textarea>
+                            <input type='hidden' name='parentID' value='<?php echo $comment["CommentID"] ?>'>
+                            <input type='submit' value='Send' class='send-button'>
+                        </form>
+                    </div>
+                    <?php } ?>
                 </div>
-                <div class='comment-content'>
-                    <!--<span style='font-weight: bold; color: #cc3333'>@amy23</span>-->
-                    {$subComment["Content"]}
-                </div>";
-                        if (!$notLoginCond && $subComment["UserID"] == $userID) {
-                            echo "<div class='comment-action'>
-                    <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
-                        onclick='confirmDelete({$subComment["CommentID"]}, {$comment["CommentID"]})'></i>
-                </div>";
-                        }
-                        echo "</div>
-        </div>";
-                    }
+                <?php } ?>
 
-                    if (!$notLoginCond) {
-                        echo "<div class='comment-frame' style='align-items: center; margin-left: 60px'>
-                    <form class='comment-input' method='post' onsubmit='return confirmSend()'>
-                        <textarea name='comment' placeholder='Add a respond' style='border-color:rgb(212, 184, 184)'
-                            required></textarea>
-                        <input type='hidden' name='parentID' value='{$comment["CommentID"]}'>
-                        <input type='submit' value='Send' class='send-button'>
-                    </form>
-                </div>";
-                    }
-                    echo "</div>";
-                }
-                ?>
             </div>
         </div>
     </div>

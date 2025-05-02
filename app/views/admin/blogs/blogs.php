@@ -79,31 +79,10 @@ if (isset($_SESSION["success_message"])) {
                             <table class="table table-striped table-bordered" id="table1">
                                 <thead>
                                     <tr>
-                                        <!-- <th>BlogID</th>
-                                        <th>Created at</th>
-                                        <th>Image</th>
-                                        <th>Writer's name</th>
-                                        <th>Title</th>
-                                        <th class="w-25">Content</th>
-                                        <th></th> -->
                                         <?php echo $tableHeader; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- <tr>
-                                        <td>1</td>
-                                        <td>2020-12-23 00:00:00</td>
-                                        <td>vehicula</td>
-                                        <td>Cuong</td>
-                                        <td>idekkkk uoer</td>
-                                        <td>Offenburg Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
-                                            rem!...</td>
-                                        <td>
-                                            <a href="/webprogramming_assignment_242/admin/blogs/update"
-                                                class="btn btn-success">Update</a>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr> -->
                                     <?php echo $tableBody; ?>
                                 </tbody>
                             </table>
