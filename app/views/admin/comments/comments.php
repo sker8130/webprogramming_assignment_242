@@ -158,7 +158,7 @@ if (isset($_SESSION["success_message"])) {
 
     <script>
     function deleteConfirm(id) {
-        if (confirm(`Delete this blog with ID =  ${id}?`)) {
+        if (confirm(`Delete this comment with ID =  ${id}?`)) {
             window.location.href = `/webprogramming_assignment_242/admin/comments/delete?id=${id}`;
         }
     }

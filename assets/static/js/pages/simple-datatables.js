@@ -1,7 +1,7 @@
 let dataTable = new simpleDatatables.DataTable(
   document.getElementById('table1'),
   {
-    sortable: false,
+    sortable: true,
   }
 );
 

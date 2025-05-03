@@ -8,9 +8,12 @@
 </head>
 
 <body>
-    <header class="mb-3">
-        <div class="burger-btn d-block d-xl-none" role="button">
-            <i class="bi bi-justify fs-3"></i>
+    <header class="mb-3 d-flex justify-content-between">
+        <div class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3" role="button"></i>
+        </div>
+        <div>
+            <a href="logout" class="btn btn-primary">Log out</a>
         </div>
     </header>
 </body>

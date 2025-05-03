@@ -71,6 +71,15 @@ function isActive($path)
                     <li class="sidebar-title">Menu</li>
 
                     <li class="sidebar-item <?php
+                                            echo isActive("/admin/users");
+                                            ?>">
+                        <a href="/webprogramming_assignment_242/admin/users" class="sidebar-link">
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Users (quản lý người dùng)</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item <?php
                                             echo isActive("/admin/blogs");
                                             ?>">
                         <a href="/webprogramming_assignment_242/admin/blogs" class="sidebar-link">

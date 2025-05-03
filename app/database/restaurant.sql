@@ -352,9 +352,9 @@ ALTER TABLE `tokens`
 -- Các ràng buộc cho bảng `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`ParentID`) REFERENCES `comments` (`CommentID`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`BlogID`) REFERENCES `blogs` (`BlogID`),
-  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`ParentID`) REFERENCES `comments` (`CommentID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`BlogID`) REFERENCES `blogs` (`BlogID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `orders`
@@ -387,7 +387,7 @@ ALTER TABLE `reviews`
 -- Các ràng buộc cho bảng `tokens`
 --
 ALTER TABLE `tokens`
-  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

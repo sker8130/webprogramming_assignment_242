@@ -8,7 +8,7 @@ require_once "app/database/database.php";
 
 class BlogModel
 {
-    private static $db;
+    private $db;
 
     public function __construct()
     {
@@ -44,9 +44,6 @@ class BlogModel
             $target_file = "app/views/admin/blogs/uploads/$imagePath";
             move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
         }
-        // $imagePath = $fileParams["image"]["name"];
-        // $target_file = "app/views/admin/blogs/uploads/$imagePath";
-        // move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
 
 
         $title = $params["title"];

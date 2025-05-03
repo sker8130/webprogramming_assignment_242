@@ -57,7 +57,7 @@ class BlogController
             <a href='/webprogramming_assignment_242/blog?id={$row["BlogID"]}'><button class='view-more-button'>
                 Xem chi tiết
             </button></a>
-        </div>";
+            </div>";
         }
 
         require_once "app/views/user/blogs/blogs.php";
@@ -97,6 +97,9 @@ class BlogController
                 if (isset($_GET["parentID"])) {
                     $_SESSION['scrollToComment'] = $_GET["parentID"];
                     $_SESSION['openResponds'] = $_GET["parentID"];
+                } else {
+                    $latestCommentID = $this->commentModel->getLastComment()->fetch_assoc()["CommentID"];
+                    $_SESSION['scrollToComment'] = $latestCommentID;
                 }
                 header("Location: /webprogramming_assignment_242/blog?id={$id}");
                 exit();
@@ -114,14 +117,21 @@ class BlogController
                                         <th class='text-center'>Writer's name</th>
                                         <th class='text-center'>Title</th>
                                         <th class='text-center'></th>";
+        if (isset($_POST["searchForBlogs"])) {
+            $oldInput = $_POST;
+            $blogID = $_POST["blogIDForBlogs"];
+            $status = $_POST["statusForBlogs"];
+            $writerName = $_POST["writerNameForBlogs"];
+            $title = $_POST["titleForBlogs"];
+        }
         $tableBody = "";
         $rows = $this->blogModel->getAll();
         while ($row = $rows->fetch_assoc()) {
-            $status = $row["IsPublic"] == "yes" ? "Public" : "Private";
-            $tableBody .= "<tr>
+            $displayedStatus = $row["IsPublic"] == "yes" ? "Public" : "Private";
+            $candidate = "<tr>
                                         <td id='id'>{$row["BlogID"]}</td>
                                         <td style='width: 150px'>{$row["CreatedAt"]}</td>
-                                        <td>{$status}</td>
+                                        <td>{$displayedStatus}</td>
                                         <td><img src='{$row["Image"]}' alt='idk' width='100'></td>
                                         <td>{$row["WriterName"]}</td>
                                         <td>{$row["Title"]}</td>
@@ -131,6 +141,17 @@ class BlogController
                                             <a onclick='deleteConfirm({$row['BlogID']})' class='btn btn-danger'>Delete</a>
                                         </td>
                                     </tr>";
+            if (isset($_POST["searchForBlogs"])) {
+                $cond1 = (!is_numeric($blogID)) || (is_numeric($blogID) && $blogID == $row["BlogID"]);
+                $cond2 = ($status == "") || ($status != "" && $row["IsPublic"] == $status);
+                $cond3 = ($writerName == "") || ($writerName != "" && is_numeric(strpos(strtolower($row["WriterName"]), trim(strtolower($writerName)))));
+                $cond4 = ($title == "") || ($title != "" && is_numeric(strpos(strtolower($row["Title"]), trim(strtolower($title)))));
+                if ($cond1 && $cond2 && $cond3 && $cond4) {
+                    $tableBody .= $candidate;
+                }
+            } else {
+                $tableBody .= $candidate;
+            }
         }
 
         require_once "app/views/admin/blogs/blogs.php";
@@ -166,8 +187,7 @@ class BlogController
 
     public function delete()
     {
-        if ($_GET["id"]) {
-            //isset??
+        if (isset($_GET["id"])) {
             $id = $_GET["id"];
             if ($this->blogModel->delete($id)) {
                 $_SESSION['success_message'] = "Delete successfully!";

@@ -52,6 +52,7 @@ class AuthController
             $admin["username"] = "admin";
             $admin["password"] = "123";
             $admin["email"] = "admin@gmail.com";
+            $admin["role"] = "admin";
             $this->userModel->register($admin);
         }
         $errors = [];

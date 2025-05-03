@@ -8,7 +8,7 @@ require_once "app/database/database.php";
 
 class CommentModel
 {
-    private static $db;
+    private $db;
 
     public function __construct()
     {
@@ -69,10 +69,10 @@ class CommentModel
 
     public function delete($commentID)
     {
-        $stmt = $this->db->prepare("delete from comments where ParentID = ?");
-        $stmt->bind_param("s", $commentID);
-        $stmt->execute();
-        $stmt->close();
+        // $stmt = $this->db->prepare("delete from comments where ParentID = ?");
+        // $stmt->bind_param("s", $commentID);
+        // $stmt->execute();
+        // $stmt->close();
 
         $stmt2 = $this->db->prepare("delete from comments where CommentID = ?");
         $stmt2->bind_param("s", $commentID);

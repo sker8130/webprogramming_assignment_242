@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 //nếu session hết hạn nhưng cookie còn -> đặt lại session
 //nếu k có session or có mà session khác admin -> header tới login
@@ -68,56 +68,41 @@ if (isset($_SESSION["success_message"])) {
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Blogs Management</h3>
+                            <h3>Users Management</h3>
                         </div>
                     </div>
                 </div>
                 <section class="section">
-                    <a href="/webprogramming_assignment_242/admin/blogs/add" class="btn btn-primary my-3">Add a blog</a>
                     <div class="card">
                         <div class="card-body">
                             <form method="post" class="row">
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="blogIDForBlogs">BlogID Input</label>
-                                        <input type="number" id="blogIDForBlogs" name="blogIDForBlogs"
-                                            class="form-control round" placeholder="Enter blogID"
-                                            value="<?php echo isset($oldInput["blogIDForBlogs"]) ? htmlspecialchars($oldInput["blogIDForBlogs"]) : ""; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-sm-2">
-                                    <div class="form-group">
-                                        <label for="statusForBlogs">Status Input</label>
-                                        <select class="form-select" id="statusForBlogs" name="statusForBlogs">
-                                            <option value="" selected>Choose</option>
-                                            <option value="yes"
-                                                <?php echo isset($oldInput["statusForBlogs"]) && $oldInput["statusForBlogs"] == "yes" ? "selected" : "";  ?>>
-                                                Public</option>
-                                            <option value="no"
-                                                <?php echo isset($oldInput["statusForBlogs"]) && $oldInput["statusForBlogs"] == "no" ? "selected" : "";  ?>>
-                                                Private</option>
-                                        </select>
+                                        <label for="userIDForUsers">UserID Input</label>
+                                        <input type="number" id="userIDForUsers" name="userIDForUsers"
+                                            class="form-control round" placeholder="Enter userID"
+                                            value="<?php echo isset($oldInput["userIDForUsers"]) ? htmlspecialchars($oldInput["userIDForUsers"]) : ""; ?>">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="writerNameForBlogs">Writer's Name Input</label>
-                                        <input type="text" id="writerNameForBlogs" name="writerNameForBlogs"
-                                            class="form-control round" placeholder="Enter writer's name"
-                                            value="<?php echo isset($oldInput["writerNameForBlogs"]) ? htmlspecialchars($oldInput["writerNameForBlogs"]) : ""; ?>">
+                                        <label for="usernameForUsers">Username Input</label>
+                                        <input type="text" id="usernameForUsers" name="usernameForUsers"
+                                            class="form-control round" placeholder="Enter username"
+                                            value="<?php echo isset($oldInput["usernameForUsers"]) ? htmlspecialchars($oldInput["usernameForUsers"]) : ""; ?>">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label for="titleForBlogs">Title Input</label>
-                                        <input type="text" id="titleForBlogs" name="titleForBlogs"
-                                            class="form-control round" placeholder="Enter title"
-                                            value="<?php echo isset($oldInput["titleForBlogs"]) ? htmlspecialchars($oldInput["titleForBlogs"]) : ""; ?>">
+                                        <label for="emailForUsers">Email Input</label>
+                                        <input type="text" id="emailForUsers" name="emailForUsers"
+                                            class="form-control round" placeholder="Enter email"
+                                            value="<?php echo isset($oldInput["emailForUsers"]) ? htmlspecialchars($oldInput["emailForUsers"]) : ""; ?>">
                                     </div>
                                 </div>
-                                <div class="col-sm-2">
+                                <div class="col-sm-3">
                                     <div class="form-group mt-4"><input type="submit" value="Search"
-                                            name="searchForBlogs" class="btn btn-success">
+                                            name="searchForUsers" class="btn btn-success">
                                     </div>
                                 </div>
 
@@ -125,11 +110,15 @@ if (isset($_SESSION["success_message"])) {
                             <table class="table table-striped table-bordered" id="table1">
                                 <thead>
                                     <tr>
-                                        <?php echo $tableHeader; ?>
+                                        <?php
+                                        echo $tableHeader;
+                                        ?>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php echo $tableBody; ?>
+                                    <?php
+                                    echo $tableBody;
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -161,10 +150,12 @@ if (isset($_SESSION["success_message"])) {
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
 
+
+
     <script>
     function deleteConfirm(id) {
-        if (confirm(`Delete this blog with ID =  ${id}?`)) {
-            window.location.href = `/webprogramming_assignment_242/admin/blogs/delete?id=${id}`;
+        if (confirm(`Delete this user with ID =  ${id}?`)) {
+            window.location.href = `/webprogramming_assignment_242/admin/users/delete?id=${id}`;
         }
     }
     </script>

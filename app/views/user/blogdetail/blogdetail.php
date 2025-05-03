@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 if (isset($_SESSION['scrollToComment'])) {
     $scrollCommentID = $_SESSION['scrollToComment'];
@@ -160,18 +160,12 @@ if (isset($_SESSION['scrollToComment'])) {
                                 style='cursor: pointer' class='viewRespondsButton'><i class='far fa-comment-alt'></i>
                                 <span><?php echo $subCommentsTotal ?></span>
                             </div>
-
                             <?php if ($comment["UserID"] == $userID) { ?>
                             <i class='far fa-trash-alt deleteComment' style='cursor: pointer'
                                 onclick='confirmDelete(<?php echo $comment["CommentID"] ?>)'></i>
                             <?php } ?>
                         </div>
-
                         <?php } ?>
-
-
-
-
                     </div>
                 </div>
 

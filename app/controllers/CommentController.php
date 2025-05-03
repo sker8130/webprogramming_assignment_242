@@ -40,7 +40,7 @@ class CommentController
         </td>
     </tr>";
             if (isset($_POST["searchForComments"])) {
-                $cond1 = ($username == "") || ($username != "" && strtolower($row["Username"]) == trim(strtolower($username)));
+                $cond1 = ($username == "") || ($username != "" && is_numeric(strpos(strtolower($row["Username"]), trim(strtolower($username)))));
                 $cond2 = (!is_numeric($blogID)) || (is_numeric($blogID) && $blogID == $row["BlogID"]);
                 $cond3 = ($content == "") || ($content != "" && is_numeric(strpos(strtolower($row["Content"]), trim(strtolower($content)))));
                 if ($cond1 && $cond2 && $cond3) {

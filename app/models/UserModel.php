@@ -9,6 +9,17 @@ class UserModel
         $this->db = (new database())->connect();
     }
 
+    public function getAll()
+    {
+        $stmt = $this->db->prepare("select * from users");
+        $stmt->execute();
+        $rows = $stmt->get_result();
+        $stmt->close();
+
+        return $rows;
+    }
+
+
     public function getUserByToken($token)
     {
         $stmt = $this->db->prepare("SELECT * FROM tokens join users on UserID = UserID WHERE token = ?");
@@ -31,8 +42,19 @@ class UserModel
         return $row;
     }
 
+    public function delete($id)
+    {
+        $stmt = $this->db->prepare("delete from users where UserID = ?");
+        $stmt->bind_param("s", $id);
+        $exists = $stmt->execute();
+        $stmt->close();
+
+        return $exists;
+    }
+
     public function checkEmailExists($email)
     {
+        $lowercaseEmail = strtolower($email);
         $stmt = $this->db->prepare("SELECT * FROM users WHERE Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -65,11 +87,11 @@ class UserModel
     {
         $username = $params["username"];
         $password = $params["password"];
-        $email = $params["email"];
+        $email = strtolower($params["email"]);
         $phoneNumber = $params["phoneNumber"];
-        $avatar = "assets/default-pfp.avif";
+        $avatar = "assets/default-pfp.png";
         $gender = $params["gender"];
-        $role = "member";
+        $role = isset($params["role"]) ? "admin" : "member";
         $dob = $params["dob"];
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
