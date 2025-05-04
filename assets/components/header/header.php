@@ -31,7 +31,7 @@ if (isset($_GET['logout'])) {
     <nav>
         <ul class="nav-links">
             <li><a href="/webprogramming_assignment_242">HOME</a></li>
-            <li><a href="/webprogramming_assignment_242/about">ABOUT</a></li>
+            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li> 
             <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
             <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
             <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>

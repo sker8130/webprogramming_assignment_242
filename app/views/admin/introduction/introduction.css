@@ -9,6 +9,7 @@ body {
   margin: 20px auto;
   background-color: #fff8ee;
   padding: 20px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .custom-container h1 {
@@ -83,6 +84,8 @@ body {
   width: 100%;
   margin: 20px auto;
   background-color: #fff8ee;
+  padding: 20px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .service-container h1 {
@@ -95,19 +98,10 @@ body {
 .service-container p {
   text-align: center;
   color: #cc3333;
-  margin-bottom: 20px;
-}
-
-.service-container .carousel-item {
-  flex: 0 0 auto;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
 }
 
 .service-container .carousel-card {
   text-align: center;
-  justify-content: center;
   display: flex;
   height: 100%;
   width: 100%;
@@ -115,14 +109,13 @@ body {
 
 .service-container .carousel-description {
   text-align: center;
-  width: 50%;
+  width: 100%;
+  padding: 30px;
   background-color: #fff8ee;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin-bottom: 2.5px;
-  margin-top: 2.5px;
 }
 
 .service-container .carousel-description h3 {
@@ -145,65 +138,66 @@ body {
 }
 
 .team-container {
-  width: 100%;
-  margin: 20px auto;
-  background-color: #fff8ee;
+    width: 100%;
+    margin: 20px auto;
+    background-color: #fff8ee;
+    padding: 20px;
 }
 
 .team-container h1 {
-  text-align: center;
-  font-weight: bold;
-  color: #2a435d;
-  margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #2a435d;
+    margin-bottom: 10px;
 }
 
 .team-container p {
-  text-align: center;
-  color: #2a435d;
+    text-align: center;
+    color: #2a435d;
 }
 
 .team-container .card {
-  background-color: #f9f4f4; 
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px; 
-  overflow: hidden; 
-  position: relative; 
+    background-color: #f9f4f4; /* Light background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust as needed */
+    overflow: hidden; /* Clip the circular image */
+    position: relative; /* For absolute positioning of the image */
 }
 
 .team-container .card-image-container {
-  position: absolute;
-  top: -30px; 
-  right: -30px; 
-  width: 120px; 
-  height: 120px; 
-  border-radius: 50%;
-  background-color: #ffffff; 
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: absolute;
+    top: -30px; /* Adjust to position the circle */
+    right: -30px; /* Adjust to position the circle */
+    width: 120px; /* Adjust circle size */
+    height: 120px; /* Adjust circle size */
+    border-radius: 50%;
+    background-color: #ffffff; /* White background for the circle */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .team-container .card-image {
-  width: 90%;
-  height: 90%;
-  object-fit: cover; 
-  border-radius: 50%; 
+    width: 90%;
+    height: 90%;
+    object-fit: cover; /* Ensure the image fills the circle */
+    border-radius: 50%; /* Make the image circular */
 }
 
 .team-container .card-content {
-  padding: 50px 20px 20px 20px; 
-  text-align: center;
+    padding: 50px 20px 20px 20px; /* Adjust top padding to accommodate the circle */
+    text-align: center;
 }
 
 .team-container .card-title {
-  color: #2a435d; 
-  font-size: 1.5em;
-  margin-bottom: 10px;
+    color: #2A435D; /* Reddish title color */
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 .team-container .card-text {
-  color: #2a435d;
-  line-height: 1.6;
+    color: #2A435D;
+    line-height: 1.6;
 }

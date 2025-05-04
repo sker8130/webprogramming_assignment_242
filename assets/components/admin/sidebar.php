@@ -98,8 +98,8 @@ function isActive($path)
                     </li>
 
                     <li class="sidebar-item <?php
-                                            echo isActive("/admin/webinfo");
-                                            ?>"> <a href="/webprogramming_assignment_242/admin/webinfo"
+                                            echo isActive("/admin/introduction");
+                                            ?>"> <a href="/webprogramming_assignment_242/admin/introduction"
                             class="sidebar-link">
                             <i class="bi bi-stack"></i>
                             <span>Web Info (quản lý thông tin trên trang đã thiết kế)</span>
