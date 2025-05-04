@@ -1,6 +1,13 @@
 <!-- header component -->
 <?php
 //header
+session_start();
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: /webprogramming_assignment_242");
+    exit();
+}
 ?>
 
 <head>
@@ -35,9 +42,26 @@
         <div class="image">
             <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
-        <a type="button" class="btn btn-primary btn-login" href="/webprogramming_assignment_242/login">
-            <span>Login</span>
-        </a>
+        <?php if (isset($_SESSION['mySession'])):
+            try {
+                $pdo = new PDO("mysql:host=localhost;dbname=restaurant", "root", "");
+                $avatar = $pdo->query("SELECT Avatar FROM users WHERE Username = '" . $_SESSION['mySession'] . "'")->fetchColumn();
+            } catch (PDOException $e) {
+                $avatar = 'assets/components/images/default-avatar.png';
+            }
+            ?>
+            <a href="/profile" class="avatar-container"
+                style="display: block; width: 80px; height: 80px; border-radius: 50%; overflow: hidden;">
+                <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar"
+                    style="width: 100%; height: 100%; object-fit: cover;"
+                    onerror="this.src='assets/components/images/default-avatar.png'">
+            </a>
+            <a href="?logout=true" type="button" class="btn btn-primary btn-login btn-logout">Log Out</a>
+        <?php else: ?>
+            <a type="button" class="btn btn-primary btn-login" href="/webprogramming_assignment_242/login">
+                <span>Login</span>
+            </a>
+        <?php endif; ?>
     </div>
     <script src="assets/components/header-script.js"></script>
 </header>
