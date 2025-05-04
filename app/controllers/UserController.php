@@ -30,11 +30,12 @@ class UserController
             $email = $_POST["emailForUsers"];
         }
         while ($row = $rows->fetch_assoc()) {
+            $displayedEmail = htmlspecialchars($row["Email"]);
             $candidate = "<tr>
         <td id='id'>{$row["UserID"]}</td>
         <td><img src='{$row["Avatar"]}' alt='idk' width='80'></td>
         <td>{$row["Username"]}</td>
-        <td>{$row["Email"]}</td>
+        <td>{$displayedEmail}</td>
         <td>{$row["Phone"]}</td>
         <td>{$row["Role"]}</td>
         <td>

@@ -98,7 +98,9 @@ function registerForm() {
     let dob = document.getElementById("dob").value;
     let password = document.getElementById("password").value;
     let confirmedPassword = document.getElementById("confirmedPassword").value;
-    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
+    // const regex = /^(?=.*[a-zA-Z])(?=.*[0-9]).+$/;
+    const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/;
+
 
     if (username.length == 0 || email.length == 0 || phoneNumber.length == 0 || gender.length == 0 || dob.length == 0 ||
         password.length == 0 || confirmedPassword.length == 0) {
@@ -108,7 +110,7 @@ function registerForm() {
     } else {
         if (username.length < 2 || username.length > 30 || !regex.test(username)) {
             document.getElementById("message").innerText =
-                "** Username's length must be from 2 to 30 characters and include numbers, please type again! ** ";
+                "** Username must be from 2 to 30 characters long, including numbers and no special characters, please type again! ** ";
             return false;
         } else if (Number(dob.substring(0, 4)) > 2010) {
             document.getElementById("message").innerText = "** Age must be over 15, please type again! **";

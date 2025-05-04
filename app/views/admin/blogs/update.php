@@ -85,7 +85,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                     <div class="form-group mb-3">
                                         <label for="title" class="form-label">Title</label>
                                         <textarea class="form-control" id="title" name="title" rows="2"
-                                            required><?php echo $row["Title"] ?></textarea>
+                                            required><?php echo htmlspecialchars($row["Title"]) ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                     <div class="form-group mb-3">
                                         <label for="preview" class="form-label">Preview</label>
                                         <textarea class="form-control" id="preview" name="preview" rows="2" required
-                                            maxlength="280"><?php echo $row["Preview"] ?></textarea>
+                                            maxlength="280"><?php echo htmlspecialchars($row["Preview"]) ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                     <div class="form-group mb-3">
                                         <label for="writerName" class="form-label">Writer's name</label>
                                         <textarea class="form-control" id="writerName" name="writerName" rows="1"
-                                            required><?php echo $row["WriterName"] ?></textarea>
+                                            required><?php echo htmlspecialchars($row["WriterName"]) ?></textarea>
                                     </div>
                                 </div>
                             </div>

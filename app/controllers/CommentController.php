@@ -29,12 +29,13 @@ class CommentController
             $content = $_POST["contentForComments"];
         }
         while ($row = $rows->fetch_assoc()) {
+            $displayedContent = htmlspecialchars($row["Content"]);
             $candidate = "<tr>
         <td id='id'>{$row["CommentID"]}</td>
         <td style='width: 150px'>{$row["ParentID"]}</td>
         <td>{$row["BlogID"]}</td>
         <td>{$row["Username"]}</td>
-        <td>{$row["Content"]}</td>
+        <td>{$displayedContent}</td>
         <td>
             <a onclick='deleteConfirm({$row["CommentID"]})' class='btn btn-danger'>Delete</a>
         </td>

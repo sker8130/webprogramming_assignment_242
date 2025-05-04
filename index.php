@@ -3,20 +3,27 @@
 $rqUri = $_SERVER["REQUEST_URI"];
 
 $routes = [
+    // url cho admin site
+    "/webprogramming_assignment_242/admin/users/delete" => [UserController::class, "delete"],
+    "/webprogramming_assignment_242/admin/users" => [UserController::class, "adminIndex"],
+
+    "/webprogramming_assignment_242/admin/comments/delete" => [CommentController::class, "delete"],
+    "/webprogramming_assignment_242/admin/comments" => [CommentController::class, "adminIndex"],
+
+    "/webprogramming_assignment_242/admin/blogs/delete" => [BlogController::class, "delete"],
+    "/webprogramming_assignment_242/admin/blogs/update" => [BlogController::class, "update"],
+    "/webprogramming_assignment_242/admin/blogs/add" => [BlogController::class, "add"],
+    "/webprogramming_assignment_242/admin/blogs" => [BlogController::class, "adminIndex"],
+
+    "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
+
+
+    // url cho guest/member site
     "/webprogramming_assignment_242/blogs" => [BlogController::class, "index"],
     "/webprogramming_assignment_242/blog" => [BlogController::class, "detail"],
     "/webprogramming_assignment_242/login" => [AuthController::class, "login"],
     "/webprogramming_assignment_242/register" => [AuthController::class, "register"],
     "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
-    "/webprogramming_assignment_242/admin/users/delete" => [UserController::class, "delete"],
-    "/webprogramming_assignment_242/admin/users" => [UserController::class, "adminIndex"],
-    "/webprogramming_assignment_242/admin/comments/delete" => [CommentController::class, "delete"],
-    "/webprogramming_assignment_242/admin/comments" => [CommentController::class, "adminIndex"],
-    "/webprogramming_assignment_242/admin/blogs/delete" => [BlogController::class, "delete"],
-    "/webprogramming_assignment_242/admin/blogs/update" => [BlogController::class, "update"],
-    "/webprogramming_assignment_242/admin/blogs/add" => [BlogController::class, "add"],
-    "/webprogramming_assignment_242/admin/blogs" => [BlogController::class, "adminIndex"],
-    "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
     "/webprogramming_assignment_242/cart" => [CartController::class, "index"],
     "/webprogramming_assignment_242/" => [HomeController::class, "index"],
 ];

@@ -38,11 +38,11 @@ if (isset($_SESSION['scrollToComment'])) {
         <div class="content">
             <div class="top">
                 <div class="main-content">
-                    <div class="title"><?php echo $row["Title"]; ?></div>
+                    <div class="title"><?php echo htmlspecialchars($row["Title"]); ?></div>
                     <div class="blog-info">
                         <div style="display: flex; gap: 5px; ">
                             <i class='far fa-user-circle'></i>
-                            <div><?php echo $row["WriterName"] ?></div>
+                            <div><?php echo htmlspecialchars($row["WriterName"]) ?></div>
                         </div>
                         <div style="display: flex; gap: 5px; ">
                             <i class='far fa-calendar-plus'></i>
@@ -70,12 +70,14 @@ if (isset($_SESSION['scrollToComment'])) {
                         $count = 0;
                         while ($otherBlog = $otherBlogs->fetch_assoc()) {
                             if ($otherBlog["BlogID"] != $row["BlogID"] && $otherBlog["IsPublic"] === "yes") {
+                                $title = htmlspecialchars($otherBlog["Title"]);
+                                $writerName = htmlspecialchars($otherBlog["WriterName"]);
                                 echo "<div class='other-blog-element'>
                                     <img src='{$otherBlog["Image"]}' alt='idk'
                                         style='width: 70px; height: 70px; border-radius: 10px'>
                                     <div style='display: flex; flex-flow: column; gap: 4px'>
-                                        <div style='font-weight:500; font-size: 14px'>{$otherBlog["Title"]}</div>
-                                        <div style='color: grey; font-size: 10px'>{$otherBlog["WriterName"]} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
+                                        <div style='font-weight:500; font-size: 14px'>{$title}</div>
+                                        <div style='color: grey; font-size: 10px'>{$writerName} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
                                     </div>
                                 </div>";
                                 $count++;
@@ -153,7 +155,7 @@ if (isset($_SESSION['scrollToComment'])) {
                             <div class='account-name'><?php echo $comment["Username"] ?></div>
                             <div class='comment-date'><?php echo $date ?></div>
                         </div>
-                        <div class='comment-content'><?php echo $comment["Content"] ?></div>
+                        <div class='comment-content'><?php echo htmlspecialchars($comment["Content"]) ?></div>
                         <?php if (!$notLoginCond) { ?>
                         <div class='comment-action'>
                             <div onclick='viewRespondsToggle(<?php echo $comment["CommentID"] ?>)'
@@ -185,7 +187,7 @@ if (isset($_SESSION['scrollToComment'])) {
                                 <div class='comment-date'><?php echo $subCommentDate ?></div>
                             </div>
                             <div class='comment-content'>
-                                <?php echo $subComment["Content"] ?>
+                                <?php echo htmlspecialchars($subComment["Content"]) ?>
                             </div>
                             <?php if (!$notLoginCond && $subComment["UserID"] == $userID) { ?>
                             <div class='comment-action'>

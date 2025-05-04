@@ -17,10 +17,45 @@ class BlogModel
 
     public function add($fileParams, $params)
     {
-        //upload file ảnh vào folder uploads:
-        $imagePath = $fileParams["image"]["name"];
-        $target_file = "app/views/admin/blogs/uploads/$imagePath";
-        move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
+        // Kiểm tra xem file có tồn tại không
+        if (!isset($fileParams['image']) || $fileParams['image']['error'] !== UPLOAD_ERR_OK) {
+            return false;
+        }
+
+        $image = $fileParams['image'];
+        $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png'];
+        $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+        $imageTmpName = $image['tmp_name'];
+        $imageOriginalName = basename($image['name']);
+        $imageExtension = strtolower(pathinfo($imageOriginalName, PATHINFO_EXTENSION));
+        $imageMimeType = mime_content_type($imageTmpName);
+        $imageSize = $image['size'];
+
+        // Kiểm tra phần mở rộng, loại MIME và kích thước
+        if (
+            !in_array($imageExtension, $allowedExtensions) ||
+            !in_array($imageMimeType, $allowedMimeTypes) ||
+            $imageSize > $maxFileSize ||
+            !getimagesize($imageTmpName)
+        ) {
+            return false;
+        }
+
+        // Đảm bảo tên file không trùng và không độc hại
+        $safeFileName = md5(uniqid() . $imageOriginalName) . '.' . $imageExtension;
+        $uploadDir = 'app/views/admin/blogs/uploads/';
+        $targetFile = $uploadDir . $safeFileName;
+
+        // Đảm bảo thư mục tồn tại
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        if (!move_uploaded_file($imageTmpName, $targetFile)) {
+            return false;
+        }
 
         $title = $params["title"];
         $preview = $params["preview"];
@@ -28,21 +63,82 @@ class BlogModel
         $writerName = $params["writerName"];
         $isPublic = isset($params["isPublic"]) ? "yes" : "no";
         $stmt = $this->db->prepare("insert into blogs (Title, Preview, Content, Image, WriterName, IsPublic) values (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $title, $preview, $content, $target_file, $writerName, $isPublic);
+        $stmt->bind_param("ssssss", $title, $preview, $content, $targetFile, $writerName, $isPublic);
 
         $exists = $stmt->execute();
         $stmt->close();
         return $exists;
     }
 
+    // public function add($fileParams, $params)
+    // {
+    //     //upload file ảnh vào folder uploads:
+    //     $imagePath = $fileParams["image"]["name"];
+    //     $target_file = "app/views/admin/blogs/uploads/$imagePath";
+    //     move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
+
+    //     $title = $params["title"];
+    //     $preview = $params["preview"];
+    //     $content = $params["content"];
+    //     $writerName = $params["writerName"];
+    //     $isPublic = isset($params["isPublic"]) ? "yes" : "no";
+    //     $stmt = $this->db->prepare("insert into blogs (Title, Preview, Content, Image, WriterName, IsPublic) values (?, ?, ?, ?, ?, ?)");
+    //     $stmt->bind_param("ssssss", $title, $preview, $content, $target_file, $writerName, $isPublic);
+
+    //     $exists = $stmt->execute();
+    //     $stmt->close();
+    //     return $exists;
+    // }
+
     public function update($id, $fileParams, $params)
     {
         //cập nhật file ảnh vào folder uploads nếu có:
         $target_file = "";
         if (isset($fileParams["image"]) && isset($fileParams["image"]["tmp_name"]) && $fileParams["image"]["tmp_name"] !== "") {
-            $imagePath = $fileParams["image"]["name"];
-            $target_file = "app/views/admin/blogs/uploads/$imagePath";
-            move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
+            // $imagePath = $fileParams["image"]["name"];
+            // $target_file = "app/views/admin/blogs/uploads/$imagePath";
+            // move_uploaded_file($fileParams["image"]["tmp_name"], $target_file);
+
+
+            // Kiểm tra xem file có tồn tại không
+            if (!isset($fileParams['image']) || $fileParams['image']['error'] !== UPLOAD_ERR_OK) {
+                return false;
+            }
+
+            $image = $fileParams['image'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png'];
+            $allowedMimeTypes = ['image/jpeg', 'image/png'];
+            $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+            $imageTmpName = $image['tmp_name'];
+            $imageOriginalName = basename($image['name']);
+            $imageExtension = strtolower(pathinfo($imageOriginalName, PATHINFO_EXTENSION));
+            $imageMimeType = mime_content_type($imageTmpName);
+            $imageSize = $image['size'];
+
+            // Kiểm tra phần mở rộng, loại MIME và kích thước
+            if (
+                !in_array($imageExtension, $allowedExtensions) ||
+                !in_array($imageMimeType, $allowedMimeTypes) ||
+                $imageSize > $maxFileSize ||
+                !getimagesize($imageTmpName)
+            ) {
+                return false;
+            }
+
+            // Đảm bảo tên file không trùng và không độc hại
+            $safeFileName = md5(uniqid() . $imageOriginalName) . '.' . $imageExtension;
+            $uploadDir = 'app/views/admin/blogs/uploads/';
+            $targetFile = $uploadDir . $safeFileName;
+
+            // Đảm bảo thư mục tồn tại
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            if (!move_uploaded_file($imageTmpName, $targetFile)) {
+                return false;
+            }
         }
 
 
@@ -51,12 +147,12 @@ class BlogModel
         $content = $params["content"];
         $writerName = $params["writerName"];
         $isPublic = isset($params["isPublic"]) ? "yes" : "no";
-        if ($target_file == "") {
+        if ($targetFile == "") {
             $stmt = $this->db->prepare("update blogs set Title = ?, Preview = ?, Content = ?, WriterName = ?, IsPublic = ? where BlogID = ?");
             $stmt->bind_param("ssssss", $title, $preview, $content, $writerName, $isPublic, $id);
         } else {
             $stmt = $this->db->prepare("update blogs set Title = ?, Preview = ?, Content = ?, Image = ?, WriterName = ?, IsPublic = ? where BlogID = ?");
-            $stmt->bind_param("sssssss", $title, $preview, $content, $target_file, $writerName, $isPublic, $id);
+            $stmt->bind_param("sssssss", $title, $preview, $content, $targetFile, $writerName, $isPublic, $id);
         }
         $exists = $stmt->execute();
         $stmt->close();

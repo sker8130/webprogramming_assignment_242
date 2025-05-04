@@ -48,15 +48,16 @@ class BlogController
 
         $blogsToDisplay = array_slice($publicBlogs, $startFrom, 6);
         foreach ($blogsToDisplay as $row) {
-
+            $title = htmlspecialchars($row["Title"]);
+            $preview = htmlspecialchars($row["Preview"]);
             $htmlDisplayed .= "<div class='card'>
             <img src='{$row["Image"]}' alt=''
                 style='width: 100%; border-top-left-radius: 20px; border-top-right-radius: 20px'>
-            <h2 style='text-align: center; margin: 10px 20px'>{$row["Title"]}</h2>
-            <p style='text-align:justify; margin: 0 15px'>{$row["Preview"]}...</p>
+            <h2 style='text-align: center; margin: 10px 20px'>{$title}</h2>
+            <p style='text-align:justify; margin: 0 15px'>{$preview}...</p>
             <a href='/webprogramming_assignment_242/blog?id={$row["BlogID"]}'><button class='view-more-button'>
-                Xem chi tiết
-            </button></a>
+                    Xem chi tiết
+                </button></a>
             </div>";
         }
 
@@ -69,8 +70,8 @@ class BlogController
         $row = $this->blogModel->getById($id)->fetch_assoc();
         $comments = $this->commentModel->getAllByBlogID($id);
         $otherBlogs = $this->blogModel->getAll();
-        $usernameEmail = $_SESSION["mySession"];
-        if (isset($usernameEmail)) {
+        if (isset($_SESSION["mySession"])) {
+            $usernameEmail = $_SESSION["mySession"];
             $checkUsernameExists = $this->userModel->checkUsernameExists($usernameEmail);
             $checkEmailExists = $this->userModel->checkEmailExists($usernameEmail);
             $userID = $checkUsernameExists ? $checkUsernameExists : $checkEmailExists;
@@ -111,12 +112,12 @@ class BlogController
     public function adminIndex()
     {
         $tableHeader = "<th class='text-center'>ID</th>
-                                        <th class='text-center'>Created at</th>
-                                        <th class='text-center'>Status</th>
-                                        <th class='text-center'>Image</th>
-                                        <th class='text-center'>Writer's name</th>
-                                        <th class='text-center'>Title</th>
-                                        <th class='text-center'></th>";
+        <th class='text-center'>Created at</th>
+        <th class='text-center'>Status</th>
+        <th class='text-center'>Image</th>
+        <th class='text-center'>Writer's name</th>
+        <th class='text-center'>Title</th>
+        <th class='text-center'></th>";
         if (isset($_POST["searchForBlogs"])) {
             $oldInput = $_POST;
             $blogID = $_POST["blogIDForBlogs"];
@@ -128,23 +129,28 @@ class BlogController
         $rows = $this->blogModel->getAll();
         while ($row = $rows->fetch_assoc()) {
             $displayedStatus = $row["IsPublic"] == "yes" ? "Public" : "Private";
+            $displayedWriterName = htmlspecialchars($row["WriterName"]);
+            $displayedTitle = htmlspecialchars($row["Title"]);
             $candidate = "<tr>
-                                        <td id='id'>{$row["BlogID"]}</td>
-                                        <td style='width: 150px'>{$row["CreatedAt"]}</td>
-                                        <td>{$displayedStatus}</td>
-                                        <td><img src='{$row["Image"]}' alt='idk' width='100'></td>
-                                        <td>{$row["WriterName"]}</td>
-                                        <td>{$row["Title"]}</td>
-                                        <td>
-                                            <a href='/webprogramming_assignment_242/admin/blogs/update?id={$row["BlogID"]}'
-                                                class='btn btn-success'>Update</a>
-                                            <a onclick='deleteConfirm({$row['BlogID']})' class='btn btn-danger'>Delete</a>
-                                        </td>
-                                    </tr>";
+            <td id='id'>{$row["BlogID"]}</td>
+            <td style='width: 150px'>{$row["CreatedAt"]}</td>
+            <td>{$displayedStatus}</td>
+            <td><img src='{$row["Image"]}' alt='idk' width='100'></td>
+            <td>{$displayedWriterName}</td>
+            <td>{$displayedTitle}</td>
+            <td>
+                <a href='/webprogramming_assignment_242/admin/blogs/update?id={$row["BlogID"]}'
+                    class='btn btn-success'>Update</a>
+                <a onclick='deleteConfirm({$row['BlogID']})' class='btn btn-danger'>Delete</a>
+            </td>
+            </tr>";
             if (isset($_POST["searchForBlogs"])) {
                 $cond1 = (!is_numeric($blogID)) || (is_numeric($blogID) && $blogID == $row["BlogID"]);
                 $cond2 = ($status == "") || ($status != "" && $row["IsPublic"] == $status);
-                $cond3 = ($writerName == "") || ($writerName != "" && is_numeric(strpos(strtolower($row["WriterName"]), trim(strtolower($writerName)))));
+                $cond3 = ($writerName == "") || ($writerName != "" && is_numeric(strpos(
+                    strtolower($row["WriterName"]),
+                    trim(strtolower($writerName))
+                )));
                 $cond4 = ($title == "") || ($title != "" && is_numeric(strpos(strtolower($row["Title"]), trim(strtolower($title)))));
                 if ($cond1 && $cond2 && $cond3 && $cond4) {
                     $tableBody .= $candidate;

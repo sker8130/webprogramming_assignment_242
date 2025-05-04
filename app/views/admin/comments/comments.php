@@ -113,10 +113,6 @@ if (isset($_SESSION["success_message"])) {
                                         <?php
                                         echo $tableHeader;
                                         ?>
-                                        <!-- <th class='text-center'>username</th>
-                                        <th class='text-center'>blogid</th>
-                                        <th class='text-center'>content</th> -->
-
                                     </tr>
                                 </thead>
                                 <tbody>
