@@ -15,6 +15,17 @@ $routes = [
     "/webprogramming_assignment_242/admin/blogs/add" => [BlogController::class, "add"],
     "/webprogramming_assignment_242/admin/blogs" => [BlogController::class, "adminIndex"],
 
+    "/webprogramming_assignment_242/admin/introduction/addbranch" => [AdminIntroController::class, "addbranch"],
+    "/webprogramming_assignment_242/admin/introduction/updatebranch" => [AdminIntroController::class, "updatebranch"],
+    "/webprogramming_assignment_242/admin/introduction/deletebranch" => [AdminIntroController::class, "deletebranch"],
+    "/webprogramming_assignment_242/admin/introduction/addservice" => [AdminIntroController::class, "addservice"],
+    "/webprogramming_assignment_242/admin/introduction/updateservice" => [AdminIntroController::class, "updateservice"],
+    "/webprogramming_assignment_242/admin/introduction/deleteservice" => [AdminIntroController::class, "deleteservice"],
+    "/webprogramming_assignment_242/admin/introduction/addmember" => [AdminIntroController::class, "addmember"],
+    "/webprogramming_assignment_242/admin/introduction/updatemember" => [AdminIntroController::class, "updatemember"],
+    "/webprogramming_assignment_242/admin/introduction/deletemember" => [AdminIntroController::class, "deletemember"],
+    "/webprogramming_assignment_242/admin/introduction" => [AdminIntroController::class, "adminIndex"],
+
     "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
 
 
@@ -25,7 +36,8 @@ $routes = [
     "/webprogramming_assignment_242/register" => [AuthController::class, "register"],
     "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
     "/webprogramming_assignment_242/cart" => [CartController::class, "index"],
-    "/webprogramming_assignment_242/" => [HomeController::class, "index"],
+    "/webprogramming_assignment_242/introduction" => [UserIntroController::class, "index"], 
+    "/webprogramming_assignment_242/" => [HomeController::class, "index"], 
 ];
 
 foreach ($routes as $uri => $arrayCtrl) {
