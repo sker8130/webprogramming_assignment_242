@@ -21,8 +21,7 @@
 <body>
     <div class="container">
         <div class="main-register">
-            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%"
-                onsubmit="return registerForm()" method="post">
+            <form action="" onsubmit="return registerForm()" method="post">
                 <h2 style="margin-bottom: -2px">Register</h2>
 
                 <!-- hiện message: -->
@@ -80,7 +79,7 @@
         </div>
 
         <div class="potato-icon">
-            <img src="assets/potatochip.png" alt="">
+            <img src="assets/components/images/potatochip.png" alt="">
         </div>
     </div>
 </body>

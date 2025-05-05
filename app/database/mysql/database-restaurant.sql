@@ -189,7 +189,45 @@ CREATE TABLE `tokens` (
   `token` varchar(255) NOT NULL,
   `expiresAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ 
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `branches`
+--
+
+CREATE TABLE `branches` (
+  `ID` int(11) NOT NULL,
+  `location` varchar(256) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `image` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `members`
+--
+
+CREATE TABLE `members` (
+  `position` varchar(128) NOT NULL,
+  `name` varchar(256) NOT NULL,
+  `description` varchar(256) NOT NULL,
+  `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `specialservice`
+--
+
+CREATE TABLE `specialservice` (
+  `title` varchar(128) NOT NULL,
+  `description` varchar(512) NOT NULL,
+  `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -275,6 +313,24 @@ ALTER TABLE `tokens`
   ADD PRIMARY KEY (`TokenID`);
 
 --
+-- Chỉ mục cho bảng `branches`
+--
+ALTER TABLE `branches`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `specialservice`
+--
+ALTER TABLE `specialservice`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
@@ -343,6 +399,25 @@ ALTER TABLE `users`
 --
 ALTER TABLE `tokens`
   MODIFY `TokenID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `branches`
+--
+
+ALTER TABLE `branches`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `members`
+--
+ALTER TABLE `members`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `specialservice`
+--
+ALTER TABLE `specialservice`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT; 
 
 --
 -- Các ràng buộc cho các bảng đã đổ

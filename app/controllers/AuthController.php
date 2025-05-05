@@ -109,6 +109,6 @@ class AuthController
             }
         }
 
-        header("location: /webprogramming_assignment_242/login");
+        header("location: /webprogramming_assignment_242/");
     }
 }

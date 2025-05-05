@@ -17,13 +17,12 @@ body {
 }
 
 .banner {
-  background-image: url('../../../../assets/image_items_bg.png');
+  background-image: url('../../../../assets/components/images/image_items_bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   aspect-ratio: 2 / 0.3;
   color: white;
-  background-color: red;
   position: relative;
   min-height: 200px;
   display: flex;
@@ -84,7 +83,7 @@ body {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 20px 30px;
-  gap: 60px;
+  justify-content: center;
 }
 
 .pagination {
@@ -112,11 +111,20 @@ body {
 }
 
 .card {
+  /* background: #fff8ee; */
   display: flex;
   flex-flow: column;
   align-items: center;
   box-shadow: 0 0 10px grey;
   border-radius: 20px;
+  margin: 30px;
+
+  transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.card:hover {
+  background: #cc3333;
+  color: white;
 }
 
 .view-more-button {
@@ -131,6 +139,13 @@ body {
   margin-top: 20px;
   margin-bottom: 10px;
   cursor: pointer;
+
+  transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.card:hover .view-more-button {
+  background: white;
+  color: #cc3333;
 }
 
 /* mobile: width < 740px */
@@ -146,5 +161,6 @@ body {
   .blogs {
     display: grid;
     grid-template-columns: auto auto;
+    justify-content: center;
   }
 }
