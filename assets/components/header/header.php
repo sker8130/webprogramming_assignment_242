@@ -2,12 +2,12 @@
 <?php
 //header
 session_start();
-if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    header("Location: /webprogramming_assignment_242");
-    exit();
-}
+// if (isset($_GET['logout'])) {
+//     session_unset();
+//     session_destroy();
+//     header("Location: /webprogramming_assignment_242");
+//     exit();
+// }
 ?>
 
 <head>
@@ -42,25 +42,46 @@ if (isset($_GET['logout'])) {
         <div class="image">
             <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
-        <?php if (isset($_SESSION['mySession'])):
+        <?php
+        //nếu session hết hạn nhưng cookie còn -> đặt lại session
+        //nếu k có session or có mà session là admin -> header tới login
+        require_once "app/models/UserModel.php";
+        require_once "app/models/TokenModel.php";
+
+        $userModel = new UserModel();
+        $tokenModel = new TokenModel();
+        if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
+            $token = $_COOKIE["usernameEmail"];
+            if ($tokenModel->checkTokenExists($token)) {
+                $user = $userModel->getUserByToken($token);
+                if ($user) {
+                    $_SESSION["mySession"] = $user["Username"];
+                }
+            }
+        }
+
+        //kiểm tra chưa đăng nhập
+        $notLoginCond = !isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"));
+
+        if (!$notLoginCond):
             try {
                 $pdo = new PDO("mysql:host=localhost;dbname=restaurant", "root", "");
                 $avatar = $pdo->query("SELECT Avatar FROM users WHERE Username = '" . $_SESSION['mySession'] . "'")->fetchColumn();
             } catch (PDOException $e) {
-                $avatar = 'assets/components/images/default-avatar.png';
+                $avatar = 'assets/default-pfp.png';
             }
-            ?>
-            <a href="/profile" class="avatar-container"
-                style="display: block; width: 80px; height: 80px; border-radius: 50%; overflow: hidden;">
-                <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar"
-                    style="width: 100%; height: 100%; object-fit: cover;"
-                    onerror="this.src='assets/components/images/default-avatar.png'">
-            </a>
-            <a href="?logout=true" type="button" class="btn btn-primary btn-login btn-logout">Log Out</a>
+        ?>
+        <a href="/profile" class="avatar-container"
+            style="display: block; width: 80px; height: 80px; border-radius: 50%; overflow: hidden;">
+            <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar"
+                style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/default-pfp.png'">
+        </a>
+        <!-- <a href="?logout=true" type="button" class="btn btn-primary btn-login btn-logout">Log Out</a> -->
+        <a type="button" class="btn btn-primary btn-login btn-logout" onclick="confirmLogout()">Log Out</a>
         <?php else: ?>
-            <a type="button" class="btn btn-primary btn-login" href="/webprogramming_assignment_242/login">
-                <span>Login</span>
-            </a>
+        <a type="button" class="btn btn-primary btn-login" href="/webprogramming_assignment_242/login">
+            <span>Login</span>
+        </a>
         <?php endif; ?>
     </div>
     <script src="assets/components/header-script.js"></script>

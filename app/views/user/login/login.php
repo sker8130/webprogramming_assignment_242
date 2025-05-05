@@ -25,7 +25,7 @@ if (isset($_SESSION['success_message'])) {
 <body>
     <div class="container">
         <div class="main-login">
-            <form action="" style="display: flex; flex-flow: column; gap: 10px; width: 100%" method="post">
+            <form action="" method="post">
                 <h2 style="margin-bottom: -2px">Login</h2>
 
                 <div style="margin-bottom: -2px; font-size: 16px; color: yellow">
@@ -55,7 +55,7 @@ if (isset($_SESSION['success_message'])) {
             </form>
         </div>
         <div class="potato-icon">
-            <img src="assets/potatochip.png" alt="">
+            <img src="assets/components/images/potatochip.png" alt="">
         </div>
     </div>
 </body>

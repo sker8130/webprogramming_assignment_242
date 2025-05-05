@@ -13,9 +13,17 @@
             <i class="bi bi-justify fs-3" role="button"></i>
         </div>
         <div>
-            <a href="logout" class="btn btn-primary">Log out</a>
+            <a onclick="confirmLogout()" class="btn btn-primary">Log out</a>
         </div>
     </header>
 </body>
 
 </html>
+
+<script>
+function confirmLogout() {
+    if (confirm("Log out?")) {
+        window.location.href = '/webprogramming_assignment_242/logout';
+    }
+}
+</script>

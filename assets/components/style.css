@@ -7,8 +7,8 @@
 }
 
 :root {
-  --primary-font: "Roboto", sans-serif;
-  --secondary-font: "Space Mono", serif;
+  --primary-font: 'Roboto', sans-serif;
+  --secondary-font: 'Space Mono', serif;
   --color-beige: #fff8ee;
   --color-red: #cc3333;
   --color-darkblue: #2a435d;
@@ -78,7 +78,7 @@ img {
   padding: 19px 13px;
   border-radius: 10px;
   font-weight: 600;
-  
+
   border: 2px solid transparent;
 }
 .btn.btn-primary {
@@ -88,6 +88,7 @@ img {
 .btn-login {
   width: 90px;
   height: 45px;
+  cursor: pointer;
 }
 
 /* header */
@@ -138,7 +139,7 @@ nav {
 
 /* đường kẻ dưới khi hover */
 .nav-links a::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

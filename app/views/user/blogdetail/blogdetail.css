@@ -16,20 +16,6 @@ body {
   font-weight: bold;
 }
 
-/* .top {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.main-content {
-  flex: 2;
-}
-
-.other-blogs {
-  flex: 0.8;
-}
-*/
 .other-blogs-list {
   box-shadow: 0 0 3px grey;
   border-radius: 15px;
@@ -74,27 +60,19 @@ body {
 .comment-frame {
   display: flex;
   gap: 20px;
+  /* gap: 10%; */
   /* align-items: center; */
   margin-top: 20px;
 }
 
-.comment-input {
-  display: flex;
-  align-items: center;
-}
-
-.comment-input,
-.comment-input > textarea {
-  width: 100%;
-  height: 65px;
-}
-
-.comment-input > textarea {
-  border: 2px solid #cc3333;
-  border-radius: 30px;
-  resize: none;
-  padding: 20px;
-  outline: none;
+.send-button {
+  margin-top: 10px;
+  background: #cc3333;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 .comment-avatar > img {
@@ -119,10 +97,11 @@ body {
   /* resize: none; */
   padding: 18px;
   background: white;
-  min-height: 150px;
+  /* min-height: 150px; */
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .comment-info {
@@ -145,19 +124,6 @@ body {
   justify-content: flex-end;
 }
 
-.send-button {
-  margin-left: -80px;
-  /* margin-left: -150px; */
-  background: #cc3333;
-  /* height: 50%; */
-  color: white;
-  padding: 8px 20px;
-  /* box-sizing: border-box; */
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-}
-
 .responds-for {
   max-height: 0;
   overflow: hidden;
@@ -171,10 +137,6 @@ body {
 .deleteComment:hover {
   color: #cc3333;
 }
-
-/* .responds-for.show {
-  max-height: 100%;
-} */
 
 /* mobile: width < 740px */
 @media only screen and (max-width: 739px) {
@@ -202,23 +164,6 @@ body {
   .other-blogs {
     flex: 0.8;
   }
-
-  /* .other-blogs-list {
-    box-shadow: 0 0 3px grey;
-    border-radius: 15px;
-    margin-top: 17px;
-    padding: 20px 10px;
-    display: flex;
-    flex-flow: column;
-    gap: 17px;
-  }
-
-  .other-blog-element {
-    display: flex;
-    gap: 15px;
-    border-bottom: 1px solid grey;
-    padding-bottom: 17px;
-  } */
 }
 
 /* pc: width >= 1024px */
@@ -243,21 +188,4 @@ body {
   .other-blogs {
     flex: 0.8;
   }
-
-  /* .other-blogs-list {
-    box-shadow: 0 0 3px grey;
-    border-radius: 15px;
-    margin-top: 17px;
-    padding: 20px 10px;
-    display: flex;
-    flex-flow: column;
-    gap: 17px;
-  }
-
-  .other-blog-element {
-    display: flex;
-    gap: 15px;
-    border-bottom: 1px solid grey;
-    padding-bottom: 17px;
-  } */
 }
