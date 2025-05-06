@@ -74,7 +74,7 @@ class BlogController
             $usernameEmail = $_SESSION["mySession"];
             $checkUsernameExists = $this->userModel->checkUsernameExists($usernameEmail);
             $checkEmailExists = $this->userModel->checkEmailExists($usernameEmail);
-            $userID = $checkUsernameExists ? $checkUsernameExists : $checkEmailExists;
+            $userID = $checkUsernameExists ? $checkUsernameExists["UserID"] : $checkEmailExists["UserID"];
         }
         if (isset($_POST["comment"])) {
             $parentID = isset($_POST["parentID"]) ? $_POST["parentID"] : null;

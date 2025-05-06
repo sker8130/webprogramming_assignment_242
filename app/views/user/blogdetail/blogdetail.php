@@ -162,7 +162,10 @@ if (isset($_SESSION['scrollToComment'])) {
                     <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
                     <div class='displayed-comment'>
                         <div class='comment-info'>
-                            <div class='account-name'><?php echo $comment["Username"] ?></div>
+                            <div class='account-name'><?php echo
+                                                            $comment["Username"]
+                                                            // $_SESSION["mySession"]
+                                                            ?></div>
                             <div class='comment-date'><?php echo $date ?></div>
                         </div>
                         <div class='comment-content'><?php echo htmlspecialchars($comment["Content"]) ?></div>

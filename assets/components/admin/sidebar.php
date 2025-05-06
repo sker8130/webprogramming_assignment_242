@@ -75,7 +75,7 @@ function isActive($path)
                                             ?>">
                         <a href="/webprogramming_assignment_242/admin/users" class="sidebar-link">
                             <i class="bi bi-person-badge-fill"></i>
-                            <span>Users (quản lý người dùng)</span>
+                            <span>Users</span>
                         </a>
                     </li>
 
@@ -84,7 +84,7 @@ function isActive($path)
                                             ?>">
                         <a href="/webprogramming_assignment_242/admin/blogs" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
-                            <span>Blogs (quản lý bài đăng)</span>
+                            <span>Blogs</span>
                         </a>
                     </li>
 
@@ -93,7 +93,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/comments"
                             class="sidebar-link">
                             <i class="bi bi-pen-fill"></i>
-                            <span>Comments (quản lý bình luận)</span>
+                            <span>Comments</span>
                         </a>
                     </li>
 
@@ -102,7 +102,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/introduction"
                             class="sidebar-link">
                             <i class="bi bi-stack"></i>
-                            <span>Web Info (quản lý thông tin trên trang đã thiết kế)</span>
+                            <span>Web Info</span>
                         </a>
                     </li>
 
@@ -111,7 +111,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/contact"
                             class="sidebar-link">
                             <i class="bi bi-collection-fill"></i>
-                            <span>Contact (quản lý liên hệ của khách)</span>
+                            <span>Contact</span>
                         </a>
                     </li>
 
@@ -120,7 +120,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/faq"
                             class="sidebar-link">
                             <i class="bi bi-grid-1x2-fill"></i>
-                            <span>FAQ (quản lý các câu hỏi đáp)</span>
+                            <span>FAQ</span>
                         </a>
                     </li>
 
@@ -129,7 +129,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/items"
                             class="sidebar-link">
                             <i class="bi bi-hexagon-fill"></i>
-                            <span>Items (quản lý sản phẩm)</span>
+                            <span>Items</span>
                         </a>
                     </li>
 
@@ -138,7 +138,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/cart"
                             class="sidebar-link">
                             <i class="bi bi-file-earmark-medical-fill"></i>
-                            <span>Cart (quản lý giỏ hàng)</span>
+                            <span>Cart</span>
                         </a>
                     </li>
 
@@ -147,7 +147,7 @@ function isActive($path)
                                             ?>"> <a href="/webprogramming_assignment_242/admin/orders"
                             class="sidebar-link">
                             <i class="bi bi-journal-check"></i>
-                            <span>Orders (quản lý đơn hàng)</span>
+                            <span>Orders</span>
                         </a>
                     </li>
                 </ul>
