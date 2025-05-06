@@ -50,7 +50,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
             require_once "assets/components/admin/header.php";
             ?>
 
-            <form action="" class="page-heading" method="post" onsubmit="return addConfirm()"
+            <form action="" class="page-heading" method="post" onsubmit="return updateConfirm()"
                 enctype="multipart/form-data">
                 <div class="page-title">
                     <div class="row">
@@ -117,7 +117,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <script src="assets/static/js/pages/tinymce.js"></script>
 
     <script>
-    function addConfirm() {
+    function updateConfirm() {
         const content = tinymce.get("content").getContent({
             format: "text"
         }).trim();
