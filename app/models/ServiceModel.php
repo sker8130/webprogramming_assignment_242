@@ -1,10 +1,10 @@
-<?php 
+<?php
 require_once "app/database/database.php";
 ?>
 <?php
 class ServiceModel
 {
-    private $db; 
+    private $db;
 
     public function __construct()
     {
@@ -24,17 +24,17 @@ class ServiceModel
     public function update($id, $title, $description)
     {
         $stmt = $this->db->prepare("update specialservice set title = ?, description = ? where ID = ?");
-        $stmt->bind_param("sss", $title, $description, $id);
+        $stmt->bind_param("ssi", $title, $description, $id);
 
         $exists = $stmt->execute();
         $stmt->close();
         return $exists;
     }
 
-    public function delete($id) 
+    public function delete($id)
     {
         $stmt = $this->db->prepare("delete from specialservice where ID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $exists = $stmt->execute();
         $stmt->close();
 
@@ -48,14 +48,14 @@ class ServiceModel
         $result = $stmt->get_result();
         $row = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        
+
         return $row;
     }
 
     public function getById($id)
     {
         $stmt = $this->db->prepare("select * from specialservice where id = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $row = $stmt->get_result();
         $stmt->close();

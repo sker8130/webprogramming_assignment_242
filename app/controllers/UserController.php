@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "app/models/UserModel.php";
 
 class UserController
@@ -20,6 +22,7 @@ class UserController
         <th class='text-center'>Email</th>
         <th class='text-center'>Phone</th>
         <th class='text-center'>Role</th>
+        <th class='text-center'>Login Status</th>
         <th class='text-center'></th>";
         $tableBody = "";
         $rows = $this->userModel->getAll();
@@ -31,6 +34,7 @@ class UserController
         }
         while ($row = $rows->fetch_assoc()) {
             $displayedEmail = htmlspecialchars($row["Email"]);
+            $loginStatus = $row["loginAttempts"] == 5 ? "Locked" : "Normal";
             $candidate = "<tr>
         <td id='id'>{$row["UserID"]}</td>
         <td><img src='{$row["Avatar"]}' alt='idk' width='80'></td>
@@ -38,7 +42,9 @@ class UserController
         <td>{$displayedEmail}</td>
         <td>{$row["Phone"]}</td>
         <td>{$row["Role"]}</td>
-        <td>
+        <td>{$loginStatus}</td>
+        <td><a href='/webprogramming_assignment_242/admin/users/update?id={$row["UserID"]}'
+                    class='btn btn-success'>Update</a>
             <a onclick='deleteConfirm({$row["UserID"]})' class='btn btn-danger'>Delete</a>
         </td>
     </tr>";
@@ -56,21 +62,23 @@ class UserController
         require_once "app/views/admin/users/users.php";
     }
 
-    // public function update()
-    // {
-    //     if (isset($_GET["id"])) {
-    //         $id = $_GET["id"];
-    //         $row = $this->userModel->getUserById($id);
-    //     }
-    //     // if (isset($_POST["update"])) {
-    //     //     if ($this->blogModel->update($id, $_FILES, $_POST)) {
-    //     //         $_SESSION['success_message'] = "Update successfully!";
-    //     //         header("Location: /webprogramming_assignment_242/admin/blogs");
-    //     //         exit();
-    //     //     }
-    //     // }
-    //     require_once "app/views/admin/users/update.php";
-    // }
+    public function update()
+    {
+        if (isset($_GET["id"])) {
+            $id = $_GET["id"];
+            $row = $this->userModel->getUserById($id);
+        }
+
+        if (isset($_POST["update"])) {
+            $isLocked = isset($_POST["isLocked"]) ? false : true;
+            if ($this->userModel->updateLoginStatus($isLocked, $id)) {
+                $_SESSION['success_message'] = "Update successfully!";
+                header("Location: /webprogramming_assignment_242/admin/users");
+                exit();
+            }
+        }
+        require_once "app/views/admin/users/update.php";
+    }
 
 
     public function delete()

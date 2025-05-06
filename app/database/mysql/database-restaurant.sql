@@ -174,7 +174,9 @@ CREATE TABLE `users` (
   `Avatar` varchar(255) DEFAULT NULL,
   `Gender` varchar(20) DEFAULT NULL,
   `Role` varchar(20) DEFAULT NULL,
-  `DateofBirth` datetime DEFAULT NULL
+  `DateofBirth` datetime DEFAULT NULL,
+  `loginAttempts` INT DEFAULT 0,  
+  `lastAttemptTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------

@@ -18,7 +18,7 @@ class CommentModel
     public function add($parentID, $blogID, $userID, $content)
     {
         $stmt = $this->db->prepare("insert into comments (ParentID, BlogID, UserID, Content) values (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $parentID, $blogID, $userID, $content);
+        $stmt->bind_param("iiis", $parentID, $blogID, $userID, $content);
 
         $exists = $stmt->execute();
         $stmt->close();

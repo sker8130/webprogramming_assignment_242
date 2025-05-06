@@ -22,7 +22,7 @@ class TokenModel
     public function add($userID, $token, $expiresAt)
     {
         $stmt = $this->db->prepare("insert into tokens (UserID, token, expiresAt) values (?, ?, ?)");
-        $stmt->bind_param("sss", $userID, $token, $expiresAt);
+        $stmt->bind_param("iss", $userID, $token, $expiresAt);
 
         $exists = $stmt->execute();
         $stmt->close();

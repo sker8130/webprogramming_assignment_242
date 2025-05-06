@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "app/database/database.php";
 ?>
 
@@ -30,7 +30,7 @@ class BranchModel
         return $exists;
     }
 
-    public function update($id, $fileParams, $params) 
+    public function update($id, $fileParams, $params)
     {
         $target_file = "";
         if (isset($fileParams["image"]) && isset($fileParams["image"]["tmp_name"]) && $fileParams["image"]["tmp_name"] !== "") {
@@ -44,46 +44,45 @@ class BranchModel
 
         if ($target_file == "") {
             $stmt = $this->db->prepare("update branches set location = ?, description = ? where ID = ?");
-            $stmt->bind_param("sss", $location, $description, $id);
+            $stmt->bind_param("ssi", $location, $description, $id);
         } else {
             $stmt = $this->db->prepare("update branches set location = ?, description = ?, image = ? where ID = ?");
-            $stmt->bind_param("ssss", $location, $description, $target_file, $id);
+            $stmt->bind_param("sssi", $location, $description, $target_file, $id);
         }
         $exists = $stmt->execute();
         $stmt->close();
         return $exists;
     }
 
-    public function delete($id) 
+    public function delete($id)
     {
         $stmt = $this->db->prepare("delete from branches where ID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $exists = $stmt->execute();
         $stmt->close();
 
         return $exists;
     }
 
-    public function getAll() 
+    public function getAll()
     {
         $stmt = $this->db->prepare("select * from branches");
         $stmt->execute();
         $result = $stmt->get_result();
         $rows = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        
+
         return $rows;
     }
 
     public function getById($id)
     {
         $stmt = $this->db->prepare("select * from branches where ID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $row = $stmt->get_result();
         $stmt->close();
 
         return $row;
     }
-    
 }

@@ -114,9 +114,9 @@ function registerForm() {
         } else if (Number(dob.substring(0, 4)) > 2010) {
             document.getElementById("message").innerText = "** Age must be over 15, please type again! **";
             return false;
-        } else if (password.length < 2 || password.length > 30) {
+        } else if (password.length < 12 || !/\d/.test(password)) {
             document.getElementById("message").innerText =
-                "** Password's length must be from 2 to 30 characters, please type again! ** ";
+                "** Password must be at least 12 characters, including numbers, please type again! ** ";
             return false;
         } else if (password != confirmedPassword) {
             document.getElementById("message").innerText =

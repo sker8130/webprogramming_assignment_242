@@ -34,7 +34,7 @@ class UserModel
     public function getUserById($id)
     {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE UserID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $row = $stmt->get_result()->fetch_assoc();
         $stmt->close();
@@ -45,7 +45,7 @@ class UserModel
     public function delete($id)
     {
         $stmt = $this->db->prepare("delete from users where UserID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $exists = $stmt->execute();
         $stmt->close();
 
@@ -62,7 +62,7 @@ class UserModel
         $stmt->close();
 
         if ($row = $result->fetch_assoc()) {
-            return $row['UserID'];
+            return $row;
         } else {
             return false;
         }
@@ -77,7 +77,7 @@ class UserModel
         $stmt->close();
 
         if ($row = $result->fetch_assoc()) {
-            return $row['UserID'];
+            return $row;
         } else {
             return false;
         }
@@ -122,5 +122,21 @@ class UserModel
         }
         $stmt->close();
         return false;
+    }
+
+    public function updateLoginAttempts($isSuccessfulLogin, $id)
+    {
+        $stmt = $isSuccessfulLogin ? $this->db->prepare("update users set loginAttempts = 0 where UserID = ?") : $this->db->prepare("update users set loginAttempts = loginAttempts + 1, lastAttemptTime = NOW() where UserID = ?");
+        $stmt->bind_param("i", $id);
+        $exists = $stmt->execute();
+        return $exists;
+    }
+
+    public function updateLoginStatus($isLocked, $id)
+    {
+        $stmt = $isLocked ? $this->db->prepare("update users set loginAttempts = 0 where UserID = ?") : $this->db->prepare("update users set loginAttempts = 5, lastAttemptTime = NOW() where UserID = ?");
+        $stmt->bind_param("i", $id);
+        $exists = $stmt->execute();
+        return $exists;
     }
 }

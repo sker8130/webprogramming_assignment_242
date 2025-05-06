@@ -82,14 +82,6 @@ if (isset($_SESSION['scrollToComment'])) {
                                         </div>
                                     </div>
                                 </a>";
-                                // echo "<div class='other-blog-element'>
-                                //     <img src='{$otherBlog["Image"]}' alt='idk' 
-                                //         style='width: 70px; height: 70px; border-radius: 10px'>
-                                //     <div style='display: flex; flex-flow: column; gap: 4px'>
-                                //         <div style='font-weight:500; font-size: 14px'>{$title}</div>
-                                //         <div style='color: grey; font-size: 10px'>{$writerName} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
-                                //     </div>
-                                // </div>";
                                 $count++;
                                 if ($count >= 4) break;
                             }

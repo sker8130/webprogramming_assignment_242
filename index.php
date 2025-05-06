@@ -5,6 +5,7 @@ $rqUri = $_SERVER["REQUEST_URI"];
 $routes = [
     // url cho admin site
     "/webprogramming_assignment_242/admin/users/delete" => [UserController::class, "delete"],
+    "/webprogramming_assignment_242/admin/users/update" => [UserController::class, "update"],
     "/webprogramming_assignment_242/admin/users" => [UserController::class, "adminIndex"],
 
     "/webprogramming_assignment_242/admin/comments/delete" => [CommentController::class, "delete"],
@@ -36,8 +37,8 @@ $routes = [
     "/webprogramming_assignment_242/register" => [AuthController::class, "register"],
     "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
     "/webprogramming_assignment_242/cart" => [CartController::class, "index"],
-    "/webprogramming_assignment_242/introduction" => [UserIntroController::class, "index"], 
-    "/webprogramming_assignment_242/" => [HomeController::class, "index"], 
+    "/webprogramming_assignment_242/introduction" => [UserIntroController::class, "index"],
+    "/webprogramming_assignment_242/" => [HomeController::class, "index"],
 ];
 
 foreach ($routes as $uri => $arrayCtrl) {

@@ -8,7 +8,7 @@ require_once "app/database/database.php";
 
 class MemberModel
 {
-    private $db; 
+    private $db;
 
     public function __construct()
     {
@@ -29,7 +29,7 @@ class MemberModel
     public function update($id, $position, $name, $description)
     {
         $stmt = $this->db->prepare("update members set position = ?, name = ?, description = ? where ID = ?");
-        $stmt->bind_param("ssss", $position, $name, $description, $id);
+        $stmt->bind_param("sssi", $position, $name, $description, $id);
 
         $exists = $stmt->execute();
         $stmt->close();
@@ -39,7 +39,7 @@ class MemberModel
     public function delete($id)
     {
         $stmt = $this->db->prepare("delete from members where ID = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $exists = $stmt->execute();
         $stmt->close();
 
@@ -53,14 +53,14 @@ class MemberModel
         $result = $stmt->get_result();
         $row = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        
+
         return $row;
     }
 
     public function getById($id)
     {
         $stmt = $this->db->prepare("select * from members where id = ?");
-        $stmt->bind_param("s", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $row = $stmt->get_result();
         $stmt->close();

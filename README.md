@@ -1,6 +1,6 @@
 # CO3049_LAP_TRINH_WEB
-BTL Lập trình web
 
+BTL Lập trình web
 
 **Bước 1:**
 Clone thư mục này về bằng câu lệnh "git clone https://github.com/cuongnguyen2323/webprogramming_assignment_242.git"
@@ -12,7 +12,7 @@ Truy cập bằng XAMPP, mở phpMyAdmin lên để đăng nhập
 Check file config.php trong thư mục app/config để xem cấu hình có giống với máy hiện tại hay không, nếu không giống thì sửa lại cho phù hợp để hệ thống có thể đăng nhập phpMyAdmin của mình
 
 **Bước 3:**
-Mở thư mục app/database/mysql và import file `database-restaurant.sql` vào phpMyAdmin (tab Import) để chạy trước. Xong rồi import các file insert còn lại
+Mở thư mục app/database/mysql và import file `database-restaurant.sql` vào phpMyAdmin (tab Import) để chạy trước. Xong rồi import file insert.sql để thêm dữ liệu mẫu vào một số bảng
 
 **Bước 4:**
 Di chuyển thư mục này vào bên trong thư mục web root trong XAMPP (đường dẫn mặc định trong XAMPP: C:\xampp\htdocs)
