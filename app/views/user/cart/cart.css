@@ -1,0 +1,323 @@
+/* General styling for the body to match the Tasty Bites theme */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #F5E8C7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cart section container styling */
+.cart-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Main heading styling */
+.cart-section h1 {
+    text-align: center;
+    color: #1E2A44;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+/* Cart table styling */
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-table th {
+    background-color: #A52A2A;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.cart-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle; /* Ensure all cells align content vertically */
+    text-align: left; /* Default text alignment for all cells */
+}
+
+/* Specific column styling for alignment */
+.cart-table th:nth-child(1),
+.cart-table td:nth-child(1) { /* Image column */
+    width: 120px;
+    text-align: center;
+}
+
+.cart-table th:nth-child(2),
+.cart-table td:nth-child(2) { /* Product column */
+    width: 30%;
+    text-align: left;
+}
+
+.cart-table th:nth-child(3),
+.cart-table td:nth-child(3) { /* Price column */
+    width: 100px;
+    text-align: right;
+}
+
+.cart-table th:nth-child(4),
+.cart-table td:nth-child(4) { /* Quantity column */
+    width: 150px;
+    text-align: center;
+}
+
+.cart-table th:nth-child(5),
+.cart-table td:nth-child(5) { /* Subtotal column */
+    width: 100px;
+    text-align: right;
+}
+
+.cart-table th:nth-child(6),
+.cart-table td:nth-child(6) { /* Action column */
+    width: 100px;
+    text-align: center;
+}
+
+.cart-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Image cell styling */
+.image-cell img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+/* Quantity cell styling */
+.quantity-cell {
+    text-align: center; /* Center the content horizontally */
+}
+
+.quantity-form {
+    display: inline-block; /* Keep forms inline to align with other elements */
+    margin: 0 5px; /* Add spacing between buttons and quantity value */
+}
+
+.quantity-btn {
+    background-color: #A52A2A;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+    vertical-align: middle; /* Align buttons with the quantity value */
+}
+
+.quantity-btn:hover {
+    background-color: #8B1A1A;
+}
+
+.quantity-value {
+    font-weight: bold;
+    min-width: 20px;
+    display: inline-block; /* Ensure it aligns inline with buttons */
+    text-align: center;
+    vertical-align: middle; /* Align with buttons */
+}
+
+/* Remove button styling */
+.remove-btn {
+    background-color: #A52A2A;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+    background-color: #8B1A1A;
+}
+
+/* Cart panels styling */
+.cart-panels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.shipper-info-panel, .cart-subtotal-panel {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 48%;
+}
+
+.shipper-info-panel {
+    border-left: 4px solid #A52A2A;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-subtotal-panel {
+    background-color: #fffaf9; /* Light pinkish background */
+}
+
+.shipper-info-panel h3, .cart-subtotal-panel h3 {
+    color: #1E2A44;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.shipper-avatar img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.shipper-info-panel .shipper-details {
+    flex: 1;
+}
+
+.shipper-info-panel p {
+    display: flex;
+    margin: 5px 0;
+    color: #333;
+    font-size: 1em;
+}
+
+.cart-subtotal-panel p {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    color: #333;
+    font-size: 1em;
+}
+
+.cart-subtotal-panel p span:last-child {
+    font-weight: bold;
+}
+
+.cart-subtotal-panel p:last-child span:last-child {
+    color: #A52A2A;
+    font-size: 1.2em;
+}
+
+/* Cart actions styling */
+.cart-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.continue-shopping {
+    color: #1E2A44;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+.continue-shopping:hover {
+    color: #A52A2A;
+}
+
+.checkout-btn {
+    background-color: #A52A2A;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+.checkout-btn:hover {
+    background-color: #8B1A1A;
+}
+
+/* Success and error messages */
+.success-message {
+    color: green;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Empty cart message */
+.cart-section p {
+    text-align: center;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .cart-panels {
+        flex-direction: column;
+    }
+
+    .shipper-info-panel, .cart-subtotal-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .shipper-info-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .shipper-avatar img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .cart-table th, .cart-table td {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .image-cell img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .quantity-btn, .remove-btn {
+        padding: 4px 8px;
+        font-size: 0.9em;
+    }
+
+    .cart-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        padding: 12px;
+    }
+}
