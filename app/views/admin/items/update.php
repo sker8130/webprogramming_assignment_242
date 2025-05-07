@@ -78,7 +78,7 @@ if (isset($_SESSION["error_message"])) {
                 <section class="section">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="/webprogramming_assignment_242/admin/items/edit" enctype="multipart/form-data" class="row">
+                            <form method="post" action="/webprogramming_assignment_242/admin/items/update" enctype="multipart/form-data" class="row">
                                 <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['ProductID']); ?>">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -89,7 +89,7 @@ if (isset($_SESSION["error_message"])) {
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="price">Price($)</label>
+                                        <label for="price">Price</label>
                                         <input type="number" id="price" name="price" class="form-control round"
                                             placeholder="Enter price" step="0.01" min="0" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
                                     </div>
@@ -112,9 +112,7 @@ if (isset($_SESSION["error_message"])) {
                                     <div class="form-group">
                                         <label for="image">Image (optional)</label>
                                         <input type="file" id="image" name="image" class="form-control" accept="image/jpeg,image/png,image/gif">
-                                        <?php if ($product['Image']): ?>
-                                            <small class="text-muted">Current image: <?php echo htmlspecialchars($product['Image']); ?></small>
-                                        <?php endif; ?>
+                                        <small class="form-text text-muted">Leave blank to keep the current image.</small>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
