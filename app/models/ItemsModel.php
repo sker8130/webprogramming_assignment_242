@@ -33,7 +33,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: items.php (to search for items)
+    // Used by: admin/items/items.php (to search for items)
     public function searchItemsAdmin($productId = null, $name = null, $categoryId = null)
     {
         $query = "SELECT p.*, c.CategoryName FROM products p JOIN categories c ON p.CategoryID = c.CategoryID WHERE 1=1";
@@ -208,7 +208,7 @@ class ItemsModel
         return $shipper;
     }
 
-    // Used by: admin/items.php (to fetch all categories for dropdown)
+    // Used by: admin/items/items.php (to fetch all categories for dropdown)
     public function getCategories()
     {
         $stmt = $this->db->prepare("SELECT CategoryID, CategoryName FROM categories");
@@ -218,7 +218,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/items.php (to add a new product)
+    // Used by: admin/items/items.php (to add a new product)
     public function addProduct($name, $price, $categoryId, $description, $image)
     {
         $stmt = $this->db->prepare("INSERT INTO products (ProductName, Price, CategoryID, Description, Image) VALUES (?, ?, ?, ?, ?)");
@@ -228,7 +228,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/items.php (to update an existing product)
+    // Used by: admin/items/items.php (to update an existing product)
     public function updateProduct($productId, $name, $price, $categoryId, $description, $image)
     {
         // If no new image is provided, keep the existing one
@@ -244,11 +244,67 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/items.php (to delete a product)
+    // Used by: admin/items/items.php (to delete a product)
     public function deleteProduct($productId)
     {
         $stmt = $this->db->prepare("DELETE FROM products WHERE ProductID = ?");
         $stmt->bind_param("i", $productId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/cart/cart.php (to fetch all orders)
+    public function getAllOrders()
+    {
+        $stmt = $this->db->prepare("SELECT o.*, u.Username, s.ShipperName 
+                                    FROM orders o 
+                                    JOIN users u ON o.UserID = u.UserID 
+                                    LEFT JOIN shippers s ON o.ShipperID = s.ShipperID 
+                                    ORDER BY o.CreateAt DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/cart/cart.php (to fetch all shippers for dropdown)
+    public function getShippers()
+    {
+        $stmt = $this->db->prepare("SELECT ShipperID, ShipperName FROM shippers");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/cart/cart.php (to update order status)
+    public function updateOrderStatus($orderId, $status)
+    {
+        // Validate status
+        $allowedStatuses = ['Pending', 'Processing', 'Completed', 'Cancelled'];
+        if (!in_array($status, $allowedStatuses)) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("UPDATE orders SET OrderStatus = ? WHERE OrderID = ?");
+        $stmt->bind_param("si", $status, $orderId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/cart/cart.php (to update order shipper)
+    public function updateOrderShipper($orderId, $shipperId)
+    {
+        // Allow NULL for unassigned shipper
+        if ($shipperId === null) {
+            $stmt = $this->db->prepare("UPDATE orders SET ShipperID = NULL WHERE OrderID = ?");
+            $stmt->bind_param("i", $orderId);
+        } else {
+            $stmt = $this->db->prepare("UPDATE orders SET ShipperID = ? WHERE OrderID = ?");
+            $stmt->bind_param("ii", $shipperId, $orderId);
+        }
         $result = $stmt->execute();
         $stmt->close();
         return $result;
