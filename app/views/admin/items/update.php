@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Restore session if expired but cookie exists
 require_once "app/models/UserModel.php";
@@ -20,10 +21,14 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     header("Location: /webprogramming_assignment_242/");
 }
 
-// Display success message if set
+// Display success/error messages
 if (isset($_SESSION["success_message"])) {
     echo '<script>alert("' . $_SESSION['success_message'] . '");</script>';
     unset($_SESSION['success_message']);
+}
+if (isset($_SESSION["error_message"])) {
+    echo '<script>alert("' . $_SESSION['error_message'] . '");</script>';
+    unset($_SESSION['error_message']);
 }
 ?>
 
@@ -33,7 +38,7 @@ if (isset($_SESSION["success_message"])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Items Management</title>
+    <title>Edit Product</title>
 
     <base href="/webprogramming_assignment_242/">
 
@@ -53,99 +58,79 @@ if (isset($_SESSION["success_message"])) {
     <div id="app">
 
         <?php
-        require_once "assets/components/admin/sidebar.php"
+        require_once "assets/components/admin/sidebar.php";
         ?>
 
         <div id="main">
 
             <?php
-            require_once "assets/components/admin/header.php"
+            require_once "assets/components/admin/header.php";
             ?>
 
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Items Management</h3>
+                            <h3>Edit Product</h3>
                         </div>
                     </div>
                 </div>
                 <section class="section">
-                    <a href="/webprogramming_assignment_242/admin/items/add" class="btn btn-primary my-3">Add a product</a>
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" class="row">
-                                <div class="col-sm-3">
+                            <form method="post" action="/webprogramming_assignment_242/admin/items/edit" enctype="multipart/form-data" class="row">
+                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['ProductID']); ?>">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="productIDForItems">ProductID Input</label>
-                                        <input type="number" id="productIDForItems" name="productIDForItems"
-                                            class="form-control round" placeholder="Enter product ID"
-                                            value="<?php echo isset($oldInput["productIDForItems"]) ? htmlspecialchars($oldInput["productIDForItems"]) : ""; ?>">
+                                        <label for="name">Product Name</label>
+                                        <input type="text" id="name" name="name" class="form-control round"
+                                            placeholder="Enter product name" value="<?php echo htmlspecialchars($product['ProductName']); ?>" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="nameForItems">Name Input</label>
-                                        <input type="text" id="nameForItems" name="nameForItems"
-                                            class="form-control round" placeholder="Enter product name"
-                                            value="<?php echo isset($oldInput["nameForItems"]) ? htmlspecialchars($oldInput["nameForItems"]) : ""; ?>">
+                                        <label for="price">Price($)</label>
+                                        <input type="number" id="price" name="price" class="form-control round"
+                                            placeholder="Enter price" step="0.01" min="0" value="<?php echo htmlspecialchars($product['Price']); ?>" required>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="categoryForItems">Category Input</label>
-                                        <select class="form-select" id="categoryForItems" name="categoryForItems">
-                                            <option value="" selected>Choose</option>
+                                        <label for="category_id">Category</label>
+                                        <select class="form-select" id="category_id" name="category_id" required>
+                                            <option value="" disabled>Choose a category</option>
                                             <?php while ($category = $categories->fetch_assoc()): ?>
                                                 <option value="<?php echo htmlspecialchars($category['CategoryID']); ?>"
-                                                    <?php echo isset($oldInput["categoryForItems"]) && $oldInput["categoryForItems"] == $category['CategoryID'] ? "selected" : ""; ?>>
+                                                    <?php echo $category['CategoryID'] == $product['CategoryID'] ? 'selected' : ''; ?>>
                                                     <?php echo htmlspecialchars($category['CategoryName']); ?>
                                                 </option>
                                             <?php endwhile; ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group mt-4">
-                                        <input type="submit" value="Search" name="searchForItems" class="btn btn-success">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="image">Image (optional)</label>
+                                        <input type="file" id="image" name="image" class="form-control" accept="image/jpeg,image/png,image/gif">
+                                        <?php if ($product['Image']): ?>
+                                            <small class="text-muted">Current image: <?php echo htmlspecialchars($product['Image']); ?></small>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="description">Description</label>
+                                        <textarea id="description" name="description" class="form-control round"
+                                            placeholder="Enter product description" rows="4" required><?php echo htmlspecialchars($product['Description']); ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group mt-3">
+                                        <button type="submit" class="btn btn-primary">Update Product</button>
+                                        <a href="/webprogramming_assignment_242/admin/items" class="btn btn-secondary">Cancel</a>
                                     </div>
                                 </div>
                             </form>
-                            <table class="table table-striped table-bordered" id="table1">
-                                <thead>
-                                    <tr>
-                                        <th>ProductID</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Category</th>
-                                        <th>Image</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if ($items && $items->num_rows > 0): ?>
-                                        <?php while ($item = $items->fetch_assoc()): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($item['ProductID']); ?></td>
-                                                <td><?php echo htmlspecialchars($item['ProductName']); ?></td>
-                                                <td>$<?php echo number_format($item['Price'], 2); ?></td>
-                                                <td><?php echo htmlspecialchars($item['CategoryName']); ?></td>
-                                                <td>
-                                                    <img src="app/views/user/items/img/<?php echo htmlspecialchars($item['Image']); ?>" alt="<?php echo htmlspecialchars($item['ProductName']); ?>" style="width: 50px; height: 50px; object-fit: cover;">
-                                                </td>
-                                                <td>
-                                                    <a href="/webprogramming_assignment_242/admin/items/update?id=<?php echo $item['ProductID']; ?>" class="btn btn-sm btn-primary">Edit</a>
-                                                    <button onclick="deleteConfirm(<?php echo $item['ProductID']; ?>)" class="btn btn-sm btn-danger">Delete</button>
-                                                </td>
-                                            </tr>
-                                        <?php endwhile; ?>
-                                    <?php else: ?>
-                                        <tr>
-                                            <td colspan="6" class="text-center">No products found.</td>
-                                        </tr>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </section>
@@ -173,14 +158,6 @@ if (isset($_SESSION["success_message"])) {
     <script src="assets/compiled/js/app.js"></script>
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
-
-    <script>
-    function deleteConfirm(id) {
-        if (confirm(`Delete this product with ID = ${id}?`)) {
-            window.location.href = `/webprogramming_assignment_242/admin/items/delete?id=${id}`;
-        }
-    }
-    </script>
 </body>
 
 </html>
