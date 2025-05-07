@@ -20,15 +20,15 @@ if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
 if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
     header("Location: /webprogramming_assignment_242/");
 }
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add new Member</title>
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -38,6 +38,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
 </head>
+
 <body>
     <script src="assets/static/js/initTheme.js"></script>
 
@@ -96,8 +97,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="preview" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="2" required
-                                            maxlength="280"></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="2"
+                                            required maxlength="280"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -146,6 +147,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
         return confirm("Add this member?");
     }
     </script>
-    </script> 
+    </script>
 </body>
+
 </html>

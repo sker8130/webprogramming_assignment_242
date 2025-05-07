@@ -11,7 +11,10 @@ $totalPages = $totalPages ?? 1;
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Blogs</title>
+    <meta name="description"
+        content="Discover the latest articles about food, behind-the-scene stories and more from TastyBites' restaurant's food blog">
+
     <link rel="stylesheet" href="app/views/user/blogs/blogs.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 

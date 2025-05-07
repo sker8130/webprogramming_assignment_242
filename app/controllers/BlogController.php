@@ -50,13 +50,14 @@ class BlogController
         foreach ($blogsToDisplay as $row) {
             $title = htmlspecialchars($row["Title"]);
             $preview = htmlspecialchars($row["Preview"]);
+            $titleParam = str_replace(' ', '-', urldecode($title));
             $htmlDisplayed .= "<div class='card'>
             <img src='{$row["Image"]}' alt=''
                 style='width: 100%; border-top-left-radius: 20px; border-top-right-radius: 20px'>
             <h2 style='text-align: center; margin: 10px 20px'>{$title}</h2>
             <p style='text-align:justify; margin: 0 15px'>{$preview}...</p>
-            <a href='/webprogramming_assignment_242/blog?id={$row["BlogID"]}'><button class='view-more-button'>
-                    Xem chi tiết
+            <a href='/webprogramming_assignment_242/blog?id={$row["BlogID"]}&title={$titleParam}'><button class='view-more-button'>
+                    View more
                 </button></a>
             </div>";
         }

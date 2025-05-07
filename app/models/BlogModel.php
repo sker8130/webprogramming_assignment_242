@@ -23,8 +23,10 @@ class BlogModel
         }
 
         $image = $fileParams['image'];
-        $allowedExtensions = ['jpg', 'jpeg', 'png'];
-        $allowedMimeTypes = ['image/jpeg', 'image/png'];
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+        $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
+
+
         $maxFileSize = 2 * 1024 * 1024; // 2MB
 
         $imageTmpName = $image['tmp_name'];
@@ -81,8 +83,10 @@ class BlogModel
             }
 
             $image = $fileParams['image'];
-            $allowedExtensions = ['jpg', 'jpeg', 'png'];
-            $allowedMimeTypes = ['image/jpeg', 'image/png'];
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'avif'];
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'];
+
+
             $maxFileSize = 2 * 1024 * 1024; // 2MB
 
             $imageTmpName = $image['tmp_name'];

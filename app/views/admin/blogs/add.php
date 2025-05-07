@@ -28,9 +28,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textarea - Mazer Admin Dashboard</title>
+    <title>Add a blog</title>
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -67,7 +66,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group mb-3">
-                                        <label for="image" class="form-label">Thumbnail image</label>
+                                        <label for="image" class="form-label">Thumbnail image (accept jpg, jpeg,
+                                            png, webp, avif)</label>
                                         <input class="form-control" type="file" id="image" name="image" accept="image/*"
                                             required>
                                         <img id="imageDisplayed" src="" alt="" width="200" class="mt-4">

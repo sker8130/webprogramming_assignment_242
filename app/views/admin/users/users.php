@@ -32,10 +32,9 @@ if (isset($_SESSION["success_message"])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DataTable - Mazer Admin Dashboard</title>
+    <title>Users management</title>
 
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon" />
     <link rel="shortcut icon"

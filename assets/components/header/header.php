@@ -19,7 +19,7 @@ session_start();
     <link
         href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <title>Header restaurant</title>
+    <!-- <title>Header restaurant</title> -->
 </head>
 
 <header>
@@ -31,7 +31,7 @@ session_start();
     <nav>
         <ul class="nav-links">
             <li><a href="/webprogramming_assignment_242">HOME</a></li>
-            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li> 
+            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li>
             <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
             <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
             <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>

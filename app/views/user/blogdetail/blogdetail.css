@@ -138,6 +138,49 @@ body {
   color: #cc3333;
 }
 
+.writer-name,
+.created-at {
+  display: flex;
+  gap: 5px;
+}
+
+.other-blogs-title {
+  text-align: center;
+  font-size: 21px;
+  font-weight: 500;
+  color: #cc3333;
+}
+
+.other-blog-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+}
+
+.other-blog {
+  display: flex;
+  flex-flow: column;
+  gap: 4px;
+}
+
+.other-blog-title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.other-blog-info {
+  color: grey;
+  font-size: 10px;
+}
+
+form > textarea {
+  background: #fff8ee;
+  outline: none;
+  border: none;
+  resize: none;
+  width: 100%;
+}
+
 /* mobile: width < 740px */
 @media only screen and (max-width: 739px) {
 }

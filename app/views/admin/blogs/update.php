@@ -28,9 +28,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Textarea - Mazer Admin Dashboard</title>
+    <title>Update a blog</title>
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"

@@ -12,7 +12,7 @@ if (isset($_SESSION['success_message'])) {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login</title>
     <link rel="stylesheet" href="app/views/user/login/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -26,9 +26,9 @@ if (isset($_SESSION['success_message'])) {
     <div class="container">
         <div class="main-login">
             <form action="" method="post">
-                <h2 style="margin-bottom: -2px">Login</h2>
+                <h2>Login</h2>
 
-                <div style="margin-bottom: -2px; font-size: 16px; color: yellow">
+                <div class="message">
                     <?php
                     if (isset($errors["message"])) {
                         echo $errors["message"];
@@ -36,26 +36,24 @@ if (isset($_SESSION['success_message'])) {
                     ?>
                 </div>
 
-                <div style="margin-bottom: -2px; font-size: 14px">Username or email address *</div>
+                <div class="login-input">Username or email address *</div>
                 <input type="text" name="usernameEmail"
                     value="<?php echo isset($oldInput["usernameEmail"]) ? htmlspecialchars($oldInput["usernameEmail"]) : ""; ?>">
-                <div style="margin-bottom: -2px; font-size: 14px">Password *</div>
+                <div class="login-input">Password *</div>
                 <input type="password" name="password"
                     value="<?php echo isset($oldInput["password"]) ? htmlspecialchars($oldInput["password"]) : ""; ?>">
-                <input type="submit" value="Log in"
-                    style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
-                <label style="color: #2a435d; display: flex; align-items: center; gap: 4px">
+                <input type="submit" value="Log in">
+                <label class="remember-me">
                     <input type="checkbox" name="remember">
                     <div>Remember me</div>
                 </label>
-                <div style="color: #4BFF3C">Lost your password</div>
-                <div>Don't have an account? <span style="color: #2a435d; font-size: 16px; font-weight: 500"><a
-                            href="/webprogramming_assignment_242/register">Register</a></span>
+                <div>Don't have an account? <span><a href="/webprogramming_assignment_242/register"
+                            class="register">Register</a></span>
                 </div>
             </form>
         </div>
         <div class="potato-icon">
-            <img src="assets/components/images/potatochip.png" alt="">
+            <img src="assets/components/images/potatochip.png" alt="potato icon">
         </div>
     </div>
 </body>

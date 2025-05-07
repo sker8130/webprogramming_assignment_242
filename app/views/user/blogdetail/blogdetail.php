@@ -23,7 +23,11 @@ if (isset($_SESSION['scrollToComment'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?php echo htmlspecialchars($row["Title"]); ?></title>
+
+    <meta name="description" content="<?php echo htmlspecialchars(substr(strip_tags($row['Content']), 0, 160)); ?>">
+    <meta name="author" content="<?php echo htmlspecialchars($row['WriterName']); ?>">
+
     <link rel="stylesheet" href="app/views/user/blogdetail/blogdetail.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -40,11 +44,11 @@ if (isset($_SESSION['scrollToComment'])) {
                 <div class="main-content">
                     <div class="title"><?php echo htmlspecialchars($row["Title"]); ?></div>
                     <div class="blog-info">
-                        <div style="display: flex; gap: 5px; ">
+                        <div class="writer-name">
                             <i class='far fa-user-circle'></i>
                             <div><?php echo htmlspecialchars($row["WriterName"]) ?></div>
                         </div>
-                        <div style="display: flex; gap: 5px; ">
+                        <div class="created-at">
                             <i class='far fa-calendar-plus'></i>
                             <div><?php echo substr($row["CreatedAt"], 0, 10) ?></div>
                         </div>
@@ -63,7 +67,7 @@ if (isset($_SESSION['scrollToComment'])) {
                     </div>
                 </div>
                 <div class="other-blogs">
-                    <div style="text-align: center; font-size: 21px; font-weight:500; color: #cc3333">Các bài viết khác
+                    <div class="other-blogs-title">Other blogs
                     </div>
                     <div class="other-blogs-list">
                         <?php
@@ -72,13 +76,13 @@ if (isset($_SESSION['scrollToComment'])) {
                             if ($otherBlog["BlogID"] != $row["BlogID"] && $otherBlog["IsPublic"] === "yes") {
                                 $title = htmlspecialchars($otherBlog["Title"]);
                                 $writerName = htmlspecialchars($otherBlog["WriterName"]);
-                                echo "<a href='/webprogramming_assignment_242/blog?id={$otherBlog["BlogID"]}'>
+                                $titleParam = str_replace(' ', '-', urldecode($title));
+                                echo "<a href='/webprogramming_assignment_242/blog?id={$otherBlog["BlogID"]}&title={$titleParam}'>
                                     <div class='other-blog-element'>
-                                        <img src='{$otherBlog["Image"]}' alt='idk'
-                                            style='width: 70px; height: 70px; border-radius: 10px'>
-                                        <div style='display: flex; flex-flow: column; gap: 4px'>
-                                            <div style='font-weight:500; font-size: 14px'>{$title}</div>
-                                            <div style='color: grey; font-size: 10px'>{$writerName} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
+                                        <img src='{$otherBlog["Image"]}' alt='idk' class='other-blog-image'>
+                                        <div class='other-blog'>
+                                            <div class='other-blog-title'>{$title}</div>
+                                            <div class='other-blog-info'>{$writerName} | " . substr($otherBlog["CreatedAt"], 0, 10) . "</div>
                                         </div>
                                     </div>
                                 </a>";
@@ -131,14 +135,11 @@ if (isset($_SESSION['scrollToComment'])) {
 
                 <?php if (!$notLoginCond): ?>
                 <div class="comment-frame">
-                    <div class="comment-avatar"><img src="<?php
-                                                                echo $userModel->getUserById($userID)["Avatar"];
-                                                                ?>" alt=""></div>
+                    <div class="comment-avatar"><img src="<?php echo $userModel->getUserById($userID)["Avatar"]; ?>"
+                            alt="avatar"></div>
 
                     <form method="post" onsubmit="return confirmSend()" style="width: 100%">
-                        <textarea name="comment"
-                            style="background: #fff8ee; outline: none; border: none; resize: none; width: 100%"
-                            placeholder="Add a comment" required></textarea>
+                        <textarea name="comment" placeholder="Add a comment" required></textarea>
                         <hr>
                         <input type="submit" value="Send" class="send-button">
                     </form>
@@ -162,10 +163,7 @@ if (isset($_SESSION['scrollToComment'])) {
                     <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
                     <div class='displayed-comment'>
                         <div class='comment-info'>
-                            <div class='account-name'><?php echo
-                                                            $comment["Username"]
-                                                            // $_SESSION["mySession"]
-                                                            ?></div>
+                            <div class='account-name'><?php echo $comment["Username"] ?></div>
                             <div class='comment-date'><?php echo $date ?></div>
                         </div>
                         <div class='comment-content'><?php echo htmlspecialchars($comment["Content"]) ?></div>
@@ -221,16 +219,13 @@ if (isset($_SESSION['scrollToComment'])) {
                     <?php if (!$notLoginCond) { ?>
                     <div class="comment-frame">
                         <form method="post" onsubmit="return confirmSend()" style="width: 100%; margin-left: 64px">
-                            <textarea name="comment"
-                                style="background: #fff8ee; outline: none; border: none; resize: none; width: 100%"
-                                placeholder="Add a respond" required></textarea>
+                            <textarea name="comment" placeholder="Add a respond" required></textarea>
                             <input type='hidden' name='parentID' value='<?php echo $comment["CommentID"] ?>'>
                             <hr>
                             <input type="submit" value="Send" class="send-button">
                         </form>
                     </div>
                     <?php } ?>
-                    <!-- </div> -->
                     <?php
                         if (!$notLoginCond) {
                         ?>

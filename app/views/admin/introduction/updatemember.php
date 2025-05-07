@@ -23,12 +23,12 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update member</title>  
+    <title>Update member</title>
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -38,6 +38,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
 </head>
+
 <body>
     <script src="assets/static/js/initTheme.js"></script>
 
@@ -96,8 +97,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="preview" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="2" required
-                                            maxlength="280"><?php echo $row["description"] ?></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="2"
+                                            required maxlength="280"><?php echo $row["description"] ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +107,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                 </section>
 
 
-                <input type="submit" name="updatemember" class="btn btn-primary" role="button" value="Update this member">
+                <input type="submit" name="updatemember" class="btn btn-primary" role="button"
+                    value="Update this member">
 
             </form>
             <footer>
@@ -148,4 +150,5 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     </script>
     </script>
 </body>
+
 </html>

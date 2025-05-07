@@ -31,15 +31,15 @@ class CommentController
         while ($row = $rows->fetch_assoc()) {
             $displayedContent = htmlspecialchars($row["Content"]);
             $candidate = "<tr>
-        <td id='id'>{$row["CommentID"]}</td>
-        <td style='width: 150px'>{$row["ParentID"]}</td>
-        <td>{$row["BlogID"]}</td>
-        <td>{$row["Username"]}</td>
-        <td>{$displayedContent}</td>
-        <td>
-            <a onclick='deleteConfirm({$row["CommentID"]})' class='btn btn-danger'>Delete</a>
-        </td>
-    </tr>";
+                <td id='id'>{$row["CommentID"]}</td>
+                <td style='width: 150px'>{$row["ParentID"]}</td>
+                <td>{$row["BlogID"]}</td>
+                <td>{$row["Username"]}</td>
+                <td>{$displayedContent}</td>
+                <td>
+                    <a onclick='deleteConfirm({$row["CommentID"]})' class='btn btn-danger'>Delete</a>
+                </td>
+            </tr>";
             if (isset($_POST["searchForComments"])) {
                 $cond1 = ($username == "") || ($username != "" && is_numeric(strpos(strtolower($row["Username"]), trim(strtolower($username)))));
                 $cond2 = (!is_numeric($blogID)) || (is_numeric($blogID) && $blogID == $row["BlogID"]);

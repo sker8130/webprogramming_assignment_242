@@ -23,12 +23,12 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update branch</title> 
+    <title>Update branch</title>
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -38,6 +38,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
 </head>
+
 <body>
     <div id="app">
         <?php
@@ -48,8 +49,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
             require_once "assets/components/admin/header.php";
             ?>
 
-            <form class="page-heading" method="post" onsubmit="return updateConfirm()"
-                enctype="multipart/form-data">
+            <form class="page-heading" method="post" onsubmit="return updateConfirm()" enctype="multipart/form-data">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -64,8 +64,10 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="image" class="form-label">Image</label>
-                                        <input class="form-control" type="file" id="image" name="image" accept="image/*">
-                                        <img id="imageDisplayed" src="<?php echo $row["image"] ?>" alt="" width="200" class="mt-4">
+                                        <input class="form-control" type="file" id="image" name="image"
+                                            accept="image/*">
+                                        <img id="imageDisplayed" src="<?php echo $row["image"] ?>" alt="" width="200"
+                                            class="mt-4">
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +96,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                                 <div class="card-body">
                                     <div class="form-group mb-3">
                                         <label for="preview" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="2" required
-                                            maxlength="280"><?php echo $row["description"] ?></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="2"
+                                            required maxlength="280"><?php echo $row["description"] ?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +106,8 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                 </section>
 
 
-                <input type="submit" name="updatebranch" class="btn btn-primary" role="button" value="Update this branch">
+                <input type="submit" name="updatebranch" class="btn btn-primary" role="button"
+                    value="Update this branch">
 
             </form>
             <footer>
@@ -163,4 +166,5 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     </script>
     </script>
 </body>
+
 </html>

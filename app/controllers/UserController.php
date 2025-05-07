@@ -36,18 +36,18 @@ class UserController
             $displayedEmail = htmlspecialchars($row["Email"]);
             $loginStatus = $row["loginAttempts"] == 5 ? "Locked" : "Normal";
             $candidate = "<tr>
-        <td id='id'>{$row["UserID"]}</td>
-        <td><img src='{$row["Avatar"]}' alt='idk' width='80'></td>
-        <td>{$row["Username"]}</td>
-        <td>{$displayedEmail}</td>
-        <td>{$row["Phone"]}</td>
-        <td>{$row["Role"]}</td>
-        <td>{$loginStatus}</td>
-        <td><a href='/webprogramming_assignment_242/admin/users/update?id={$row["UserID"]}'
-                    class='btn btn-success'>Update</a>
-            <a onclick='deleteConfirm({$row["UserID"]})' class='btn btn-danger'>Delete</a>
-        </td>
-    </tr>";
+                <td id='id'>{$row["UserID"]}</td>
+                <td><img src='{$row["Avatar"]}' alt='idk' width='80'></td>
+                <td>{$row["Username"]}</td>
+                <td>{$displayedEmail}</td>
+                <td>{$row["Phone"]}</td>
+                <td>{$row["Role"]}</td>
+                <td>{$loginStatus}</td>
+                <td><a href='/webprogramming_assignment_242/admin/users/update?id={$row["UserID"]}'
+                            class='btn btn-success'>Update</a>
+                    <a onclick='deleteConfirm({$row["UserID"]})' class='btn btn-danger'>Delete</a>
+                </td>
+            </tr>";
             if (isset($_POST["searchForUsers"])) {
                 $cond1 = ($username == "") || ($username != "" && is_numeric(strpos(strtolower($row["Username"]), trim(strtolower($username)))));
                 $cond2 = (!is_numeric($userID)) || (is_numeric($userID) && $userID == $row["UserID"]);

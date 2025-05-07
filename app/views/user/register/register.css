@@ -44,6 +44,24 @@ input[type='submit']:hover {
   cursor: pointer;
 }
 
+#message {
+  margin-bottom: -2px;
+  font-size: 16px;
+  color: yellow;
+}
+
+.register-input {
+  margin-bottom: -2px;
+  font-size: 14px;
+}
+
+input[type='submit'] {
+  width: 35%;
+  height: 33px;
+  color: white;
+  background-color: #2a435d;
+}
+
 /* mobile: width < 740px */
 @media only screen and (max-width: 739px) {
   body {

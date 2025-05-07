@@ -24,13 +24,13 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update faq</title>
 
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
@@ -40,12 +40,13 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <link rel="stylesheet" href="assets/compiled/css/app.css">
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css">
 </head>
+
 <body>
     <script src="assets/static/js/initTheme.js"></script>
 
     <div id="main">
         <?php
-            require_once "assets/components/admin/sidebar.php"
+        require_once "assets/components/admin/sidebar.php"
         ?>
 
         <div id="main">
@@ -135,4 +136,5 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     </script>
     </script>
 </body>
+
 </html>

@@ -28,13 +28,13 @@ if (isset($_SESSION["success_message"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DataTable - Mazer Admin Dashboard</title>
 
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon" />
     <link rel="shortcut icon"
@@ -47,16 +47,17 @@ if (isset($_SESSION["success_message"])) {
     <link rel="stylesheet" href="assets/compiled/css/app.css" />
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css" />
 </head>
+
 <body>
     <script src="assets/static/js/initTheme.js"></script>
     <div id="app">
         <?php
-            require_once "assets/components/admin/sidebar.php"
+        require_once "assets/components/admin/sidebar.php"
         ?>
 
         <div id="main">
             <?php
-                require_once "assets/components/admin/header.php"
+            require_once "assets/components/admin/header.php"
             ?>
 
             <div class="page-heading">
@@ -70,7 +71,8 @@ if (isset($_SESSION["success_message"])) {
 
                 <section class="section">
                     <!-- Add new branch -->
-                    <a href="/webprogramming_assignment_242/admin/faq/addfaq.php" class="btn btn-primary my-3">Add new faq</a> 
+                    <a href="/webprogramming_assignment_242/admin/faq/addfaq.php" class="btn btn-primary my-3">Add new
+                        faq</a>
                     <table class="table table-striped table-bordered" id="table1">
                         <thead>
                             <tr>
@@ -107,7 +109,7 @@ if (isset($_SESSION["success_message"])) {
     <script src="assets/compiled/js/app.js"></script>
 
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="assets/static/js/pages/simple-datatables.js"></script> 
+    <script src="assets/static/js/pages/simple-datatables.js"></script>
 
     <script>
     function deleteConfirm(id) {
@@ -117,4 +119,5 @@ if (isset($_SESSION["success_message"])) {
     }
     </script>
 </body>
+
 </html>

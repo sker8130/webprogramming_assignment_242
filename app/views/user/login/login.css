@@ -1,3 +1,7 @@
+h2 {
+  margin-bottom: -2px;
+}
+
 .potato-icon {
   grid-column: 3/4;
   padding-right: 10px;
@@ -60,6 +64,37 @@ a:active {
 
 input[type='submit']:hover {
   cursor: pointer;
+}
+
+.message {
+  margin-bottom: -2px;
+  font-size: 16px;
+  color: yellow;
+}
+
+.login-input {
+  margin-bottom: -2px;
+  font-size: 14px;
+}
+
+input[type='submit'] {
+  width: 35%;
+  height: 33px;
+  color: white;
+  background-color: #2a435d;
+}
+
+.remember-me {
+  color: #2a435d;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.register {
+  color: #2a435d;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* mobile: width < 740px */

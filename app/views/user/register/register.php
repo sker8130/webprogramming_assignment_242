@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Register</title>
     <link rel="stylesheet" href="app/views/user/register/register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -25,7 +25,7 @@
                 <h2 style="margin-bottom: -2px">Register</h2>
 
                 <!-- hiện message: -->
-                <div style="margin-bottom: -2px; font-size: 16px; color: yellow" id="message">
+                <div id="message">
                     <?php
                     if (isset($errors["message"])) {
                         echo $errors["message"];
@@ -33,19 +33,19 @@
                     ?>
                 </div>
 
-                <div style="margin-bottom: -2px; font-size: 14px">Username</div>
+                <div class="register-input">Username</div>
                 <input type="text" id="username" name="username"
                     value="<?php echo isset($oldInput["username"]) ? htmlspecialchars($oldInput["username"]) : ""; ?>">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Email</div>
+                <div class="register-input">Email</div>
                 <input type="email" id="email" name="email"
                     value="<?php echo isset($oldInput["email"]) ? htmlspecialchars($oldInput["email"]) : ""; ?>">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Phone Number</div>
+                <div class="register-input">Phone Number</div>
                 <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="1234567890"
                     value="<?php echo isset($oldInput["phoneNumber"]) ? htmlspecialchars($oldInput["phoneNumber"]) : ""; ?>">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Gender</div>
+                <div class="register-input">Gender</div>
                 <select id="gender" name="gender">
                     <option value="female"
                         <?php echo (isset($oldInput["gender"]) && $oldInput["gender"] === "female") ? "selected" : ""; ?>>
@@ -58,20 +58,19 @@
                         Other</option>
                 </select>
 
-                <div style="margin-bottom: -2px; font-size: 14px">Date of Birth</div>
+                <div class="register-input">Date of Birth</div>
                 <input type="date" id="dob" name="dob"
                     value="<?php echo isset($oldInput["dob"]) ? htmlspecialchars($oldInput["dob"]) : ""; ?>">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Password</div>
+                <div class="register-input">Password</div>
                 <input type="password" id="password" name="password"
                     value="<?php echo isset($oldInput["password"]) ? htmlspecialchars($oldInput["password"]) : ""; ?>">
 
-                <div style="margin-bottom: -2px; font-size: 14px">Confirm Password</div>
+                <div class="register-input">Confirm Password</div>
                 <input type="password" id="confirmedPassword" name="confirmedPassword"
                     value="<?php echo isset($oldInput["confirmedPassword"]) ? htmlspecialchars($oldInput["confirmedPassword"]) : ""; ?>">
 
-                <input type="submit" value="Register"
-                    style="width: 35%; height: 33px; color: white; background-color: #2a435d; ">
+                <input type="submit" value="Register">
                 <div>I already have an account. <span><a href="/webprogramming_assignment_242/login">
                             Log in</a></span>
                 </div>
@@ -79,7 +78,7 @@
         </div>
 
         <div class="potato-icon">
-            <img src="assets/components/images/potatochip.png" alt="">
+            <img src="assets/components/images/potatochip.png" alt="potato icon">
         </div>
     </div>
 </body>

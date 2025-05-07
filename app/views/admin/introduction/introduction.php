@@ -29,13 +29,13 @@ if (isset($_SESSION["success_message"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DataTable - Mazer Admin Dashboard</title>
 
     <base href="/webprogramming_assignment_242/">
-    <!-- bắt buộc phải có dòng này -->
 
     <link rel="shortcut icon" href="assets/compiled/svg/favicon.svg" type="image/x-icon" />
     <link rel="shortcut icon"
@@ -48,6 +48,7 @@ if (isset($_SESSION["success_message"])) {
     <link rel="stylesheet" href="assets/compiled/css/app.css" />
     <link rel="stylesheet" href="assets/compiled/css/app-dark.css" />
 </head>
+
 <body>
     <script src="assets/static/js/initTheme.js"></script>
     <div id="app">
@@ -71,7 +72,8 @@ if (isset($_SESSION["success_message"])) {
 
                 <section class="section">
                     <!-- Add new branch -->
-                    <a href="/webprogramming_assignment_242/admin/introduction/addbranch.php" class="btn btn-primary my-3">Add new branch</a> 
+                    <a href="/webprogramming_assignment_242/admin/introduction/addbranch.php"
+                        class="btn btn-primary my-3">Add new branch</a>
                     <table class="table table-striped table-bordered" id="table1">
                         <thead>
                             <tr>
@@ -86,7 +88,8 @@ if (isset($_SESSION["success_message"])) {
 
                 <section class="section">
                     <!-- Add new service -->
-                    <a href="/webprogramming_assignment_242/admin/introduction/addservice.php" class="btn btn-primary my-3">Add new service</a>
+                    <a href="/webprogramming_assignment_242/admin/introduction/addservice.php"
+                        class="btn btn-primary my-3">Add new service</a>
                     <table class="table table-striped table-bordered" id="table2">
                         <thead>
                             <tr>
@@ -101,8 +104,9 @@ if (isset($_SESSION["success_message"])) {
 
                 <section class="section">
                     <!-- Add new member -->
-                    <a href="/webprogramming_assignment_242/admin/introduction/addmember.php" class="btn btn-primary my-3">Add new member</a>
-                    <table class="table table-striped table-bordered" id="table3"> 
+                    <a href="/webprogramming_assignment_242/admin/introduction/addmember.php"
+                        class="btn btn-primary my-3">Add new member</a>
+                    <table class="table table-striped table-bordered" id="table3">
                         <thead>
                             <tr>
                                 <?php echo $tableMemberHeader; ?>
@@ -138,7 +142,7 @@ if (isset($_SESSION["success_message"])) {
     <script src="assets/compiled/js/app.js"></script>
 
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="assets/static/js/pages/simple-datatables.js"></script> 
+    <script src="assets/static/js/pages/simple-datatables.js"></script>
 
     <script>
     function deleteConfirmBranch(id) {
@@ -164,4 +168,5 @@ if (isset($_SESSION["success_message"])) {
     }
     </script>
 </body>
+
 </html>
