@@ -31,6 +31,7 @@ $routes = [
 
 
     // url cho guest/member site
+    "/webprogramming_assignment_242/contact" => [ContactController::class, "index"],
     "/webprogramming_assignment_242/blogs" => [BlogController::class, "index"],
     "/webprogramming_assignment_242/blog" => [BlogController::class, "detail"],
     "/webprogramming_assignment_242/login" => [AuthController::class, "login"],
