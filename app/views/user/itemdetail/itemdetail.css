@@ -1,0 +1,258 @@
+/* Item Detail Section */
+.item-detail-section {
+    padding: 40px 0;
+    background-color: #fff; /* Plain white background */
+}
+
+.item-detail-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.item-detail {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.item-image img {
+    width: 300px; /* Smaller image as per screenshot */
+    height: 300px;
+    border: 1px solid #ddd; /* Light border to match screenshot */
+    border-radius: 5px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h1 {
+    font-size: 28px; /* Smaller title */
+    font-weight: 700;
+    color: var(--color-darkblue);
+    margin: 0 0 15px;
+}
+
+.item-info .category {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    margin: 0 0 10px;
+}
+
+.item-info .description {
+    font-size: 16px;
+    color: var(--color-darkblue);
+    margin: 0 0 15px;
+    line-height: 1.5;
+}
+
+.item-info .price {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-red);
+    margin: 0 0 20px;
+}
+
+.button-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.order-now-btn {
+    background-color: var(--color-red);
+    color: var(--color-textwhite);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-now-btn:hover {
+    background-color: #d32f2f;
+}
+
+.order-now-btn:disabled {
+    background-color: #cccccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.order-now-btn:disabled:hover {
+    background-color: #cccccc; /* Disable hover effect when disabled */
+}
+
+.go-to-cart-link {
+    font-size: 16px;
+    color: var(--color-darkblue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.go-to-cart-link:hover {
+    text-decoration: underline;
+}
+
+.login-message {
+    font-size: 16px;
+    color: var(--color-darkblue);
+    margin: 0;
+}
+
+.login-message a {
+    color: var(--color-red);
+    text-decoration: none;
+}
+
+.login-message a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    font-size: 16px;
+    color: #d32f2f; /* Red color for errors */
+    margin: 0 0 10px;
+}
+
+/* See More Items Section */
+.see-more-section {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.see-more-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.see-more-link {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-red);
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.see-more-link:hover {
+    text-decoration: underline;
+}
+
+/* Popup Styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content p {
+    font-size: 18px;
+    color: var(--color-darkblue);
+    margin: 0 0 15px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Responsive Design */
+
+/* Desktop Small */
+@media screen and (max-width: 1280px) {
+    .item-image img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .item-info h1 {
+        font-size: 26px;
+    }
+
+    .item-info .price {
+        font-size: 18px;
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 1024px) {
+    .item-detail {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-image img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .button-group {
+        justify-content: center;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .item-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .item-info h1 {
+        font-size: 24px;
+    }
+
+    .item-info .category {
+        font-size: 14px;
+    }
+
+    .item-info .description {
+        font-size: 14px;
+    }
+
+    .item-info .price {
+        font-size: 16px;
+    }
+
+    .order-now-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .go-to-cart-link,
+    .see-more-link,
+    .login-message,
+    .error-message {
+        font-size: 14px;
+    }
+}
