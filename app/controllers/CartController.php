@@ -18,7 +18,9 @@ class CartController
         }
 
         // Get UserID
-        $userId = $userModel->checkUsernameExists($_SESSION["mySession"]);
+        $checkUsernameExists = $userModel->checkUsernameExists($_SESSION["mySession"]);
+        $checkEmailExists = $userModel->checkEmailExists($_SESSION["mySession"]);
+        $userId = $checkUsernameExists ? $checkUsernameExists["UserID"] : $checkEmailExists["UserID"];
         if (!$userId) {
             // Handle user not found (e.g., redirect or show error)
             header("Location: /webprogramming_assignment_242/login");
@@ -93,4 +95,3 @@ class CartController
         require_once "app/views/user/cart/cart.php";
     }
 }
-?>

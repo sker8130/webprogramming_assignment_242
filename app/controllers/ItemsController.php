@@ -8,7 +8,7 @@ class ItemsController
     public function index()
     {
         $itemsModel = new ItemsModel();
-        
+
         // Handle search
         $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
         if ($keyword) {
@@ -43,7 +43,9 @@ class ItemsController
         $orderError = null;
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["order_item"]) && isset($_SESSION["mySession"])) {
             // Get UserID from username using UserModel
-            $userId = $userModel->checkUsernameExists($_SESSION["mySession"]);
+            $checkUsernameExists = $userModel->checkUsernameExists($_SESSION["mySession"]);
+            $checkEmailExists = $userModel->checkEmailExists($_SESSION["mySession"]);
+            $userId = $checkUsernameExists ? $checkUsernameExists["UserID"] : $checkEmailExists["UserID"];
             if (!$userId) {
                 $orderError = "User not found.";
             } else {
@@ -83,4 +85,3 @@ class ItemsController
         require_once "app/views/user/itemdetail/itemdetail.php";
     }
 }
-?>
