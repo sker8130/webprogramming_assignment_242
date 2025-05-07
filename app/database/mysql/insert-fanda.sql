@@ -10,7 +10,7 @@ CREATE TABLE `fanda` (
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
+-- 
 -- Chỉ mục cho bảng `fanda`
 --
 ALTER TABLE `fanda`

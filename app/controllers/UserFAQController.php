@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "app/models/FAQModel.php";
 session_start();
 
@@ -15,6 +15,6 @@ class UserFAQController
     {
         $faq = $this->faqModel->getAll();
 
-        require_once "app/views/user/faq/faq.php"; 
+        require_once "app/views/user/faq/faq.php";
     }
 }
