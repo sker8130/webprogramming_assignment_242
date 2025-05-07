@@ -232,6 +232,19 @@ CREATE TABLE `specialservice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Cấu trúc bảng cho bảng `fanda`
+--
+
+CREATE TABLE `fanda` (
+  `ID` int(11) NOT NULL,
+  `question` varchar(1000) NOT NULL,
+  `answer` varchar(1000) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+--
 -- Chỉ mục cho các bảng đã đổ
 --
 
@@ -332,6 +345,13 @@ ALTER TABLE `members`
 ALTER TABLE `specialservice`
   ADD PRIMARY KEY (`ID`);
 
+
+-- 
+-- Chỉ mục cho bảng `fanda`
+--
+ALTER TABLE `fanda`
+  ADD PRIMARY KEY (`ID`);
+
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
@@ -420,6 +440,12 @@ ALTER TABLE `members`
 --
 ALTER TABLE `specialservice`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT; 
+
+--
+-- AUTO_INCREMENT cho bảng `fanda`
+--
+ALTER TABLE `fanda`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

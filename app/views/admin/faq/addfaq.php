@@ -20,13 +20,15 @@ if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
 if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
     header("Location: /webprogramming_assignment_242/");
 }
-?>
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update member</title>  
+    <title>Add new FAQ</title> 
+
     <base href="/webprogramming_assignment_242/">
     <!-- bắt buộc phải có dòng này -->
 
@@ -50,12 +52,12 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
             require_once "assets/components/admin/header.php";
             ?>
 
-            <form action="" class="page-heading" method="post" onsubmit="return updateConfirm()"
+            <form action="" class="page-heading" method="post" onsubmit="return addConfirm()"
                 enctype="multipart/form-data">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Update this member</h3>
+                            <h3>Add a faq</h3>
                         </div>
                     </div>
                 </div>
@@ -65,9 +67,9 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group mb-3">
-                                        <label for="title" class="form-label">Position</label>
-                                        <textarea class="form-control" id="position" name="position" rows="2"
-                                            required><?php echo $row["position"] ?></textarea>
+                                        <label for="title" class="form-label">Question</label>
+                                        <textarea class="form-control" id="question" name="question" rows="2"
+                                            required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -80,24 +82,9 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group mb-3">
-                                        <label for="preview" class="form-label">Name</label>
-                                        <textarea class="form-control" id="name" name="name" rows="2" required
-                                            maxlength="280"><?php echo $row["name"] ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="section">
-                    <div class="row">
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="form-group mb-3">
-                                        <label for="preview" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="2" required
-                                            maxlength="280"><?php echo $row["description"] ?></textarea>
+                                        <label for="preview" class="form-label">Answer</label>
+                                        <textarea class="form-control" id="answer" name="answer" rows="2" required
+                                            maxlength="280"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -105,10 +92,10 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
                     </div>
                 </section>
 
-
-                <input type="submit" name="updatemember" class="btn btn-primary" role="button" value="Update this member">
+                <input type="submit" name="addfaq" class="btn btn-primary" role="button" value="Add this faq">
 
             </form>
+
             <footer>
                 <div class=" footer clearfix mb-0 text-muted">
                     <div class="float-start">
@@ -132,7 +119,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
     <script src="assets/static/js/pages/tinymce.js"></script>
 
     <script>
-    function updateConfirm() {
+    function addConfirm() {
         const content = tinymce.get("content").getContent({
             format: "text"
         }).trim();
@@ -143,9 +130,9 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
             return false;
         }
 
-        return confirm("Update this member?");
+        return confirm("Add this faq?"); 
     }
     </script>
-    </script>
+    </script> 
 </body>
 </html>

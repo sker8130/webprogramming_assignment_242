@@ -27,6 +27,11 @@ $routes = [
     "/webprogramming_assignment_242/admin/introduction/deletemember" => [AdminIntroController::class, "deletemember"],
     "/webprogramming_assignment_242/admin/introduction" => [AdminIntroController::class, "adminIndex"],
 
+    "/webprogramming_assignment_242/admin/faq/addfaq" => [AdminFAQController::class, "add"],
+    "/webprogramming_assignment_242/admin/faq/updatefaq" => [AdminFAQController::class, "update"],
+    "/webprogramming_assignment_242/admin/faq/deletefaq" => [AdminFAQController::class, "delete"],
+    "/webprogramming_assignment_242/admin/faq" => [AdminFAQController::class, "adminIndex"],
+
     "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
 
 
@@ -39,6 +44,7 @@ $routes = [
     "/webprogramming_assignment_242/logout" => [AuthController::class, "logout"],
     "/webprogramming_assignment_242/cart" => [CartController::class, "index"],
     "/webprogramming_assignment_242/introduction" => [UserIntroController::class, "index"],
+    "/webprogramming_assignment_242/faq" => [UserFAQController::class, "index"],
     "/webprogramming_assignment_242/" => [HomeController::class, "index"],
 ];
 
