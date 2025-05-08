@@ -43,7 +43,7 @@ if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSI
 <body>
     <script src="assets/static/js/initTheme.js"></script>
 
-    <div id="main">
+    <div id="app">
         <?php
             require_once "assets/components/admin/sidebar.php"
         ?>
