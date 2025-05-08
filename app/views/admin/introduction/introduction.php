@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 //nếu session hết hạn nhưng cookie còn -> đặt lại session
 //nếu k có session or có mà session khác admin -> header tới login
