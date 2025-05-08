@@ -208,6 +208,38 @@ class ItemsModel
         return $shipper;
     }
 
+    // Used by: cart.php (to get the next shipper for rotation)
+    public function getNextShipperId()
+    {
+        // Fetch all shippers
+        $stmt = $this->db->prepare("SELECT ShipperID FROM shippers");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $shippers = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        if (empty($shippers)) {
+            return null; // No shippers available
+        }
+
+        // Use session to track the current index, default to 0 if not set
+        if (!isset($_SESSION["shipper_index"])) {
+            $_SESSION["shipper_index"] = 0;
+        }
+
+        // Get the total number of shippers
+        $totalShippers = count($shippers);
+        $currentIndex = $_SESSION["shipper_index"] % $totalShippers;
+
+        // Get the ShipperID at the current index
+        $nextShipperId = $shippers[$currentIndex]["ShipperID"];
+
+        // Increment the index for the next order
+        $_SESSION["shipper_index"]++;
+
+        return $nextShipperId;
+    }
+
     // Used by: admin/items/items.php (to fetch all categories for dropdown)
     public function getCategories()
     {
@@ -254,7 +286,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/cart/cart.php (to fetch all orders)
+    // Used by: admin/orders/orders.php (to fetch all orders)
     public function getAllOrders()
     {
         $stmt = $this->db->prepare("SELECT o.*, u.Username, s.ShipperName 
@@ -268,7 +300,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/cart/cart.php (to fetch all shippers for dropdown)
+    // Used by: admin/orders/orders.php (to fetch all shippers for dropdown)
     public function getShippers()
     {
         $stmt = $this->db->prepare("SELECT ShipperID, ShipperName FROM shippers");
@@ -278,7 +310,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/cart/cart.php (to update order status)
+    // Used by: admin/orders/orders.php (to update order status)
     public function updateOrderStatus($orderId, $status)
     {
         // Validate status
@@ -294,7 +326,7 @@ class ItemsModel
         return $result;
     }
 
-    // Used by: admin/cart/cart.php (to update order shipper)
+    // Used by: admin/orders/orders.php (to update order shipper)
     public function updateOrderShipper($orderId, $shipperId)
     {
         // Allow NULL for unassigned shipper
