@@ -33,6 +33,39 @@ class ItemsModel
         return $result;
     }
 
+    // Used by: admin/items/items.php (to search for items)
+    public function searchItemsAdmin($productId = null, $name = null, $categoryId = null)
+    {
+        $query = "SELECT p.*, c.CategoryName FROM products p JOIN categories c ON p.CategoryID = c.CategoryID WHERE 1=1";
+        $params = [];
+        $types = "";
+
+        if ($productId !== null && $productId !== "") {
+            $query .= " AND p.ProductID = ?";
+            $params[] = $productId;
+            $types .= "i";
+        }
+        if ($name !== null && $name !== "") {
+            $query .= " AND p.ProductName LIKE ?";
+            $params[] = "%$name%";
+            $types .= "s";
+        }
+        if ($categoryId !== null && $categoryId !== "") {
+            $query .= " AND p.CategoryID = ?";
+            $params[] = $categoryId;
+            $types .= "i";
+        }
+
+        $stmt = $this->db->prepare($query);
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
     // Used by: itemdetail.php (to display item details)
     public function getItemById($productId)
     {
@@ -173,6 +206,140 @@ class ItemsModel
         $shipper = $result->fetch_assoc();
         $stmt->close();
         return $shipper;
+    }
+
+    // Used by: cart.php (to get the next shipper for rotation)
+    public function getNextShipperId()
+    {
+        // Fetch all shippers
+        $stmt = $this->db->prepare("SELECT ShipperID FROM shippers");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $shippers = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+
+        if (empty($shippers)) {
+            return null; // No shippers available
+        }
+
+        // Use session to track the current index, default to 0 if not set
+        if (!isset($_SESSION["shipper_index"])) {
+            $_SESSION["shipper_index"] = 0;
+        }
+
+        // Get the total number of shippers
+        $totalShippers = count($shippers);
+        $currentIndex = $_SESSION["shipper_index"] % $totalShippers;
+
+        // Get the ShipperID at the current index
+        $nextShipperId = $shippers[$currentIndex]["ShipperID"];
+
+        // Increment the index for the next order
+        $_SESSION["shipper_index"]++;
+
+        return $nextShipperId;
+    }
+
+    // Used by: admin/items/items.php (to fetch all categories for dropdown)
+    public function getCategories()
+    {
+        $stmt = $this->db->prepare("SELECT CategoryID, CategoryName FROM categories");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/items/items.php (to add a new product)
+    public function addProduct($name, $price, $categoryId, $description, $image)
+    {
+        $stmt = $this->db->prepare("INSERT INTO products (ProductName, Price, CategoryID, Description, Image) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sdiss", $name, $price, $categoryId, $description, $image);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/items/items.php (to update an existing product)
+    public function updateProduct($productId, $name, $price, $categoryId, $description, $image)
+    {
+        // If no new image is provided, keep the existing one
+        if ($image) {
+            $stmt = $this->db->prepare("UPDATE products SET ProductName = ?, Price = ?, CategoryID = ?, Description = ?, Image = ? WHERE ProductID = ?");
+            $stmt->bind_param("sdissi", $name, $price, $categoryId, $description, $image, $productId);
+        } else {
+            $stmt = $this->db->prepare("UPDATE products SET ProductName = ?, Price = ?, CategoryID = ?, Description = ? WHERE ProductID = ?");
+            $stmt->bind_param("sdisi", $name, $price, $categoryId, $description, $productId);
+        }
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/items/items.php (to delete a product)
+    public function deleteProduct($productId)
+    {
+        $stmt = $this->db->prepare("DELETE FROM products WHERE ProductID = ?");
+        $stmt->bind_param("i", $productId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/orders/orders.php (to fetch all orders)
+    public function getAllOrders()
+    {
+        $stmt = $this->db->prepare("SELECT o.*, u.Username, s.ShipperName 
+                                    FROM orders o 
+                                    JOIN users u ON o.UserID = u.UserID 
+                                    LEFT JOIN shippers s ON o.ShipperID = s.ShipperID 
+                                    ORDER BY o.CreateAt DESC");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/orders/orders.php (to fetch all shippers for dropdown)
+    public function getShippers()
+    {
+        $stmt = $this->db->prepare("SELECT ShipperID, ShipperName FROM shippers");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/orders/orders.php (to update order status)
+    public function updateOrderStatus($orderId, $status)
+    {
+        // Validate status
+        $allowedStatuses = ['Pending', 'Processing', 'Completed', 'Cancelled'];
+        if (!in_array($status, $allowedStatuses)) {
+            return false;
+        }
+
+        $stmt = $this->db->prepare("UPDATE orders SET OrderStatus = ? WHERE OrderID = ?");
+        $stmt->bind_param("si", $status, $orderId);
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
+    }
+
+    // Used by: admin/orders/orders.php (to update order shipper)
+    public function updateOrderShipper($orderId, $shipperId)
+    {
+        // Allow NULL for unassigned shipper
+        if ($shipperId === null) {
+            $stmt = $this->db->prepare("UPDATE orders SET ShipperID = NULL WHERE OrderID = ?");
+            $stmt->bind_param("i", $orderId);
+        } else {
+            $stmt = $this->db->prepare("UPDATE orders SET ShipperID = ? WHERE OrderID = ?");
+            $stmt->bind_param("ii", $shipperId, $orderId);
+        }
+        $result = $stmt->execute();
+        $stmt->close();
+        return $result;
     }
 }
 ?>

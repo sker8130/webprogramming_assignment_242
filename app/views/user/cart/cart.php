@@ -1,6 +1,5 @@
 <?php
-// If session expired but cookie exists -> restore session
-// If no session or session belongs to admin -> redirect to login
+// Restore session if expired but cookie exists
 require_once "app/models/UserModel.php";
 require_once "app/models/TokenModel.php";
 
@@ -16,6 +15,11 @@ if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
     }
 }
 $notLoginCond = !isset($_SESSION["mySession"]);
+
+// Generate CSRF token if not set
+if (!isset($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
 ?>
 
 <?php if ($notLoginCond): ?>
@@ -55,8 +59,16 @@ $notLoginCond = !isset($_SESSION["mySession"]);
                 <?php if (isset($quantityError)): ?>
                     <p class="error-message"><?php echo htmlspecialchars($quantityError); ?></p>
                 <?php endif; ?>
+                <?php if (isset($checkoutError)): ?>
+                    <p class="error-message"><?php echo htmlspecialchars($checkoutError); ?></p>
+                <?php endif; ?>
 
-                <?php if ($order && $orderItems && $orderItems->num_rows > 0): ?>
+                <?php if ($checkoutSuccess): ?>
+                    <div class="checkout-confirmation">
+                        <p>Checkout successful! Your order is now being processed.</p>
+                        <a href="/webprogramming_assignment_242/items" class="continue-shopping">Continue Shopping</a>
+                    </div>
+                <?php elseif ($order && $orderItems && $orderItems->num_rows > 0): ?>
                     <table class="cart-table">
                         <thead>
                             <tr>
@@ -82,6 +94,7 @@ $notLoginCond = !isset($_SESSION["mySession"]);
                                             <input type="hidden" name="action" value="update_quantity">
                                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($item['ProductID']); ?>">
                                             <input type="hidden" name="change" value="decrease">
+                                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                             <button type="submit" class="quantity-btn">-</button>
                                         </form>
                                         <span class="quantity-value"><?php echo htmlspecialchars($item['Quantity']); ?></span>
@@ -90,6 +103,7 @@ $notLoginCond = !isset($_SESSION["mySession"]);
                                             <input type="hidden" name="action" value="update_quantity">
                                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($item['ProductID']); ?>">
                                             <input type="hidden" name="change" value="increase">
+                                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                             <button type="submit" class="quantity-btn">+</button>
                                         </form>
                                     </td>
@@ -99,6 +113,7 @@ $notLoginCond = !isset($_SESSION["mySession"]);
                                         <form method="POST" action="">
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($item['ProductID']); ?>">
+                                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                             <button type="submit" class="remove-btn">Remove</button>
                                         </form>
                                     </td>
@@ -112,14 +127,12 @@ $notLoginCond = !isset($_SESSION["mySession"]);
                             <h3>Shipper Info</h3>
 
                             <?php if ($shipper): ?>
-                                
                                 <div class="shipper-details">
                                     <p><strong>Name:</strong> <?php echo htmlspecialchars($shipper['ShipperName']); ?></p>
                                     <p><strong>License Plate:</strong> <?php echo htmlspecialchars($shipper['CarID']); ?></p>
                                     <p><strong>Phone:</strong> <?php echo htmlspecialchars($shipper['Phone']); ?></p>
                                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($shipper['Gender']); ?></p>
                                 </div>
-                                
                                 <div class="shipper-avatar">
                                     <img src="app/views/user/shippers/img/<?php echo htmlspecialchars($shipper['Avatar']); ?>" alt="<?php echo htmlspecialchars($shipper['ShipperName']); ?>">
                                 </div>
@@ -137,7 +150,11 @@ $notLoginCond = !isset($_SESSION["mySession"]);
 
                     <div class="cart-actions">
                         <a href="/webprogramming_assignment_242/items" class="continue-shopping">Continue Shopping</a>
-                        <button class="checkout-btn">Checkout</button>
+                        <form method="POST" action="" class="checkout-form">
+                            <input type="hidden" name="action" value="checkout">
+                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                            <button type="submit" class="checkout-btn">Checkout</button>
+                        </form>
                     </div>
                 <?php else: ?>
                     <p>Your cart is empty.</p>

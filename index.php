@@ -32,6 +32,15 @@ $routes = [
     "/webprogramming_assignment_242/admin/faq/deletefaq" => [AdminFAQController::class, "delete"],
     "/webprogramming_assignment_242/admin/faq" => [AdminFAQController::class, "adminIndex"],
 
+    "/webprogramming_assignment_242/admin/items/add" => [AdminItemsController::class, "add"],
+    "/webprogramming_assignment_242/admin/items/update" => [AdminItemsController::class, "update"],
+    "/webprogramming_assignment_242/admin/items/delete" => [AdminItemsController::class, "delete"],
+    "/webprogramming_assignment_242/admin/items" => [AdminItemsController::class, "adminIndex"],
+    
+    "/webprogramming_assignment_242/admin/orders/updateStatus" => [AdminOrdersController::class, "updateStatus"],
+    "/webprogramming_assignment_242/admin/orders/updateShipper" => [AdminOrdersController::class, "updateShipper"],
+    "/webprogramming_assignment_242/admin/orders" => [AdminOrdersController::class, "adminIndex"],
+    
     "/webprogramming_assignment_242/admin" => [AdminController::class, "index"],
 
 
