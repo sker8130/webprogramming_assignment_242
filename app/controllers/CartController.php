@@ -7,7 +7,6 @@ class CartController
     // Used by: cart.php (display cart contents, handle item deletion, quantity adjustment, and checkout)
     public function index()
     {
-        session_start(); // Ensure session is started
 
         $itemsModel = new ItemsModel();
         $userModel = new UserModel(); // For checkUsernameExists
@@ -36,6 +35,17 @@ class CartController
 
         // Get pending order
         $order = $itemsModel->getPendingOrder($userId);
+
+        // Create a new order with the next shipper if no pending order exists
+        if (!$order) {
+            $nextShipperId = $itemsModel->getNextShipperId();
+            if ($nextShipperId !== null) {
+                $orderId = $itemsModel->createOrder($userId, 0.00, $nextShipperId); // Initial total is 0.00
+                if ($orderId) {
+                    $order = $itemsModel->getPendingOrder($userId); // Re-fetch the newly created order
+                }
+            }
+        }
 
         // Fetch shipper details if order exists
         $shipper = null;
