@@ -122,9 +122,9 @@ if (isset($_SESSION['scrollToComment'])) {
             ?>
 
             <div class="comment-section">
-                <div style="font-size: 30px">
+                <a href="login" style="font-size: 30px; margin: 10px 0">
                     Please login as a member first to leave a comment!
-                </div>
+                </a>
             </div>
             <?php else: ?>
             <div class="comment-section" id="comment-section">
@@ -157,9 +157,7 @@ if (isset($_SESSION['scrollToComment'])) {
                 <!-- hiển thị comment cha
                     khi ấn vào icon reply thì comments con và khung trả lời comment được hiện ra
                     ấn vào icon reply 1 lần nữa thì ẩn đi -->
-                <div class='comment-frame'
-                    style='<?php echo $notLoginCond ? "margin-top: -30px" : "margin-top: 50px" ?>'
-                    id='comment-<?php echo $comment["CommentID"] ?>'>
+                <div class='comment-frame' id='comment-<?php echo $comment["CommentID"] ?>'>
                     <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
                     <div class='displayed-comment'>
                         <div class='comment-info'>
@@ -194,7 +192,7 @@ if (isset($_SESSION['scrollToComment'])) {
                     <?php while ($subComment = $subComments->fetch_assoc()) {
                             $subCommentDate = substr($subComment["CreatedAt"], 0, 10); ?>
                     <div class='comment-frame'
-                        style='margin-left: 60px; <?php echo $notLoginCond ? "margin-top: -30px" : "" ?>'
+                        style='margin-left: 60px; <?php echo $notLoginCond ? "margin-top: 3px" : "" ?>'
                         id='comment-<?php echo $subComment["CommentID"] ?>'>
                         <div class='displayed-comment-avatar'><img src='<?php echo $comment["Avatar"] ?>' alt=''></div>
                         <div class='displayed-comment'>

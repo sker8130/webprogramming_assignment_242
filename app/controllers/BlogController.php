@@ -95,6 +95,7 @@ class BlogController
 
         if (isset($_GET["deletingCommentID"])) {
             $deletingCommentID = $_GET["deletingCommentID"];
+            $titleParam = str_replace(' ', '-', urldecode($row["Title"]));
             if ($this->commentModel->delete($deletingCommentID)) {
                 if (isset($_GET["parentID"])) {
                     $_SESSION['scrollToComment'] = $_GET["parentID"];
@@ -103,7 +104,7 @@ class BlogController
                     $latestCommentID = $this->commentModel->getLastComment()->fetch_assoc()["CommentID"];
                     $_SESSION['scrollToComment'] = $latestCommentID;
                 }
-                header("Location: /webprogramming_assignment_242/blog?id={$id}");
+                header("Location: /webprogramming_assignment_242/blog?id={$id}&title={$titleParam}");
                 exit();
             }
         }
