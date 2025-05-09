@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Restore session if expired but cookie exists
 require_once "app/models/UserModel.php";
