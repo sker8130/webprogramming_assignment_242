@@ -52,6 +52,28 @@ INSERT INTO `special_menu` (`id`, `image_path`, `title`) VALUES
 (9, 'uploads/special_menu/image_specialManu_9.png', 'Ice cream with Chocolate'),
 (10, 'uploads/special_menu/image_specialManu_10.png', 'Cocktail Glasses');
 
+INSERT INTO `reviews` (`UserID`, `ProductID`, `Rating`, `Comment`, `CreatedAt`) VALUES
+(1, 1, 5, 'Excellent product, highly recommend!', '2023-01-15 10:30:00'),
+(1, 2, 4, 'Good quality but delivery was late', '2023-02-20 14:45:00'),
+(1, 3, 3, 'Average product, expected better', '2023-03-10 09:15:00');
+
+INSERT INTO `reviews` (`UserID`, `ProductID`, `Rating`, `Comment`, `CreatedAt`) VALUES
+(3, 4, 4, 'Works as described', '2023-01-20 11:20:00'),
+(3, 5, 5, 'Absolutely love this!', '2023-04-05 16:30:00');
+
+INSERT INTO `reviews` (`UserID`, `ProductID`, `Rating`, `Comment`, `CreatedAt`) VALUES
+(4, 6, 2, 'Not satisfied with the quality', '2023-02-25 13:10:00'),
+(4, 7, 5, 'Exceeded my expectations', '2023-03-15 10:00:00'),
+(4, 8, 4, 'Good value for money', '2023-05-01 12:45:00'),
+(4, 9, 3, 'It''s okay, nothing special', '2023-05-10 09:30:00');
+
+INSERT INTO `reviews` (`UserID`, `ProductID`, `Rating`, `Comment`, `CreatedAt`) VALUES
+(5, 10, 1, 'Defective item received', '2023-04-10 15:20:00');
+
+INSERT INTO `reviews` (`UserID`, `ProductID`, `Rating`, `Comment`, `CreatedAt`) VALUES
+(6, 15, 5, 'Perfect! Will buy again', '2023-05-05 14:00:00'),
+(6, 12, 4, 'Satisfied with the purchase', '2023-02-28 10:30:00');
+
 
 
 INSERT INTO `visit_us` (`id`, `address`, `phone`, `email`, `working_hours_description`, `dphone`) VALUES
