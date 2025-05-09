@@ -1,6 +1,6 @@
 <?php
 require_once "app/models/ItemsModel.php";
-require_once "app/models/UserModel.php"; // Added to use checkUsernameExists
+require_once "app/models/UserModel.php";
 
 class ItemsController
 {
