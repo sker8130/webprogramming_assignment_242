@@ -1,6 +1,6 @@
 <?php
 require_once "app/models/ItemsModel.php";
-require_once "app/models/UserModel.php";
+require_once "app/models/UserModel.php"; // Added to use checkUsernameExists
 
 class ItemsController
 {
@@ -49,8 +49,6 @@ class ItemsController
             if (!$userId) {
                 $orderError = "User not found.";
             } else {
-
-
                 // Check for a pending order
                 $order = $itemsModel->getPendingOrder($userId);
                 if (!$order) {
@@ -65,18 +63,49 @@ class ItemsController
                     }
                 }
 
-                // Add item to order
+                // Check if item is already in the order
                 if (!$orderError) {
-                    $quantity = 1; // Default quantity when adding to cart
-                    if ($itemsModel->addItemToOrder($order['OrderID'], $productId, $quantity)) {
-                        // Update the total amount
-                        if ($itemsModel->updateOrderTotal($order['OrderID'])) {
-                            $orderSuccess = true;
+                    $orderItems = $itemsModel->getOrderItems($order['OrderID']);
+                    $isInCart = false;
+                    while ($orderItem = $orderItems->fetch_assoc()) {
+                        if ($orderItem['ProductID'] == $productId) {
+                            $isInCart = true;
+                            break;
+                        }
+                    }
+
+                    if (!$isInCart) {
+                        $quantity = 1; // Default quantity when adding to cart
+                        if ($itemsModel->addItemToOrder($order['OrderID'], $productId, $quantity)) {
+                            // Update the total amount
+                            if ($itemsModel->updateOrderTotal($order['OrderID'])) {
+                                $orderSuccess = true;
+                            } else {
+                                $orderError = "Failed to update order total.";
+                            }
                         } else {
-                            $orderError = "Failed to update order total.";
+                            $orderError = "Failed to add item to order.";
                         }
                     } else {
-                        $orderError = "Failed to add item to order.";
+                        $orderError = "Item is already in your cart.";
+                    }
+                }
+            }
+        }
+
+        // Recompute $isInCart for display
+        $isInCart = false;
+        if (isset($_SESSION["mySession"]) && $item) {
+            $userId = $userModel->checkUsernameExists($_SESSION["mySession"]);
+            if ($userId) {
+                $order = $itemsModel->getPendingOrder($userId["UserID"]);
+                if ($order) {
+                    $orderItems = $itemsModel->getOrderItems($order['OrderID']);
+                    while ($orderItem = $orderItems->fetch_assoc()) {
+                        if ($orderItem['ProductID'] == $item['ProductID']) {
+                            $isInCart = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -85,3 +114,4 @@ class ItemsController
         require_once "app/views/user/itemdetail/itemdetail.php";
     }
 }
+?>
