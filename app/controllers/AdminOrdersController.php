@@ -14,13 +14,12 @@ class AdminOrdersController
         $this->itemsModel = new ItemsModel();
         $this->userModel = new UserModel();
         $this->tokenModel = new TokenModel();
+        session_start();
     }
 
     // Used by: admin/orders/orders.php (display all orders)
     public function adminIndex()
     {
-        session_start();
-
         // Restore session if expired but cookie exists
         if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
             $token = $_COOKIE["usernameEmail"];
@@ -31,9 +30,9 @@ class AdminOrdersController
                 }
             }
         }
-        // Redirect non-admin users
+        // Redirect non-admin users to login page
         if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
-            header("Location: /webprogramming_assignment_242/");
+            header("Location: /webprogramming_assignment_242/login");
             exit;
         }
 
@@ -73,42 +72,46 @@ class AdminOrdersController
                 }
             }
         }
-        // Redirect non-admin users
+        // Redirect non-admin users to login page
         if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
-            header("Location: /webprogramming_assignment_242/");
-            exit;
+            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Unauthorized access. Please log in.']);
+                exit;
+            } else {
+                header("Location: /webprogramming_assignment_242/login");
+                exit;
+            }
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["orderId"]) && isset($_POST["status"]) && isset($_POST["csrf_token"])) {
             // Validate CSRF token
             if ($_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-                $_SESSION["error_message"] = "Invalid CSRF token.";
-                header("Location: /webprogramming_assignment_242/admin/orders");
-                exit;
-            }
-
-            $orderId = intval($_POST["orderId"]);
-            $status = trim($_POST["status"]);
-            $allowedStatuses = ['Pending', 'Processing', 'Completed', 'Cancelled'];
-
-            // Validate inputs
-            if ($orderId <= 0 || !in_array($status, $allowedStatuses)) {
-                $_SESSION["error_message"] = "Invalid order ID or status.";
-                header("Location: /webprogramming_assignment_242/admin/orders");
-                exit;
-            }
-
-            // Update status
-            if ($this->itemsModel->updateOrderStatus($orderId, $status)) {
-                $_SESSION["success_message"] = "Order status updated successfully.";
+                $response = ['success' => false, 'message' => 'Invalid CSRF token.'];
             } else {
-                $_SESSION["error_message"] = "Failed to update order status. Check server logs for details.";
+                $orderId = intval($_POST["orderId"]);
+                $status = trim($_POST["status"]);
+                $allowedStatuses = ['Pending', 'Processing', 'Completed', 'Cancelled'];
+
+                // Validate inputs
+                if ($orderId <= 0 || !in_array($status, $allowedStatuses)) {
+                    $response = ['success' => false, 'message' => 'Invalid order ID or status.'];
+                } else {
+                    // Update status
+                    if ($this->itemsModel->updateOrderStatus($orderId, $status)) {
+                        $response = ['success' => true, 'message' => 'Order status updated successfully.'];
+                    } else {
+                        $response = ['success' => false, 'message' => 'Failed to update order status. Check server logs for details.'];
+                    }
+                }
             }
         } else {
-            $_SESSION["error_message"] = "Invalid request.";
+            $response = ['success' => false, 'message' => 'Invalid request.'];
         }
 
-        header("Location: /webprogramming_assignment_242/admin/orders");
+        // Return JSON response for AJAX
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
     }
 
@@ -125,41 +128,46 @@ class AdminOrdersController
                 }
             }
         }
-        // Redirect non-admin users
+        // Redirect non-admin users to login page
         if (!isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] != "admin" && $_SESSION["mySession"] != "admin@gmail.com"))) {
-            header("Location: /webprogramming_assignment_242/");
-            exit;
+            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Unauthorized access. Please log in.']);
+                exit;
+            } else {
+                header("Location: /webprogramming_assignment_242/login");
+                exit;
+            }
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["orderId"]) && isset($_POST["shipperId"]) && isset($_POST["csrf_token"])) {
             // Validate CSRF token
             if ($_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-                $_SESSION["error_message"] = "Invalid CSRF token.";
-                header("Location: /webprogramming_assignment_242/admin/orders");
-                exit;
-            }
-
-            $orderId = intval($_POST["orderId"]);
-            $shipperId = intval($_POST["shipperId"]);
-
-            // Validate inputs
-            if ($orderId <= 0 || $shipperId <= 0) {
-                $_SESSION["error_message"] = "Invalid order ID or shipper ID.";
-                header("Location: /webprogramming_assignment_242/admin/orders");
-                exit;
-            }
-
-            // Update shipper
-            if ($this->itemsModel->updateOrderShipper($orderId, $shipperId)) {
-                $_SESSION["success_message"] = "Shipper updated successfully.";
+                $response = ['success' => false, 'message' => 'Invalid CSRF token.'];
             } else {
-                $_SESSION["error_message"] = "Failed to update shipper.";
+                $orderId = intval($_POST["orderId"]);
+                $shipperId = intval($_POST["shipperId"]);
+
+                // Validate inputs
+                if ($orderId <= 0 || $shipperId <= 0) {
+                    $response = ['success' => false, 'message' => 'Invalid order ID or shipper ID.'];
+                } else {
+                    // Update shipper
+                    if ($this->itemsModel->updateOrderShipper($orderId, $shipperId)) {
+                        $response = ['success' => true, 'message' => 'Shipper updated successfully.'];
+                    } else {
+                        $response = ['success' => false, 'message' => 'Failed to update shipper.'];
+                    }
+                }
             }
         } else {
-            $_SESSION["error_message"] = "Invalid request.";
+            $response = ['success' => false, 'message' => 'Invalid request.'];
         }
 
-        header("Location: /webprogramming_assignment_242/admin/orders");
+        // Return JSON response for AJAX
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
     }
 }
+?>
