@@ -8,6 +8,9 @@ session_start();
 //     header("Location: /webprogramming_assignment_242");
 //     exit();
 // }
+require_once "app/models/HeaderModel.php";
+$headerModel = new HeaderModel();
+$currentLogo = $headerModel->getLogo();
 ?>
 
 <head>
@@ -19,23 +22,22 @@ session_start();
     <link
         href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
-    <!-- <title>Header restaurant</title> -->
+    <title>Header restaurant</title>
 </head>
 
 <header>
     <div class="logo">
         <a href="#">
-            <img src="assets/components/images/logo-img-1.png" alt="logo image" />
+        <img src="<?php echo $currentLogo; ?>" alt="Current Logo" style="max-width: 200px; max-height: 86px;">
         </a>
     </div>
     <nav>
         <ul class="nav-links">
             <li><a href="/webprogramming_assignment_242">HOME</a></li>
-            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li>
+            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li> 
             <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
             <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
             <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>
-            <li><a href="/webprogramming_assignment_242/faq">FAQ</a></li>
         </ul>
         <img src="assets/components/images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
     </nav>
@@ -43,7 +45,6 @@ session_start();
         <div class="image">
             <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
-
         <?php
         //nếu session hết hạn nhưng cookie còn -> đặt lại session
         //nếu k có session or có mà session là admin -> header tới login
@@ -62,6 +63,8 @@ session_start();
             }
         }
 
+    
+
         //kiểm tra chưa đăng nhập
         $notLoginCond = !isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"));
 
@@ -73,10 +76,13 @@ session_start();
                 $avatar = 'assets/default-pfp.png';
             }
         ?>
-        <a href="/profile" class="avatar-container"
+        <a href="profile.php" class="avatar-container"
             style="display: block; width: 80px; height: 80px; border-radius: 50%; overflow: hidden;">
             <img src="<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar"
                 style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='assets/default-pfp.png'">
+        </a>
+        <a class="cart" href="cart.php">
+            <img src="assets/components/images/cart.png" alt="icon cart" />
         </a>
         <!-- <a href="?logout=true" type="button" class="btn btn-primary btn-login btn-logout">Log Out</a> -->
         <a type="button" class="btn btn-primary btn-login btn-logout" onclick="confirmLogout()">Log Out</a>
