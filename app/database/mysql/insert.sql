@@ -1,5 +1,63 @@
 Use `restaurant`;
 
+
+
+INSERT INTO `banner` (`id`, `image_path`) VALUES
+(1, 'uploads/banners/banner1.png');
+
+
+INSERT INTO `contacts` (`ContactID`, `UserID`, `Name`, `Email`, `Message`, `Reply`, `Status`, `CreatedAt`, `is_user_read`) VALUES
+(1, NULL, 'Alice Nguyen', 'alice@example.com', 'I love your website!', 'tr', 'Read', '2025-05-08 00:30:03', 0),
+(2, NULL, 'John Tran', 'john.tran@example.com', 'Can you help me with my order?', NULL, 'Pending', '2025-05-08 00:30:03', 0),
+(3, NULL, 'Linh Vo', 'linh.vo@example.com', 'Great service, thank you!', NULL, 'Resolved', '2025-05-08 00:30:03', 0);
+
+
+
+INSERT INTO `footer` (`id`, `working_hour_1`, `working_hour_2`, `phone_1`, `phone_2`, `hotline`, `image_path`, `copyright`, `place_1`, `place_2`) VALUES
+(1, '7.30 AM - 9.30 PM', '7.30 AM - 9.30 PM', '0387847976', '0387847976', '1900 8383', '', 'Copyright © 2025 | sker', 'TastyBite Estella', 'TastyBite HN'),
+(2, NULL, NULL, NULL, NULL, NULL, 'uploads/logosf/1746637874_logo-img-2.png', NULL, NULL, NULL);
+
+
+
+INSERT INTO `header` (`id`, `image_path`) VALUES
+(1, 'uploads/logos/logo2.png'),
+(2, 'uploads/logos/logo3.png'),
+(3, 'uploads/logos/logo4.png'),
+(4, 'uploads/logos/1746635030_logo-img-2.png'),
+(5, 'uploads/logos/1746637251_logo-img-1.png'),
+(6, 'uploads/logosf/1746637723_logo-img-2.png'),
+(7, 'uploads/logosf/1746637851_logo-img-2.png');
+
+
+
+INSERT INTO `popular_dishes` (`id`, `image_path`, `dish_order`, `alt_text`) VALUES
+(2, 'uploads/popular_dishes/image_Dishes_1.png', 2, 'dish1'),
+(3, 'uploads/popular_dishes/image_Dishes_2.png', 3, 'dish2'),
+(4, 'uploads/popular_dishes/image_Dishes_3.png', 4, 'dish3'),
+(5, 'uploads/popular_dishes/image_Dishes_4.png', 5, 'dish4'),
+(6, 'uploads/popular_dishes/image_Dishes_5.png', 6, 'dish5');
+
+
+
+
+INSERT INTO `special_menu` (`id`, `image_path`, `title`) VALUES
+(1, 'uploads/special_menu/image_specialManu_1.png', 'Burger'),
+(2, 'uploads/special_menu/image_specialManu_2.png', 'Fried chicken'),
+(3, 'uploads/special_menu/image_specialManu_3.png', 'Doner Chicken'),
+(4, 'uploads/special_menu/image_specialManu_4.png', 'Pizza'),
+(5, 'uploads/special_menu/image_specialManu_5.png', 'Hot Dogs'),
+(6, 'uploads/special_menu/image_specialManu_6.png', 'Chicken Skewers'),
+(7, 'uploads/special_menu/image_specialManu_7.png', 'Greek Salad'),
+(8, 'uploads/special_menu/image_specialManu_8.png', 'Dahi Puri'),
+(9, 'uploads/special_menu/image_specialManu_9.png', 'Ice cream with Chocolate'),
+(10, 'uploads/special_menu/image_specialManu_10.png', 'Cocktail Glasses');
+
+
+
+INSERT INTO `visit_us` (`id`, `address`, `phone`, `email`, `working_hours_description`, `dphone`) VALUES
+(1, '88, 01 Song Hanh, An Phu, District 2, HCMC', '+84 387 847 976', 'tastybite@gmal.com', '7:30 am to 9:30pm on Weekdays', '+84 387 847 976');
+
+
 INSERT INTO `users` (`Username`, `PasswordHash`, `Email`, `Phone`, `Avatar`, `Gender`, `Role`, `DateofBirth`) VALUES
 ('cuongnguyen23', '$2y$10$ALeyQnSshJmBpOJ6yuw1.eTC.aauMZWBD8/CPKekHJKs8ddfxuWiS', 'cuong.nguyenmsmsms23@hcmut.edu.vn', '0912665234', 'assets/default-pfp.png', 'male', 'member', '2003-06-07 00:00:00'),
 ('admin', '$2y$10$NUdbLpNkfaaISQb/VmzWf.hBkXx7LnNxqQ.8hA17/aNtzAEU.zlka', 'admin@gmail.com', NULL, 'assets/default-pfp.png', NULL, 'admin', NULL),
@@ -133,3 +191,8 @@ INSERT INTO order_items (OrderID, ProductID, Quantity) VALUES
 (1, 1, 1), -- User 1 ordered Chicken Supreme Pizza
 (2, 1, 1), -- User 2 ordered Chicken Supreme Pizza
 (2, 3, 1); -- User 2 also ordered Cola
+
+
+
+UPDATE `users`
+SET `Avatar` = CONCAT('assets/avatar/avatar', FLOOR(1 + RAND() * 7), '.png');

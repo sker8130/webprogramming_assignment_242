@@ -493,6 +493,202 @@ ALTER TABLE `tokens`
   ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE;
 COMMIT;
 
+
+
+
+DROP TABLE IF EXISTS contacts;
+
+
+--
+-- Table structure for table `banner`
+--
+--
+
+CREATE TABLE `banner` (
+  `id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `ContactID` int(11) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `Name` varchar(100) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `Message` text NOT NULL,
+  `Reply` text DEFAULT NULL,
+  `Status` varchar(20) DEFAULT NULL,
+  `CreatedAt` datetime DEFAULT current_timestamp(),
+  `is_user_read` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- --------------------------------------------------------
+--
+-- Table structure for table `footer`
+--
+
+CREATE TABLE `footer` (
+  `id` int(11) NOT NULL,
+  `working_hour_1` varchar(100) DEFAULT NULL,
+  `working_hour_2` varchar(100) DEFAULT NULL,
+  `phone_1` varchar(20) DEFAULT NULL,
+  `phone_2` varchar(20) DEFAULT NULL,
+  `hotline` varchar(20) DEFAULT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `copyright` varchar(255) DEFAULT NULL,
+  `place_1` varchar(255) DEFAULT NULL,
+  `place_2` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Table structure for table `header`
+--
+
+CREATE TABLE `header` (
+  `id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+--
+-- Table structure for table `popular_dishes`
+--
+
+CREATE TABLE `popular_dishes` (
+  `id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `dish_order` int(11) DEFAULT NULL,
+  `alt_text` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+--
+-- Table structure for table `special_menu`
+--
+
+CREATE TABLE `special_menu` (
+  `id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `title` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+--
+-- Table structure for table `visit_us`
+--
+
+CREATE TABLE `visit_us` (
+  `id` int(11) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `working_hours_description` varchar(255) DEFAULT NULL,
+  `dphone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `banner`
+--
+ALTER TABLE `banner`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`ContactID`),
+  ADD KEY `fk_contacts_user` (`UserID`);
+--
+-- Indexes for table `footer`
+--
+ALTER TABLE `footer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `header`
+--
+ALTER TABLE `header`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `popular_dishes`
+--
+ALTER TABLE `popular_dishes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `special_menu`
+--
+ALTER TABLE `special_menu`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `visit_us`
+--
+ALTER TABLE `visit_us`
+  ADD PRIMARY KEY (`id`);
+
+
+
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `banner`
+--
+ALTER TABLE `banner`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `ContactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `footer`
+--
+ALTER TABLE `footer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `header`
+--
+ALTER TABLE `header`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `popular_dishes`
+--
+ALTER TABLE `popular_dishes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `special_menu`
+--
+ALTER TABLE `special_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `visit_us`
+--
+ALTER TABLE `visit_us`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+
+
+--
+-- Constraints for dumped tables
+--
+--
+-- Constraints for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD CONSTRAINT `fk_contacts_user` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
