@@ -14,6 +14,7 @@ class AdminOrdersController
         $this->itemsModel = new ItemsModel();
         $this->userModel = new UserModel();
         $this->tokenModel = new TokenModel();
+        session_start();
     }
 
     // Used by: admin/orders/orders.php (display all orders)
