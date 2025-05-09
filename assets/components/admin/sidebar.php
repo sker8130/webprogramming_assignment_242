@@ -150,6 +150,66 @@ function isActive($path)
                             <span>Orders</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-title">UI Homepage </li>
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/pd"
+                            class="sidebar-link">
+                            <i class="bi bi-egg-fried"></i>
+                            <span>Popular Dishes</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/sm"
+                            class="sidebar-link">
+                            <i class="bi bi-cup-hot-fill"></i>
+                            <span>Special Menu</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/vu"
+                            class="sidebar-link">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>Visit Us</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/header"
+                            class="sidebar-link">
+                            <i class="bi bi-image-fill"></i>
+                            <span>Header Logo</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/footer"
+                            class="sidebar-link">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                            <span>Footer</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="sidebar-item <?php
+                    echo isActive("/admin/orders");
+                    ?>"> <a href="/webprogramming_assignment_242/admin/banner"
+                            class="sidebar-link">
+                            <i class="bi bi-collection-play-fill"></i>
+                            <span>Banner</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -1,6 +1,10 @@
 <!-- footer component  -->
 <?php
 //footer
+require_once "app/models/FooterModel.php";
+$footerModel = new FooterModel();
+$footerInfo = $footerModel->getFooterInfo();
+$currentLogo = $footerModel->getLogo();
 ?>
 
 <head>
@@ -18,7 +22,14 @@
 <footer>
     <div class="">
         <div class="footer-logo">
-            <img src="assets/components/images/logo-img-2.png" alt="image logo 2" />
+
+
+
+            <img src="<?php echo $currentLogo; ?>" alt="image logo 2" width="270" height="86" />
+
+
+
+
         </div>
         <div class="footer-content">
             <div class="branchs">
@@ -26,16 +37,16 @@
                     <div class="address">
                         <span class="icon-location"><img src="assets/components/images/icon-location.png"
                                 alt="icon location" /></span>
-                        <span>TASTY BITES ESTELLA</span>
+                        <span><?php echo isset($footerInfo['place_1']) ? htmlspecialchars($footerInfo['place_1']) : ''; ?></span>
                     </div>
                     <div class="store-info">
                         <div class="open-hour">
                             <span><img src="assets/components/images/icon-watch.png" alt="icon watch" /></span>
-                            <span>7.30AM - 9.30PM</span>
+                            <span><?php echo isset($footerInfo['working_hour_1']) ? htmlspecialchars($footerInfo['working_hour_1']) : ''; ?></span>
                         </div>
                         <div class="phone-num">
                             <span><img src="assets/components/images/icon-phone.png" alt="icon phone" /></span>
-                            <span>+387 847 976</span>
+                            <span><?php echo isset($footerInfo['phone_1']) ? htmlspecialchars($footerInfo['phone_1']) : ''; ?></span>
                         </div>
                     </div>
                 </div>
@@ -43,16 +54,16 @@
                     <div class="address">
                         <span class="icon-location"><img src="assets/components/images/icon-location.png"
                                 alt="icon location" /></span>
-                        <span>TASTY BITES SAIGON CENTRE</span>
+                        <span><?php echo isset($footerInfo['place_2']) ? htmlspecialchars($footerInfo['place_2']) : ''; ?></span>
                     </div>
                     <div class="store-info">
                         <div class="open-hour">
                             <span><img src="assets/components/images/icon-watch.png" alt="icon watch" /></span>
-                            <span>7.30AM - 9.30PM</span>
+                            <span><?php echo isset($footerInfo['working_hour_2']) ? htmlspecialchars($footerInfo['working_hour_2']) : ''; ?></span>
                         </div>
                         <div class="phone-num">
                             <span><img src="assets/components/images/icon-phone.png" alt="icon phone" /></span>
-                            <span>+387 847 976</span>
+                            <span><?php echo isset($footerInfo['phone_2']) ? htmlspecialchars($footerInfo['phone_2']) : ''; ?></span>
                         </div>
                     </div>
                 </div>
@@ -62,7 +73,7 @@
                 <span class="footer-contact-us">Contact Us</span>
                 <div class="hotline">
                     <span><img src="assets/components/images/icon-phone.png" alt="icon phone" /></span>
-                    <span>Hotline: 0387847976</span>
+                    <span>Hotline: <?php echo isset($footerInfo['hotline']) ? htmlspecialchars($footerInfo['hotline']) : ''; ?></span>
                 </div>
                 <div class="service">
                     <span><img src="assets/components/images/icon-service.png" alt="img service" /></span>
@@ -113,7 +124,7 @@
         </div>
     </div>
     <div class="copyright">
-        <span>Copyright © 2025 | sker</span>
+        <span><?php echo isset($footerInfo['copyright']) ? htmlspecialchars($footerInfo['copyright']) : ''; ?></span>
     </div>
 
     <!-- <img src="assets/components/images/logo-img-1.png" alt=""> -->

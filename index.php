@@ -16,6 +16,14 @@ $routes = [
     "/webprogramming_assignment_242/admin/blogs/add" => [BlogController::class, "add"],
     "/webprogramming_assignment_242/admin/blogs" => [BlogController::class, "adminIndex"],
 
+    "/webprogramming_assignment_242/admin/header" => [HeaderController::class, "index"],
+    "/webprogramming_assignment_242/admin/banner" => [BannerController::class, "index"],
+    "/webprogramming_assignment_242/admin/footer" => [FooterController::class, "index"],
+    "/webprogramming_assignment_242/admin/vu" => [VisitUsController::class, "index"],
+    "/webprogramming_assignment_242/admin/pd" => [PopularDishesController::class, "index"],
+    "/webprogramming_assignment_242/admin/sm" => [SpecialMenuController::class, "index"],
+    "/webprogramming_assignment_242/admin/contact" => [AdminContactController::class, "index"],
+
     "/webprogramming_assignment_242/admin/introduction/addbranch" => [AdminIntroController::class, "addbranch"],
     "/webprogramming_assignment_242/admin/introduction/updatebranch" => [AdminIntroController::class, "updatebranch"],
     "/webprogramming_assignment_242/admin/introduction/deletebranch" => [AdminIntroController::class, "deletebranch"],
