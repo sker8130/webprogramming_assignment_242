@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "app/models/ItemsModel.php";
 require_once "app/models/UserModel.php";
 require_once "app/models/TokenModel.php";
@@ -62,7 +61,6 @@ class AdminOrdersController
     // Used by: admin/orders/orders.php (update order status)
     public function updateStatus()
     {
-        session_start(); // Ensure session is started
         // Restore session if expired but cookie exists
         if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
             $token = $_COOKIE["usernameEmail"];
@@ -115,7 +113,6 @@ class AdminOrdersController
     // Used by: admin/orders/orders.php (update order shipper)
     public function updateShipper()
     {
-        session_start(); // Ensure session is started
         // Restore session if expired but cookie exists
         if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
             $token = $_COOKIE["usernameEmail"];
