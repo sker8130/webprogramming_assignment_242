@@ -28,16 +28,17 @@ $currentLogo = $headerModel->getLogo();
 <header>
     <div class="logo">
         <a href="#">
-        <img src="<?php echo $currentLogo; ?>" alt="Current Logo" style="max-width: 200px; max-height: 86px;">
+            <img src="<?php echo $currentLogo; ?>" alt="Current Logo" style="max-width: 200px; max-height: 86px;">
         </a>
     </div>
     <nav>
         <ul class="nav-links">
             <li><a href="/webprogramming_assignment_242">HOME</a></li>
-            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li> 
+            <li><a href="/webprogramming_assignment_242/introduction">ABOUT</a></li>
             <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
             <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
             <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>
+            <li><a href="/webprogramming_assignment_242/faq">FAQ</a></li>
         </ul>
         <img src="assets/components/images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
     </nav>
@@ -63,7 +64,7 @@ $currentLogo = $headerModel->getLogo();
             }
         }
 
-    
+
 
         //kiểm tra chưa đăng nhập
         $notLoginCond = !isset($_SESSION["mySession"]) || (isset($_SESSION["mySession"]) && ($_SESSION["mySession"] == "admin" || $_SESSION["mySession"] == "admin@gmail.com"));
