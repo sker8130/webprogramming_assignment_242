@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Restore session if expired but cookie exists
 require_once "app/models/UserModel.php";
@@ -122,7 +122,7 @@ while ($order = $orders->fetch_assoc()) {
                                                     <td><?php echo htmlspecialchars($order['OrderID']); ?></td>
                                                     <td>$<?php echo number_format($order['TotalAmount'], 2); ?></td>
                                                     <td>
-                                                        <form method="post" action="/webprogramming_assignment_242/admin/order/updateStatus">
+                                                        <form method="post" action="/webprogramming_assignment_242/admin/orders/updateStatus">
                                                             <input type="hidden" name="orderId" value="<?php echo htmlspecialchars($order['OrderID']); ?>">
                                                             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                                             <select name="status" class="form-select" onchange="this.form.submit()">
@@ -139,7 +139,7 @@ while ($order = $orders->fetch_assoc()) {
                                                             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
                                                             <select name="shipperId" class="form-select" onchange="this.form.submit()">
                                                                 <?php
-                                                                $shippers->data_seek(0); // Reset shipper result pointer
+                                                                $shippers->data_seek(0); 
                                                                 while ($shipper = $shippers->fetch_assoc()): ?>
                                                                     <option value="<?php echo htmlspecialchars($shipper['ShipperID']); ?>" <?php echo $order['ShipperID'] == $shipper['ShipperID'] ? 'selected' : ''; ?>>
                                                                         <?php echo htmlspecialchars($shipper['ShipperName']); ?>
