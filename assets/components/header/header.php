@@ -1,7 +1,7 @@
 <!-- header component -->
 <?php
 //header
-session_start();
+// session_start();
 // if (isset($_GET['logout'])) {
 //     session_unset();
 //     session_destroy();
@@ -25,7 +25,7 @@ session_start();
 <header>
     <div class="logo">
         <a href="#">
-            <img src="assets/components/images/logo-img-1.png" alt="logo image" />
+            <img src="assets/components/images/logo-img-1.png" alt="logo image" /> 
         </a>
     </div>
     <nav>
@@ -35,6 +35,7 @@ session_start();
             <li><a href="/webprogramming_assignment_242/items">ITEMS</a></li>
             <li><a href="/webprogramming_assignment_242/blogs">BLOGS</a></li>
             <li><a href="/webprogramming_assignment_242/contact">CONTACT</a></li>
+            <li><a href="/webprogramming_assignment_242/faq">FAQ</a></li>
         </ul>
         <img src="assets/components/images/icon-hamburger.png" class="hamburger" id="hamburger" alt="Menu" />
     </nav>
