@@ -30,6 +30,7 @@ $totalPages = $totalPages ?? 1;
         <div class="banner">
             <div class="blog-title">
                 <h3>FOOD BLOGS</h3>
+
             </div>
         </div>
         <div class="search-bar">

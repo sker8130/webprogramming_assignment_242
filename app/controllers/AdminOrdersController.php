@@ -8,7 +8,7 @@ class AdminOrdersController
     private $itemsModel;
     private $userModel;
     private $tokenModel;
-    
+
     public function __construct()
     {
         $this->itemsModel = new ItemsModel();
@@ -19,6 +19,8 @@ class AdminOrdersController
     // Used by: admin/orders/orders.php (display all orders)
     public function adminIndex()
     {
+        session_start();
+
         // Restore session if expired but cookie exists
         if (!isset($_SESSION["mySession"]) && isset($_COOKIE["usernameEmail"])) {
             $token = $_COOKIE["usernameEmail"];
@@ -161,4 +163,3 @@ class AdminOrdersController
         exit;
     }
 }
-?>

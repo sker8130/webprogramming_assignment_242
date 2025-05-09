@@ -133,14 +133,14 @@ function isActive($path)
                         </a>
                     </li>
 
-                    <li class="sidebar-item <?php
-                                            echo isActive("/admin/cart");
-                                            ?>"> <a href="/webprogramming_assignment_242/admin/cart"
+                    <!-- <li class="sidebar-item <?php
+                                                    echo isActive("/admin/cart");
+                                                    ?>"> <a href="/webprogramming_assignment_242/admin/cart"
                             class="sidebar-link">
                             <i class="bi bi-file-earmark-medical-fill"></i>
                             <span>Cart</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="sidebar-item <?php
                                             echo isActive("/admin/orders");

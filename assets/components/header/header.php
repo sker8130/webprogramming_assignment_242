@@ -1,7 +1,7 @@
 <!-- header component -->
 <?php
 //header
-// session_start();
+session_start();
 // if (isset($_GET['logout'])) {
 //     session_unset();
 //     session_destroy();
@@ -25,7 +25,7 @@
 <header>
     <div class="logo">
         <a href="#">
-            <img src="assets/components/images/logo-img-1.png" alt="logo image" /> 
+            <img src="assets/components/images/logo-img-1.png" alt="logo image" />
         </a>
     </div>
     <nav>
@@ -43,6 +43,7 @@
         <div class="image">
             <img src="assets/components/images/icon-delivery.png" alt="icon delivery" />
         </div>
+
         <?php
         //nếu session hết hạn nhưng cookie còn -> đặt lại session
         //nếu k có session or có mà session là admin -> header tới login
