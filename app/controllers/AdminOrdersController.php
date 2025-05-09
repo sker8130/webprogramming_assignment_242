@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "app/models/ItemsModel.php";
 require_once "app/models/UserModel.php";
 require_once "app/models/TokenModel.php";
@@ -82,7 +81,7 @@ class AdminOrdersController
             // Validate CSRF token
             if ($_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
                 $_SESSION["error_message"] = "Invalid CSRF token.";
-                header("Location: /webprogramming_assignment_242/admin/cart");
+                header("Location: /webprogramming_assignment_242/admin/orders");
                 exit;
             }
 
@@ -93,7 +92,7 @@ class AdminOrdersController
             // Validate inputs
             if ($orderId <= 0 || !in_array($status, $allowedStatuses)) {
                 $_SESSION["error_message"] = "Invalid order ID or status.";
-                header("Location: /webprogramming_assignment_242/admin/cart");
+                header("Location: /webprogramming_assignment_242/admin/orders");
                 exit;
             }
 
@@ -101,13 +100,13 @@ class AdminOrdersController
             if ($this->itemsModel->updateOrderStatus($orderId, $status)) {
                 $_SESSION["success_message"] = "Order status updated successfully.";
             } else {
-                $_SESSION["error_message"] = "Failed to update order status.";
+                $_SESSION["error_message"] = "Failed to update order status. Check server logs for details.";
             }
         } else {
             $_SESSION["error_message"] = "Invalid request.";
         }
 
-        header("Location: /webprogramming_assignment_242/admin/cart");
+        header("Location: /webprogramming_assignment_242/admin/orders");
         exit;
     }
 
@@ -134,7 +133,7 @@ class AdminOrdersController
             // Validate CSRF token
             if ($_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
                 $_SESSION["error_message"] = "Invalid CSRF token.";
-                header("Location: /webprogramming_assignment_242/admin/cart");
+                header("Location: /webprogramming_assignment_242/admin/orders");
                 exit;
             }
 
@@ -144,7 +143,7 @@ class AdminOrdersController
             // Validate inputs
             if ($orderId <= 0 || $shipperId <= 0) {
                 $_SESSION["error_message"] = "Invalid order ID or shipper ID.";
-                header("Location: /webprogramming_assignment_242/admin/cart");
+                header("Location: /webprogramming_assignment_242/admin/orders");
                 exit;
             }
 
@@ -158,7 +157,7 @@ class AdminOrdersController
             $_SESSION["error_message"] = "Invalid request.";
         }
 
-        header("Location: /webprogramming_assignment_242/admin/cart");
+        header("Location: /webprogramming_assignment_242/admin/orders");
         exit;
     }
 }
