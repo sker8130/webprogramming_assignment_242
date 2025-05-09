@@ -1,5 +1,4 @@
 <?php
-//session_start();
 
 // Login check snippet
 require_once "app/models/UserModel.php";
@@ -28,7 +27,7 @@ $isInCart = false;
 if (!$notLoginCond && $item) {
     $userId = $userModel->checkUsernameExists($_SESSION["mySession"]);
     if ($userId) {
-        $order = $itemsModel->getPendingOrder($userId);
+        $order = $itemsModel->getPendingOrder($userId["UserID"]);
         if ($order) {
             $orderItems = $itemsModel->getOrderItems($order['OrderID']);
             while ($orderItem = $orderItems->fetch_assoc()) {
@@ -83,10 +82,10 @@ if (!$notLoginCond && $item) {
                                     <?php if (isset($orderError)): ?>
                                         <p class="error-message"><?php echo htmlspecialchars($orderError); ?></p>
                                     <?php endif; ?>
-                                    <form method="POST" action="">
+                                    <form method="POST" action="" id="orderForm">
                                         <input type="hidden" name="order_item" value="1">
                                         <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($item['ProductID']); ?>">
-                                        <button type="submit" class="order-now-btn" <?php echo $isInCart ? 'disabled' : ''; ?>>
+                                        <button type="submit" class="order-now-btn" id="orderNowBtn" <?php echo $isInCart ? 'disabled' : ''; ?>>
                                             <?php echo $isInCart ? 'Item already in cart' : 'Order Now'; ?>
                                         </button>
                                     </form>
@@ -179,6 +178,16 @@ if (!$notLoginCond && $item) {
         <?php if (isset($orderSuccess) && $orderSuccess): ?>
             showPopup();
         <?php endif; ?>
+
+        // Handle button click to update state immediately
+        document.getElementById('orderForm')?.addEventListener('submit', function(event) {
+            const orderNowBtn = document.getElementById('orderNowBtn');
+            if (!orderNowBtn.disabled) {
+                orderNowBtn.disabled = true;
+                orderNowBtn.textContent = 'Item already in cart';
+                orderNowBtn.classList.add('disabled');
+            }
+        });
     </script>
 </body>
 </html>
