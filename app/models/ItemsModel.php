@@ -222,7 +222,6 @@ class ItemsModel
             return null; // No shippers available
         }
 
-        // Use session to track the current index, default to 0 if not set
         if (!isset($_SESSION["shipper_index"])) {
             $_SESSION["shipper_index"] = 0;
         }
@@ -322,6 +321,9 @@ class ItemsModel
         $stmt = $this->db->prepare("UPDATE orders SET OrderStatus = ? WHERE OrderID = ?");
         $stmt->bind_param("si", $status, $orderId);
         $result = $stmt->execute();
+        if (!$result) {
+            error_log("Failed to update order status for OrderID $orderId: " . $this->db->error);
+        }
         $stmt->close();
         return $result;
     }
@@ -338,6 +340,9 @@ class ItemsModel
             $stmt->bind_param("ii", $shipperId, $orderId);
         }
         $result = $stmt->execute();
+        if (!$result) {
+            error_log("Failed to update shipper for OrderID $orderId: " . $this->db->error);
+        }
         $stmt->close();
         return $result;
     }

@@ -1,6 +1,6 @@
 <?php
 require_once "app/models/ItemsModel.php";
-require_once "app/models/UserModel.php"; // For checkUsernameExists
+require_once "app/models/UserModel.php"; 
 
 class CartController
 {
@@ -9,7 +9,7 @@ class CartController
     {
 
         $itemsModel = new ItemsModel();
-        $userModel = new UserModel(); // For checkUsernameExists
+        $userModel = new UserModel();
 
         // Check if user is logged in
         if (!isset($_SESSION["mySession"])) {

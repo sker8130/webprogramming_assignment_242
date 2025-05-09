@@ -1,6 +1,6 @@
 <?php
 require_once "app/models/ItemsModel.php";
-require_once "app/models/UserModel.php"; // Added to use checkUsernameExists
+require_once "app/models/UserModel.php";
 
 class ItemsController
 {
@@ -49,7 +49,7 @@ class ItemsController
             if (!$userId) {
                 $orderError = "User not found.";
             } else {
-                $userId = $userId; // UserID is already an integer from checkUsernameExists
+
 
                 // Check for a pending order
                 $order = $itemsModel->getPendingOrder($userId);
