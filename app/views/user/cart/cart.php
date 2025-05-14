@@ -134,7 +134,7 @@ if (!isset($_SESSION["csrf_token"])) {
                                     <p><strong>Gender:</strong> <?php echo htmlspecialchars($shipper['Gender']); ?></p>
                                 </div>
                                 <div class="shipper-avatar">
-                                    <img src="app/views/user/shippers/img/<?php echo htmlspecialchars($shipper['Avatar']); ?>" alt="<?php echo htmlspecialchars($shipper['ShipperName']); ?>">
+                                    <img src="app/views/user/cart/<?php echo htmlspecialchars($shipper['Avatar']); ?>" alt="<?php echo htmlspecialchars($shipper['ShipperName']); ?>">
                                 </div>
                             <?php else: ?>
                                 <p>Shipper information not available.</p>
